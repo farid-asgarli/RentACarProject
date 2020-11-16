@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "Login",
+        HREF = Url.Action("Login", "Main")
+    });
+}
+
+@model g_auto.VM.UserLoginVM
+
+<section class="gauto-login-area section_70">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="login-box">
+                    <div class="login-page-heading">
+                        <i class="fa fa-key"></i>
+                        <h3>sign in</h3>
+                    </div>
+                    @using (Html.BeginForm("Login", "Main", FormMethod.Post, new { enctype = "multipart/form-data", @id ="user_login_form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="account-form-group">
+                            @Html.TextBoxFor(u => u.Email,new { @required = true, @type = "email", @placeholder="Email", @class= "form-control mt-3 mb-3" })
+                            <i class="fas fa-envelope"></i>
+                            @Html.ValidationMessageFor(u => u.Email, "", new { @class = "text-danger text-left d-block  mb-3", @style = "color:#e2b71c !important" })
+                        </div>
+                        <div class="account-form-group">
+                            @Html.TextBoxFor(u => u.Password, new { @required = true, @type = "password", @placeholder = "Password", @class = "form-control mt-3 mb-3" })
+                            <i class="fa fa-lock"></i>
+                            @Html.ValidationMessageFor(u => u.Password, "", new { @class = "text-danger text-left d-block  mb-3", @style = "color:#e2b71c !important" })
+                        </div>
+                        <div class="remember-row">
+                            <p class="lost-pass">
+                                <a href="@Url.Action("ForgotPassword","Main")">forgot password?</a>
+                            </p>
+                            @*<p class="checkbox remember">
+                                <input class="checkbox-spin" type="checkbox" id="Freelance">
+                                <label for="Freelance"><span></span>Keep Me Signed In</label>
+                            </p>*@
+                        </div>
+                        <p>
+                            <button type="submit" class="gauto-theme-btn">Login now</button>
+                        </p>
+                    }
+                    <div class="login-sign-up">
+                        <a href="@Url.Action("Register","Main")">Don't have an account?</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

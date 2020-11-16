@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model g_auto.Models.Vacancy
+
+@if (Model != null && Model.isActive != false)
+{
+
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "Vacancy Details",
+        HREF = Url.Action("Index", "Careers")
+    });
+
+    <section class="gauto-blog-page-area section_70">
+        <main>
+            <article class="b-post b-post-full" style="background: url(/Assets/img/bg-2.png) 50% 100% no-repeat;" data-aos="fade-up">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-10 offset-xl-1">
+                            <div class="entry-media">
+                                <a class="js-zoom-images" href="~/Uploads/@Model.CoverImage"><img class="img-fluid" src="~/Uploads/@Model.CoverImage" style="width:100%" alt="photo"></a>
+                                <div class="blog-decor"></div>
+                            </div>
+                            <div class="row justify-content-beetween align-items-baseline">
+                                <div class="col-md">
+                                    <div class="entry-meta">
+                                        <time class="entry-meta__item" datetime="@Model.PostDate.ToString("d MMM, yyyy")"><i class="ic far fa-calendar-alt"></i> @Model.PostDate.ToString("d MMM, yyyy")</time>
+                                        <span class="entry-meta__item">
+                                            by
+                                            <a class="entry-meta__link text-primary mr-4">Autlines</a>
+                                        </span>
+                                        <span class="entry-meta__item">
+                                            <i class="fas fa-calendar-minus"></i> Deadline for Applications: 
+
+                                           
+                                            <a class="entry-meta__link text-primary comment-count">@Model.Deadline.ToString("d MMM, yyyy")</a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-auto">
+                                    <div class="b-post-soc">
+                                        <div class="b-post-soc__title">Share This</div>
+                                        <div class="b-post-soc__item"><a class="b-post-soc__link" href="#" target="_blank"><i class="ic fab fa-twitter"></i></a></div>
+                                        <div class="b-post-soc__item"><a class="b-post-soc__link" href="#" target="_blank"><i class="ic fab fa-facebook-f"></i></a></div>
+                                        <div class="b-post-soc__item"><a class="b-post-soc__link" href="#" target="_blank"><i class="ic fab fa-pinterest-p"></i></a></div>
+                                        <div class="b-post-soc__item"><a class="b-post-soc__link" href="#" target="_blank"><i class="ic fab fa-behance"></i></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="entry-main">
+                        <div class="entry-header">
+                            <div class="row">
+                                <div class="col-xl-10 offset-xl-1">
+                                    <h1 class="entry-title">@Model.Title</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="entry-content">
+                            <div class="row">
+                                <div class="col-xl-10 offset-xl-1">
+                                    @Html.Raw(Model.Content)
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="entry-footer">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class=" mb-4 vacancy-footer">
+                                    <div class="entry-label mb-3">Last date for application:  @Model.Deadline.ToString("d MMM, yyyy")</div>
+                                    <div class="entry-label mb-3">Job salary: @Model.Salary</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </article>
+            <!-- end .post-->
+
+          
+        </main>
+    </section>
+}
+else
+{
+
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "404 Page",
+        HREF = Url.Action("Index")
+    });
+
+
+    Html.RenderPartial("~/Views/Partial/_NotFound.cshtml");
+
+}

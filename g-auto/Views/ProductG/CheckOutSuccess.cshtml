@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "CheckOutSuccess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "Checkout",
+        HREF = Url.Action("Index", "ProductG")
+    });
+}
+
+
+

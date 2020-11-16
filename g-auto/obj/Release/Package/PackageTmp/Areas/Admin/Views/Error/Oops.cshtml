@@ -1,0 +1,49 @@
+﻿
+@{ ViewBag.Title = "Oops! Error Encountered"; }
+<!DOCTYPE html>
+
+<html lang="en" style="background-image: linear-gradient(45deg, #1C3FAA 2%, #002025 100%)!important; overflow-y:hidden">
+<!-- BEGIN: Head -->
+<head>
+    <meta charset="utf-8">
+    <link href="~/Areas/Admin/Assets/images/logo.svg" rel="shortcut icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Midone admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="LEFT4CODE">
+    <title>Error Page - Midone - Tailwind HTML Admin Template</title>
+    <!-- BEGIN: CSS Assets-->
+    <link rel="stylesheet" href="~/Areas/Admin/Assets/css/app.css">
+    <!-- END: CSS Assets-->
+</head>
+<!-- END: Head -->
+<body class="app">
+    <div class="container">
+        <!-- BEGIN: Error Page -->
+        <div class="error-page flex flex-col lg:flex-row items-center justify-center h-screen text-center lg:text-left">
+            <div class="-intro-x lg:mr-20">
+                <img alt="Midone Tailwind HTML Admin Template" class="h-48 lg:h-auto" src="~/Areas/Admin/Assets/images/error-illustration.svg">
+            </div>
+            <div class="text-white mt-10 lg:mt-0">
+                <div class="intro-x text-6xl font-medium">@Response.StatusCode</div>
+                <div class="intro-x text-xl lg:text-3xl font-medium">Oops. This page has gone missing.</div>
+                <div class="intro-x text-lg mt-3">@Response.StatusDescription</div>
+                <a href="@Url.Action("Index", "Home")"><button class="intro-x button button--lg border border-white dark:border-dark-5 dark:text-gray-300 mt-10">Back to Home</button></a>
+
+            </div>
+        </div>
+        <!-- END: Error Page -->
+    </div>
+    <!-- BEGIN: Dark Mode Switcher-->
+    @*<div class="dark-mode-switcher shadow-md fixed bottom-0 right-0 box dark:bg-dark-2 border rounded-full w-40 h-12 flex items-center justify-center z-50 mb-10 mr-10">
+            <div class="mr-4 text-gray-700 dark:text-gray-300">Dark Mode</div>
+            <input class="input input--switch border" type="checkbox" value="1">
+        </div>*@
+    <!-- END: Dark Mode Switcher-->
+    <!-- BEGIN: JS Assets-->
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBG7gNHAhDzgYmq4-EHvM4bqW1DNj2UCuk&libraries=places"></script>
+    <script src="~/Areas/Admin/Assets/js/app.js"></script>
+    <!-- END: JS Assets-->
+</body>
+</html>

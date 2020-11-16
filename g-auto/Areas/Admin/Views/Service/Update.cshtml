@@ -1,0 +1,195 @@
+﻿
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model g_auto.Models.Service
+
+@using (Html.BeginForm("Update", "Service", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+   
+
+    <div class="form-horizontal">
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="round-section">
+                    <div class="col-lg-12">
+                        <div class="main-view">
+                            <h1>Update the Service</h1>
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.HiddenFor(model => model.Id)
+
+                            <div class="form-group mt-3">
+                                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="">
+                                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg", @placeholder = "Title", @required = true } })
+
+                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "sm:ml-auto mt-1 sm:mt-0 text-xs text-red-600" })
+                                </div>
+                            </div>
+
+                            <div class="form-group mt-3 mb-3">
+                                @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2 " })
+                                <div class=" mt-5">
+                                    @Html.TextAreaFor(model => model.Content, new { @class = "summernote", @name = "editor", @data_feature = "all" })
+                                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "sm:ml-auto mt-1 sm:mt-0 text-xs text-red-600" })
+                                </div>
+                            </div>
+                            <div class="form-group mt-3 mb-3">
+                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2 " })
+                                <div class=" mt-5">
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "custom_textarea intro-y box input--lg form-control input w-full border mt-2 mb-2", @placeholder = "Your Description " })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "sm:ml-auto mt-1 sm:mt-0 text-xs text-red-600" })
+                                </div>
+                            </div>
+
+
+                            <div class="form-group mt-3  mb-3">
+                                @if (ViewBag.Infos != null)
+                                {
+                                    <label class="control-label ">Select Info Labels  </label>
+                                    <div class=" mt-5">
+
+
+                                        <select data-placeholder="Select Infos" class="select2 " style="width:100%" multiple name="ServiceInfoId">
+                                            @foreach (g_auto.Models.ServiceInfo item2 in ViewBag.Infos)
+                                            {
+
+                                                if (Model.ServiceInfoId != null)
+                                                {
+                                                    <option @(Model.ServiceInfoId != null ? (Model.ServiceInfoId.Any(c => c == item2.Id) ? "selected" : "") : "") value="@item2.Id">@item2.Title</option>
+                                                }
+                                                else if (Model.ServiceToInfo != null)
+                                                {
+
+                                                    <option @(Model.ServiceToInfo != null ? (Model.ServiceToInfo.Any(c => c.ServiceInfoId == item2.Id) ? "selected" : "") : "") value="@item2.Id">@item2.Title</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item2.Id">@item2.Title</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                }
+                            </div>
+
+                            <label class="control-label col-md-2">Benefits</label>
+
+
+
+                            @if (Model.ServiceBenefits != null)
+                            {
+
+
+                                foreach (var item in Model.ServiceBenefits)
+                                {
+                                    <div class="form-group mt-3">
+                                        <div class=" mt-2 mb-2 relative">
+                                            <input type="text" name="Benefits" placeholder="Add a Benefit" value="@item.Content" class="form-control input w-full border mt-2 bf custom-val-input" required />
+
+
+                                        </div>
+                                        <button type="button" class="rmvbenefitbtn  button w-36 inline-block mr-1 mb-2 mt-2 border border-theme-6 text-theme-6 dark:border-theme-6">Remove this field</button>
+                                        @Html.ValidationMessageFor(model => model.Benefits, "", new { @class = "text-danger", @style = "color:red" })
+
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                if (ViewBag.Benefits != null)
+                                {
+
+                                    foreach (g_auto.Models.ServiceBenefit item in ViewBag.Benefits)
+                                    {
+                                        <div class="form-group mt-3">
+                                            <div class=" mt-2 mb-2 relative">
+                                                <input type="text" name="Benefits" placeholder="Add a Benefit" value="@item.Content" class="form-control input w-full border mt-2 bf custom-val-input" required />
+
+
+                                            </div>
+                                            <button type="button" class="rmvbenefitbtn  button w-36 inline-block mr-1 mb-2 mt-2 border border-theme-6 text-theme-6 dark:border-theme-6">Remove this field</button>
+                                            @Html.ValidationMessageFor(model => model.Benefits, "", new { @class = "text-danger", @style = "color:red" })
+
+                                        </div>
+                                    }
+
+                                }
+                            }
+                        </div>
+
+
+                        <button id="addbenefitbtn" type="button" class="button w-36 inline-block mr-1 mb-2 mt-2 border border-theme-1 text-theme-1 dark:border-theme-10 dark:text-theme-10">Add Another Benefit</button>
+
+                    </div>
+                    <div class="col-md-12">
+                        @{
+                            Html.RenderPartial("~/Areas/Admin/Views/Partial/_ButtonSection.cshtml", new g_auto.ViewModels.ButtonSection
+                            {
+                                url = "Service",
+                                btntype = "Update"
+                            });
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="flex flex-wrap round-section">
+                    <div class="col-md-12">
+
+                        @{
+                            Html.RenderPartial("~/Areas/Admin/Views/Partial/_ImageSectionMultiple.cshtml", new g_auto.ViewModels.ImageFile
+                            {
+
+                                ImageName = "ServiceImageFirstFile",
+                                ImageText = "First Cover Image",
+                                ImageDbLink = Model.ServiceImageFirst,
+                                ImageHeight = "270px"
+
+                            });
+                        }
+
+
+                    </div>
+                    <div class="col-md-12">
+                        @{
+                            Html.RenderPartial("~/Areas/Admin/Views/Partial/_ImageSectionMultiple.cshtml", new g_auto.ViewModels.ImageFile
+                            {
+
+                                ImageName = "ServiceImageSecondFile",
+                                ImageText = "Second Cover Image",
+                                ImageDbLink = Model.ServiceImageSecond,
+                                ImageHeight = "270px"
+
+
+                            });
+                        }
+                    </div>
+                    <div class="col-md-12">
+
+                        @{
+                            Html.RenderPartial("~/Areas/Admin/Views/Partial/_ImageSectionMultiple.cshtml", new g_auto.ViewModels.ImageFile
+                            {
+
+                                ImageName = "ServiceIconFile",
+                                ImageText = "Service Icon",
+                                ImageDbLink = Model.ServiceIcon,
+                                ImageHeight = "270px"
+
+                            });
+                        }
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

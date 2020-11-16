@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model g_auto.VM.ServiceVM
+
+@if (Model.Service != null)
+{
+    if (Model.Service.isActive != false)
+    {
+        Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+        {
+            Page = "Service Details",
+            HREF = Url.Action("Index", "ServiceG")
+        });
+        
+
+        <section class="gauto-service-details-area section_70" style=" background: url(/Assets/img/bg-2.png) 50% 10% no-repeat;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="service-details-left">
+                            <div class="sidebar-widget">
+                                <ul class="service-menu">
+                                    @foreach (g_auto.Models.Service item in Model.Services)
+                                    {
+                                        if (item.isActive != false)
+                                        {
+                                            <li class="@(Model.Service.Id==item.Id?"active":"")"><a href="@Url.Action("ServiceReservation", "ServiceG", new { id=item.Id})">@item.Title</a></li>
+
+                                        }
+
+                                    }
+                                </ul>
+                            </div>
+                            <div class="sidebar-widget">
+                                <div class="brochures">
+                                    <a href="#"><i class="fa fa-file-pdf-o"></i>download.pdf</a>
+                                    <a href="#"><i class="fa fa-file-word-o"></i>download.doc</a>
+                                </div>
+                            </div>
+                            <div class="sidebar-widget">
+                                <div class="service-page-banner">
+                                    <h3>10% off only for new members</h3>
+                                    <p>Fusce vulputate eleifend sapien. Vestibulum purus quam, risque</p>
+                                    <a href="javascript:;" id="service_app_scroll" class="gauto-btn">Make An Appointment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="service-details-right">
+                            <h3>@Model.Service.Title</h3>
+                            <p>@Html.Raw(Model.Service.Content)</p>
+                            <div class="row">
+                                <div class="col-md-6 pad-right-sm">
+                                    <div class="service-details-image" style="height: 500px; overflow: hidden; background-image: url(/Uploads/@Model.Service.ServiceImageFirst); background-size: cover; background-position: center;">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 pad-left-sm">
+                                    <div class="service-details-image" style=" height: 500px; overflow: hidden; background-image: url(/Uploads/@Model.Service.ServiceImageSecond); background-size: cover; background-position: center;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-details-list clearfix">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @if (Model.Service.ServiceBenefits != null)
+                                        {
+                                            <ul>
+                                                @foreach (g_auto.Models.ServiceBenefit item in Model.Service.ServiceBenefits)
+                                                {
+
+                                                    <li><i class="fa fa-check"></i> @item.Content</li>
+
+                                                }
+                                            </ul>
+
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="service-accordion" id="accordion">
+                                <h3>Get more information</h3>
+                                @if (Model.Service.ServiceToInfo.FirstOrDefault() != null)
+                                {
+                                    foreach (var item in Model.Service.ServiceToInfo)
+                                    {
+
+                                        <div class="single_faq_accordian">
+                                            <div class="faq_accordian_header">
+                                                <a class="btn btn-link collapsed" href="#" id="heading-@item.ServiceInfo.Id" data-toggle="collapse" data-target="#collapse-@item.ServiceInfo.Id" aria-expanded="false" aria-controls="collapseOne">
+                                                    @item.ServiceInfo.Title
+                                                </a>
+                                            </div>
+                                            <div id="collapse-@item.ServiceInfo.Id" class="collapse" aria-labelledby="heading-@item.ServiceInfo.Id" data-parent="#accordion">
+                                                <div class="faq_accordian_body">
+                                                    <p>@Html.Raw(item.ServiceInfo.Content)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    }
+
+                                }
+                            </div>
+                            <div class="service-reservation mt-5" id="dtpServiceId" data-id="@Model.Service.Id">
+                                <h2 class="b-booking-main__title">Appointment</h2>
+
+                                <div class="woocommerce-notices-wrapper" id="notifyProfileUpdate">
+                                    <ul class="woocommerce-error" role="alert">
+                                        <li> Your appointment has been succesfully submitted. Our agents will contact you soon. </li>
+                                    </ul>
+                                </div>
+                                <div class="woocommerce-notices-wrapper" id="notifyProfileError">
+                                    <ul class="woocommerce-error woocommerce-custom-error" role="alert">
+                                        <li>Sorry, looks like you already have a pending appointment.  Please wait for a response.</li>
+                                    </ul>
+                                </div>
+                                <div class="woocommerce-notices-wrapper" id="notifySessionError">
+                                    <ul class="woocommerce-error woocommerce-custom-error" role="alert">
+                                        <li>Looks like your session is over. Redirecting...</li>
+                                    </ul>
+                                </div>
+                                <form action="/" method="post" id="appService" onsubmit="return false">
+                                    <fieldset>
+                                        <div class="b-booking-main__section" id="time-section">
+                                            <div class="row">
+                                                <div class="col-md-6 mt-2 mb-2">
+                                                    <p>
+                                                        <input type="text" name="AppDate" placeholder="Date" id="input_date" class="datepicker form-control" required>
+
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-6 mt-2 mb-2">
+                                                    <p class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                        <input type="text" name="Time" id="input_time" autocomplete="off" class="form-control" placeholder="Reservation Time" required>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @if (Session["User"] == null)
+                                        {
+
+
+                                            <div class="form-group">
+                                                <label class="form-label">Full Name*</label>
+                                                <input class="form-control" name="FullName" minlength="6" maxlength="150" type="text" required>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Email Address*</label>
+                                                        <input class="form-control" name="Email" type="email" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Phone *</label>
+                                                        <input type="text" class="form-control" maxlength="14" minlength="14" name="Phone" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        <div class="form-group">
+                                            <label class="form-label">Message</label>
+                                            <textarea class="form-control" name="Message" rows="5"></textarea>
+                                        </div>
+
+                                        <input type="hidden" name="ServiceId" value="@Model.Service.Id" />
+                                        <div class="text-center">
+                                            Within 24 hours, Our representative we will confirm your appointment by call / email
+                                            @*<a href="javascript:;" id="appServiceButton" class="gauto-btn mt-5">Confirm Booking</a>*@
+                                            <button type="submit" id="appServiceButton" class="gauto-btn mt-5">Confirm Booking</button>
+                                        </div>
+
+                                    </fieldset>
+                                </form>
+                            </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+    else
+    {
+        Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+        {
+            Page = "404 Page",
+            HREF = Url.Action("Index")
+        });
+
+
+        Html.RenderPartial("~/Views/Partial/_NotFound.cshtml");
+    }
+
+}

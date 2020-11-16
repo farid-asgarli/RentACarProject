@@ -1,0 +1,728 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model g_auto.VM.Home
+
+@************************************************************************@
+@********************************SLIDER-AREA-START***********************@
+@************************************************************************@
+
+
+<section class="slider-area" data-aos="fade-right">
+    <div class="gauto-slide owl-carousel">
+        @if (Model.Sliders != null && Model.Layout != null)
+        {
+            if (Model.Layout.sliderToggle != false)
+            {
+                var i = 0;
+
+                foreach (g_auto.Models.Sliders item in Model.Sliders.Take(Model.Layout.sliderCount.Value))
+                {
+
+                    if (item.isActive != false)
+                    {
+                        i++;
+
+                        <div class="main-slide slide-item-@i" style="background-image:url(/Uploads/@item.Image)">
+                            <div class="gauto-main-caption">
+                                <div class="gauto-caption-cell">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="slider-text">
+                                                    <p>@item.Title</p>
+                                                    <h2>@item.Subtitle</h2>
+                                                    <a href="@item.Link" class="gauto-btn">Reserve Now!</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+            }
+        }
+    </div>
+</section>
+
+
+@************************************************************************@
+@*********************************SLIDER-AREA-END************************@
+@************************************************************************@
+
+
+
+@************************************************************************@
+@*******************************SEARCH-AREA-START************************@
+@************************************************************************@
+
+<section class="search-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="find-box" data-aos="fade-up">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="find-text">
+                                <h3>Search Your Best Cars here.</h3>
+
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="find-form">
+                                <form method="get" action="@Url.Action("Grid", "ModelG")">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p>
+                                                <select id="EngineLayout" name="EngineLayout">
+                                                    <option value="Front Engine"> Front Engine</option>
+                                                    <option value="Mid Engine"> Mid Engine</option>
+                                                    <option selected value="Rear Engine"> Rear Engine</option>
+                                                </select>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>
+                                                <select id="DriveTrain" name="DriveTrain">
+                                                    <option value="Front-Wheel Drive"> Front-Wheel Drive</option>
+                                                    <option value="Rear-Wheel Drive"> Rear-Wheel Drive</option>
+                                                    <option selected value="Both"> Both</option>
+                                                </select>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>
+                                                <select id="FuelType" name="FuelType">
+                                                    <option selected value="Diesel">Diesel</option>
+                                                    <option value="Ethanol">Ethanol</option>
+                                                    <option value="Biodiesel">Biodiesel</option>
+                                                    <option value="Propane">Propane</option>
+                                                    <option value="Natural Gas"> Natural Gas</option>
+                                                    <option value="Electric">Electric</option>
+                                                </select>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p>
+                                                <select id="Transmission" name="Transmission">
+                                                    <option value="Automated-Manual">Automated-Manual</option>
+                                                    <option selected value="Automatic">Automatic</option>
+                                                    <option value="Continuously Variable Transmission">Continuously Variable Transmission</option>
+                                                    <option value="Dual-Clutch Transmission">Dual-Clutch Transmission</option>
+                                                    <option value="Direct Shift Gearbox ">Direct Shift Gearbox</option>
+                                                    <option value="Tiptronic">Tiptronic</option>
+                                                </select>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>
+                                                <select id="Condition" name="Condition">
+                                                    <option selected value="New">New</option>
+                                                    <option value="Deprecated">Deprecated</option>
+                                                </select>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>
+                                                <button type="submit" class="gauto-theme-btn">Find Car</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@************************************************************************@
+@*******************************SEARCH-AREA-END**************************@
+@************************************************************************@
+
+@************************************************************************@
+@*********************************ABOUT-AREA-START***********************@
+@************************************************************************@
+
+
+@if (Model.Layout != null)
+{
+    if (Model.Layout.aboutToggle != false)
+    {
+        <section class="about-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="about-left" data-aos="fade-right">
+                            <h4>about us</h4>
+                            <h2>@Model.Layout.About_Title</h2>
+                            <p>@Html.Raw(Model.Layout.About_Content)</p>
+                            <div class="about-list">
+                                <ul>
+                                    @if (Model.Layout.AboutBenefits.FirstOrDefault() != null)
+                                    {
+                                        foreach (g_auto.Models.AboutBenefits item in Model.Layout.AboutBenefits)
+                                        {
+                                            <li><i class="fa fa-check"></i>@Html.Raw(item.Content)</li>
+
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                            <div class="about-signature">
+                                <div class="signature-left">
+                                    <img src="~/Uploads/@Model.Layout.Signature" alt="signature">
+                                </div>
+                                <div class="signature-right">
+                                    <h3>@Model.Layout.About_CEO</h3>
+                                    <p>President</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-right" data-aos="fade-left">
+                            <img src="~/Uploads/@Model.Layout.About_Image" alt="car">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    }
+}
+
+@************************************************************************@
+@******************************ABOUT-AREA-END****************************@
+@************************************************************************@
+
+
+
+@************************************************************************@
+@***************************SERVICE-AREA-START***************************@
+@************************************************************************@
+
+
+@if (Model.Sliders != null && Model.Layout != null)
+{
+
+    if (Model.Layout.serviceToggle != false)
+    {
+        var i = 0;
+        <section class="service-area" data-aos="fade-up" style=" background: url(/Assets/img/bg-2.png) 50% 21% no-repeat;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center mb-3 mt-3">
+                            <div class="ui-title-logo">SERVICES</div>
+                            <h2 class="ui-title">
+                                Choose From Variety Of<br />
+                                Our Services
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="service-slider owl-carousel">
+                            @foreach (g_auto.Models.Service item in Model.Services.Take(Model.Layout.serviceCount.Value))
+                            {
+                                if (item.isActive != false)
+                                {
+
+                                    i++;
+                                    <div class="single-service">
+                                        <span class="service-number">0@(i) </span>
+                                        <div class="service-icon">
+                                            <img src="~/Uploads/@item.ServiceIcon" class="filter-cyan" alt="city trasport">
+                                        </div>
+                                        <div class="service-text">
+                                            <a href="@Url.Action("ServiceReservation", "ServiceG", new {id=item.Id })">
+                                                <h3>@item.Title</h3>
+                                            </a>
+                                            <p>
+                                                @(item.Description.Length > 170 ? item.Description.Substring(0, 170) + "..." : item.Description)
+                                            </p>
+                                        </div>
+                                        <div class="service-details-button">
+                                            <a href="@Url.Action("ServiceReservation","ServiceG", new { id = item.Id })">View Details</a>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    }
+
+}
+
+@************************************************************************@
+@*****************************SERVICE-AREA-END***************************@
+@************************************************************************@
+
+
+@************************************************************************@
+@*****************************ADVERT-AREA-START**************************@
+@************************************************************************@
+
+@{
+    Html.RenderPartial("~/Views/Partial/_Promo.cshtml");
+}
+
+@************************************************************************@
+@*****************************ADVERT-AREA-END****************************@
+@************************************************************************@
+
+
+
+@************************************************************************@
+@*****************************MODELS-AREA-START**************************@
+@************************************************************************@
+
+@if (Model.Layout != null && Model.Brands != null)
+{
+    if (Model.Layout.modelToggle != false)
+    {
+        <section class="models-area" data-aos="fade-up">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center mb-3 mt-3">
+                            <div class="ui-title-logo">OFFERS</div>
+                            <h2 class="ui-title">
+                                We Provide Variety Of High-End<br />
+                                Auto Customizations
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+
+                        <div class="model-tabs">
+                            <ul class="nav nav-tabs" id="model-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true">All Brands</a>
+                                </li>
+                                @foreach (g_auto.Models.Brand item in Model.Brands.OrderByDescending(c => c.PostDate).Take(7))
+                                {
+
+                                    if (item.isActive != false)
+                                    {
+                                        if (item.Models.FirstOrDefault() != null && item.Models.FirstOrDefault().isActive)
+                                        {
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="@item.Name-tab" data-toggle="tab" href="#@item.Name" role="tab" aria-controls="@item.Name" aria-selected="false">@item.Name</a>
+                                            </li>
+                                        }
+                                    }
+                                }
+
+                            </ul>
+                            <div class="tab-content" id="offerTabContent">
+                                <!-- All Tab Start -->
+                                <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                                    <div class="row">
+                                        @foreach (g_auto.Models.Model item in Model.Models.OrderByDescending(c => c.PostDate).Take(Model.Layout.modelCount.Value))
+                                        {
+                                            if (item.isActive)
+                                            {
+                                                <div class="col-lg-4">
+                                                    <div class="single-offers">
+                                                        <div class="offer-image">
+                                                            <a href="@Url.Action("Details", "ModelG", new { id=item.Id})">
+                                                                <img src="~/Uploads/@item.ModelImages.FirstOrDefault().Name" alt="offer 1">
+                                                            </a>
+                                                        </div>
+                                                        <div class="offer-text">
+                                                            <a href="#">
+                                                                <h3>@item.Name</h3>
+                                                            </a>
+                                                            <h4>$@item.PriceDaily.ToString("0") <span>/ Day</span></h4>
+                                                            <ul>
+                                                                <li><i class="fa fa-car"></i>Model:@item.Year</li>
+                                                                <li><i class="fas fa-gas-pump"></i>@item.FuelType</li>
+
+                                                            </ul>
+                                                            <ul>
+                                                                <li><i class="fa fa-cogs"></i>@item.Engine.ToString("0.0")</li>
+                                                                <li><i class="fa fa-dashboard"></i>@item.Transmission</li>
+
+
+                                                            </ul>
+                                                            <div class="offer-action">
+                                                                <a href="@Url.Action("Reservation", "ModelG", new { id=item.Id})" class="offer-btn-1">Rent Car</a>
+                                                                <a href="@Url.Action("Details", "ModelG", new { id=item.Id})" class="offer-btn-2">Details</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            }
+                                        }
+                                    </div>
+
+                                </div>
+                                <!-- All Tab End -->
+                                <!-- Nissan Tab Start -->
+                                @foreach (g_auto.Models.Brand item in Model.Brands)
+                                {
+                                    if (item.isActive != false)
+                                    {
+                                        <div class="tab-pane fade" id="@item.Name" role="tabpanel" aria-labelledby="@item.Name-tab">
+                                            <div class="row">
+                                                @foreach (g_auto.Models.Model item2 in item.Models.OrderByDescending(c => c.PostDate))
+                                                {
+                                                    if (item2.isActive != false)
+                                                    {
+                                                        <div class="col-lg-4">
+                                                            <div class="single-offers">
+                                                                <div class="offer-image" style="height:150px">
+                                                                    <a href="@Url.Action("Details", "ModelG", new { id=item.Id})">
+                                                                        <img src="~/Uploads/@item2.ModelImages.FirstOrDefault().Name" alt="offer 1">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="offer-text">
+                                                                    <a href="#">
+                                                                        <h3>@item2.Name</h3>
+                                                                    </a>
+                                                                    <h4>$@item2.PriceDaily.ToString("0") <span>/ Day</span></h4>
+                                                                    <ul>
+                                                                        <li><i class="fa fa-car"></i>Model:@item2.Year</li>
+                                                                        <li><i class="fas fa-gas-pump"></i>@item2.FuelType</li>
+
+                                                                    </ul>
+                                                                    <ul>
+                                                                        <li><i class="fa fa-dashboard"></i>@item2.Transmission</li>
+
+                                                                        <li><i class="fa fa-cogs"></i>@item2.Engine.ToString("0.0")</li>
+
+                                                                    </ul>
+                                                                    <div class="offer-action">
+                                                                        <a href="@Url.Action("Reservation", "ModelG", new { id=item2.Id})" class="offer-btn-1">Rent Car</a>
+                                                                        <a href="@Url.Action("Details", "ModelG", new { id=item2.Id})" class="offer-btn-2">Details</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+
+                                                }
+                                            </div>
+                                        </div>
+
+                                    }
+                                }
+                                <!-- Nissan Tab End -->
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    }
+}
+
+
+
+
+@************************************************************************@
+@*****************************MODELS-AREA-END****************************@
+@************************************************************************@
+
+
+<section class="service-map-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center mb-3 mt-3">
+                    <div class="ui-title-logo">DELIVERY</div>
+                    <h2 class="ui-title">See How It Works</h2>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="vc-number-content-container fl-animated-item-velocity " data-aos="fade-up">
+                    <div class="number-div-content col-lg-3 animation-complete" style="opacity: 1; transform: translateX(0px);">
+                        <div class="inner-content">
+                            <div class="number fl-font-style-bolt">01</div>
+                            <div class="number-title fl-font-style-semi-bolt">Search Our Inventory</div>
+                            <div class="number-content">Orci eu quisque est magna hac consequat aptent erat integer, lorem est eu habitasse, consequat id.</div>
+                        </div>
+                    </div>
+                    <div class="number-div-content col-lg-3 reflect-element animation-complete" style="opacity: 1; transform: translateX(0px);">
+                        <div class="inner-content">
+                            <div class="number fl-font-style-bolt">02</div>
+                            <div class="number-title fl-font-style-semi-bolt">Choose The Car You Like</div>
+                            <div class="number-content">Magna aliqua enim aduas dui veniam quis nostrud exercitation ullam laboris aut aliquip ex consequat. </div>
+                        </div>
+                    </div>
+                    <div class="number-div-content col-lg-3 animation-complete" style="opacity: 1; transform: translateX(0px);">
+                        <div class="inner-content">
+                            <div class="number fl-font-style-bolt">03</div>
+                            <div class="number-title fl-font-style-semi-bolt">Apply For Auto Finance</div>
+                            <div class="number-content">Sagittis dui fermentum vulputate proin vulputate quis ac, lacus conubia vehicula lacus ullamcorper.</div>
+                        </div>
+                    </div>
+                    <div class="number-div-content col-lg-3 reflect-element animation-complete" style="opacity: 1; transform: translateX(0px);">
+                        <div class="inner-content">
+                            <div class="number fl-font-style-bolt">04</div>
+                            <div class="number-title fl-font-style-semi-bolt">Get Approved &amp; Drive</div>
+                            <div class="number-content">Magna aliqua enim aduas dui veniam quis nostrud exercitation ullam laboris aut aliquip ex consequat. </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+@************************************************************************@
+@**************************TESTIMONIAL-AREA-START************************@
+@************************************************************************@
+
+
+@if (Model.Layout != null && Model.Testimonials != null)
+{
+    if (Model.Layout.testimonialToggle != false)
+    {
+        <section class="testimonial-area" data-aos="fade-up">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center mb-3 mt-3">
+                            <div class="ui-title-logo">TESTIMONIALS</div>
+                            <h2 class="ui-title">
+                                Main Priority Is Always<br />
+                                Our Customers
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="testimonial-slider owl-carousel">
+
+                            @foreach (g_auto.Models.Testimonial item in Model.Testimonials)
+                            {
+                                <div class="single-testimonial">
+                                    <div class="testimonial-text">
+                                        <p>@item.Content</p>
+                                        <div class="testimonial-meta">
+                                            <div class="client-image">
+                                                <div class="profimage-container">
+                                                    <div class="profimage" style="background:url(@(item.User.ProfilePicture!="Default"?"/Uploads/"+item.User.ProfilePicture:"/Assets/img/user-avatar-default.png"))">
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="client-info">
+                                                <h3>@(item.User!=null?item.User.FullName:"*Deleted User*")</h3>
+                                                <p>Customer</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    }
+}
+
+
+
+
+@************************************************************************@
+@****************************TESTIMONIAL-AREA-END************************@
+@************************************************************************@
+
+
+
+
+
+@************************************************************************@
+@****************************EXPERTS-AREA-START**************************@
+@************************************************************************@
+
+
+@{
+    Html.RenderPartial("~/Views/Partial/_Expert.cshtml");
+}
+
+
+
+
+@************************************************************************@
+@****************************EXPERTS-AREA-END****************************@
+@************************************************************************@
+
+
+
+
+@{
+    Html.RenderPartial("~/Views/Partial/_CounterView.cshtml", new g_auto.VM.CounterVM { ReservationsBase = Model.Reservations != null ? Model.Reservations.Count() : 0, AppBase = Model.Appointments != null ? Model.Appointments.Count() : 0, CustomerBase = Model.Sales != null ? Model.Sales.Count() : 0, VehicleBase = Model.Models != null ? Model.Models.Count() : 0 });
+}
+
+
+@************************************************************************@
+@*******************************BLOG-AREA-START**************************@
+@************************************************************************@
+
+@if (Model.Layout != null && Model.Blogs != null)
+{
+    if (Model.Layout.blogToggle != false)
+    {
+        <section class="blog-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center mb-3 mt-3">
+                            <div class="ui-title-logo">OUR BLOG</div>
+                            <h2 class="ui-title">See The Latest News</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach (g_auto.Models.Blog item in Model.Blogs.Take(Model.Layout.blogCount.Value))
+                    {
+                        if (item.isActive != false)
+                        {
+                            var CommentCount = 0;
+
+                            if (item.Comments != null && item.Comments.FirstOrDefault() != null)
+                            {
+                                foreach (g_auto.Models.Comment c in item.Comments)
+                                {
+                                    CommentCount += c.Replies.Count();
+                                }
+
+                            }
+
+                            <div class="col-lg-4">
+                                <div class="single-blog-container">
+                                    <div class="single-blog">
+                                        <a href="@Url.Action("Details", "BlogG", new { id=item.Id})">
+                                            <div style="overflow:hidden">
+                                                <div class="blog-image" style="background:url(/Uploads/@item.BlogCoverImage)">
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                        <div class="blog-text">
+                                            <h3><a href="@Url.Action("Details", "BlogG", new { id=item.Id})">@(item.Title.Length > 70 ? item.Title.Substring(0, 70) + "..." : item.Title)</a></h3>
+                                            <div class="blog-meta-home">
+                                                <div class="blog-meta-left">
+                                                    <p>@item.PostDate.ToString("MMM d, HH:mm")</p>
+                                                </div>
+                                                <div class="blog-meta-right">
+                                                    <p> <i style="color:#22abc3;margin-top: -2px;" data-feather="eye"></i> @item.ViewCount</p>
+                                                    <p><i style="color:#22abc3;margin-top: -2px;" data-feather="message-circle"></i> @(item.Comments!=null? item.Comments.Count()+ CommentCount : 0)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="blog-details-button">
+                                            <a href="@Url.Action("Details","BlogG", new { id = item.Id })">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    }
+                </div>
+            </div>
+        </section>
+
+    }
+}
+
+
+@************************************************************************@
+@*******************************BLOG-AREA-END****************************@
+@************************************************************************@
+
+
+@************************************************************************@
+@****************************CONTACT-AREA-START**************************@
+@************************************************************************@
+
+
+@if (Model.Layout != null)
+{
+    if (Model.Layout.contactToggle != false)
+    {
+        <section class="contact-area" style="padding:70px 0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="call-box">
+                            <div class="call-box-inner">
+                                <h2>@Html.Raw(Model.Layout.Contact_Title)</h2>
+                                <p>@Html.Raw(Model.Layout.Contact_Content)</p>
+                                <div class="call-number">
+                                    <div class="call-icon">
+                                        <i class="fa fa-phone"></i>
+                                    </div>
+                                    <div class="call-text">
+                                        <p>need any help?</p>
+                                        <h4>
+                                            <a href="tel:@Model.Layout.Phone">
+                                                @if (Model.About != null)
+                                                {
+                                                    <span>@Model.Layout.Phone</span>
+                                                }
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    }
+}
+
+
+
+
+
+
+
+
+@************************************************************************@
+@****************************CONTACT-AREA-END****************************@
+@************************************************************************@
+

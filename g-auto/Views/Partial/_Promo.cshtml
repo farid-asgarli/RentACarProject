@@ -1,0 +1,32 @@
+﻿@{
+    g_auto.DAL.DBContext db = new g_auto.DAL.DBContext();
+    Model.Experts = db.Expert.ToList();
+    Model.Layout = db.Layout.FirstOrDefault();
+}
+@model g_auto.VM.Home
+
+@if (Model.Layout != null)
+{
+
+    if (Model.Layout.promoToggle != false)
+    {
+        <section class="advert-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="advert-left" data-aos="fade-right">
+                            <img src="~/Uploads/@Model.Layout.Promo_Image" alt="promo car">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="advert-right" data-aos="fade-right">
+                            <h3>@Html.Raw(Model.Layout.Promo_Content)</h3>
+                            <a href="@Model.Layout.Promo_Link" class="gauto-btn" style="color:white;cursor:pointer">See the latest vacancies</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    }
+}

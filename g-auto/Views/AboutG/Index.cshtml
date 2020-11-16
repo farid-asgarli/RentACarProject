@@ -1,0 +1,173 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "About Us",
+        HREF = Url.Action("Index", "AboutG")
+    });
+}
+
+@model g_auto.VM.Home
+
+
+
+<div class="l-main-content">
+    
+    <main>
+        <section class="section-area mt-5">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 offset-md-1 text-center pt-4" data-aos="fade-up">
+                        <div class="ui-title-logo">AUTLINES</div>
+                        <h2 class="ui-title mb-4">We Provide Variety Of High-End<br>Auto Customizations</h2>
+                        <p>@Model.About.Content</p>
+                        <div class="d-block">
+                            <a class="ui-link" href="#">Get Painting or Styling Estimation</a>
+                            <div class="b-phone b-phone_mod-a bg-gray"><i class="ic icon-call-end"></i> Call Us Today<a class="b-phone__number" href="tel:@Model.About.Phone">+994 @Model.About.Phone</a></div>
+                            <!-- end .b-phone-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="section-default">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="b-advantages">
+                            <div class="ic flaticon-car-4 text-secondary"></div>
+                            <div class="b-advantages__main">
+                                <div class="b-advantages__title">We are team of creative designers and artists</div>
+                                <div class="b-advantages__info">Magna aliqua enim aduas dui veniam quis nostrud exercitation ullam laboris aut aliquip ex consequat.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="b-advantages">
+                            <div class="ic flaticon-wrench text-secondary"></div>
+                            <div class="b-advantages__main">
+                                <div class="b-advantages__title">We specialize in high end services and tools</div>
+                                <div class="b-advantages__info">Magna aliqua enim aduas dui veniam quis nostrud exercitation ullam laboris aut aliquip ex consequat.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="b-advantages">
+                            <div class="ic flaticon-tyre text-secondary"></div>
+                            <div class="b-advantages__main">
+                                <div class="b-advantages__title">We use professional approach to work</div>
+                                <div class="b-advantages__info">Magna aliqua enim aduas dui veniam quis nostrud exercitation ullam laboris aut aliquip ex consequat.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end .b-advantages-->
+
+        <div class="b-styles">
+            <div class="container">
+                <img class="img-fluid" src="~/Uploads/@Model.About.CoverImageFirst" alt="photo" data-aos="fade-down">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="b-styles__main">
+                            <div class="b-styles__title">@Model.About.CoverImageFirstTitle</div>
+                            <div class="b-styles__info">@Model.About.CoverImageFirstContent</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="b-styles__group row no-gutters">
+                            <div class="col-md-6">
+                                <div class="b-styles__item b-styles__item_first" data-aos="fade-right">
+                                    <div class="b-styles__item-title">@Model.About.CoverImageSecondTitle</div>
+                                    <div class="b-styles__item-info">@Model.About.CoverImageSecondContent</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="b-styles__item b-styles__item_second bg-primary" data-aos="fade-left">
+                                    <div class="b-styles__item-title">@Model.About.CoverImageThirdTitle</div>
+                                    <div class="b-styles__item-info">@Model.About.CoverImageThirdContent</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end .b-styles-->
+
+        @{
+            Html.RenderPartial("~/Views/Partial/_CounterView.cshtml", new g_auto.VM.CounterVM { ReservationsBase = Model.Reservations != null ? Model.Reservations.Count() : 0, AppBase = Model.Appointments != null ? Model.Appointments.Count() : 0, CustomerBase = Model.Sales != null ? Model.Sales.Count() : 0, VehicleBase = Model.Models != null ? Model.Models.Count() : 0 });
+        }
+        <section class="section-special">
+            <div class="row no-gutters">
+                <div class="col-xl-6">
+                    <div class="section-special__inner" data-aos="fade-right">
+                        <div class="text-center">
+                            <div class="ui-title-logo">AUTLINES</div>
+                            <h2 class="ui-title ui-title_light text-uppercase mb-1">Special Services</h2>
+                            <p class="section-special__info">Dolore magna aliqua enim minim veniam quis nostrud exercitation</p>
+                        </div>
+                        <div class="service-slider owl-carousel">
+                            @{
+                                var i = 0;
+                            }
+                            @foreach (g_auto.Models.Service item in Model.Services.Take(Model.Layout.serviceCount.Value))
+                            {
+                                if (item.isActive != false)
+                                {
+
+                                    i++;
+                                    <div class="single-service">
+                                        <span class="service-number">0@(i) </span>
+                                        <div class="service-icon">
+                                            <img src="~/Uploads/@item.ServiceIcon" class="filter-cyan" alt="city trasport">
+                                        </div>
+                                        <div class="service-text">
+                                            <a href="@Url.Action("ServiceReservation", "ServiceG", new {id=item.Id })">
+                                                <h3>@item.Title</h3>
+                                            </a>
+                                            <p>
+                                                @(item.Description.Length > 170 ? item.Description.Substring(0, 170) + "..." : item.Description)
+                                            </p>
+                                        </div>
+                                        <div class="service-details-button">
+                                            <a href="@Url.Action("ServiceReservation","ServiceG", new { id = item.Id })">View Details</a>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="section-special__img" data-aos="fade-left"><img class="img-scale" src="~/Uploads/@Model.About.CoverImageFourth" alt="photo"></div>
+                </div>
+            </div>
+        </section>
+
+        @{
+            Html.RenderPartial("~/Views/Partial/_Expert.cshtml");
+        }
+    </main>
+</div>
+<style>
+
+    .b-styles__item_first:after {
+        background: url(/Uploads/@Model.About.CoverImageSecond) no-repeat;
+        background-size: cover;
+    }
+
+    .b-styles__item_second:after {
+        background: url('/Uploads/@Model.About.CoverImageThird') no-repeat;
+        background-size: cover;
+    }
+</style>

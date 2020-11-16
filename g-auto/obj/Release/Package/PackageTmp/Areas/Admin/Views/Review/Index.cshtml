@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@model g_auto.VM.ReviewVM
+
+
+
+<div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+    <h1 class="mr-auto">
+        Model Reviews
+    </h1>
+    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+       
+    </div>
+</div>
+<!-- BEGIN: Datatable -->
+<div class="intro-y datatable-wrapper box p-5 mt-5">
+    <table class="table table-report table-report--bordered display datatable w-full">
+        <thead>
+            <tr>
+                <th class="border-b-2 whitespace-no-wrap">RESERVATION №</th>
+
+                <th class="border-b-2 text-left whitespace-no-wrap">MODEL</th>
+                <th class="border-b-2 text-left whitespace-no-wrap">USER</th>
+                <th class="border-b-2 text-left whitespace-no-wrap">RATING</th>
+                <th class="border-b-2 text-left whitespace-no-wrap">DATE</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (g_auto.Models.Review item in Model.Reviews)
+            {
+                <tr>
+                    <td class=" border-b">GA@(item.ReservationId)</td>
+                    <td class="border-b">
+                        @if (item.Model != null)
+                        {
+                            <a href="@Url.Action("Details", "Reservation", new { id=item.ReservationId })"><div class="font-medium whitespace-no-wrap">@item.Model.Name</div></a>
+                            <div class="text-gray-600 text-xs whitespace-no-wrap">@item.Model.Brand.Name</div>
+                        }
+                    </td>
+                    <td class="border-b">
+                        @if (item.User != null)
+                        {
+                            <div class="font-medium whitespace-no-wrap">@item.User.FullName</div>
+                            <div class="text-gray-600 text-xs whitespace-no-wrap">@item.User.Email</div>
+                        }
+                    </td>
+                    <td class="border-b">
+                        <div class="font-medium whitespace-no-wrap">@item.Rating out of 5</div>
+                    </td>
+                    <td class="text-left border-b">@item.PostedDate.ToString("MMM d yyyy, HH:mm")</td>
+                    <td class="border-b w-5 status_container">
+                        <div class="flex sm:justify-center items-center">
+                            <a class="flex items-center mr-3  action-pr-btn" href="@Url.Action("ReviewDetailsModel", "Review", new { Id= item.Id}) "> <i data-feather="eye" class="w-4 h-4 mr-1"></i> View </a>
+                            <a class="flex items-center text-theme-6 cancel_review_index" href="javascript:;" data-id="@item.Id"> <i data-feather="x" class="w-4 h-4 mr-1"></i> Delete </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+    <h1 class="mr-auto">
+        Product Reviews
+    </h1>
+    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+      
+    </div>
+</div>
+<!-- BEGIN: Datatable -->
+<div class="intro-y datatable-wrapper box p-5 mt-5">
+    <table class="table table-report table-report--bordered display datatable w-full">
+        <thead>
+            <tr>
+                <th class="border-b-2 whitespace-no-wrap">ORDER №</th>
+
+                <th class="border-b-2 text-left whitespace-no-wrap">PRODUCT</th>
+                <th class="border-b-2 text-left whitespace-no-wrap">USER</th>
+                <th class="border-b-2 text-left whitespace-no-wrap">RATING</th>
+                <th class="border-b-2 text-left whitespace-no-wrap">DATE</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (g_auto.Models.ReviewProduct item in Model.ReviewProducts)
+            {
+                <tr>
+                    <td class=" border-b">GA@(item.Sale.Id)</td>
+                    <td class="border-b">
+                        @if (item.Product != null)
+                        {
+                            <a href="@Url.Action("Details", "Sale", new { id=item.SaleId })"><div class="font-medium whitespace-no-wrap">@item.Product.Name</div></a>
+                            <div class="text-gray-600 text-xs whitespace-no-wrap">@item.Product.ProductToCategory.FirstOrDefault().ProductCategory.Name</div>
+                        }
+                    </td>
+                    <td class="border-b">
+                        @if (item.User != null)
+                        {
+                            <div class="font-medium whitespace-no-wrap">@item.User.FullName</div>
+                            <div class="text-gray-600 text-xs whitespace-no-wrap">@item.User.Email</div>
+                        }
+                    </td>
+                    <td class="border-b">
+                        <div class="font-medium whitespace-no-wrap">@item.Rating out of 5</div>
+                    </td>
+                    <td class="text-left border-b">@item.PostedDate.ToString("MMM d yyyy, HH:mm")</td>
+                    <td class="border-b w-5 status_container">
+                        <div class="flex sm:justify-center items-center">
+                            <a class="flex items-center mr-3" href="@Url.Action("ReviewDetailProduct", "Review", new { Id= item.Id}) "> <i data-feather="eye" class="w-4 h-4 mr-1"></i> View </a>
+                            <a class="flex items-center text-theme-6 cancel_review_index" href="javascript:;" data-id="@item.Id"> <i data-feather="x" class="w-4 h-4 mr-1"></i> Delete </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal" id="delete-confirmation-modal-review">
+    <div class="modal__content">
+        <div class="p-5 text-center">
+            <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+            <div class="text-3xl mt-5">Are you sure?</div>
+            <div class="text-gray-600 mt-2">Are you sure you want to cancel the Order? This process cannot be undone.</div>
+        </div>
+        <div class="px-5 pb-8 text-center">
+            <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Dismiss</button>
+            <button type="button" id="btn-cancel-review-index" data-id="" class="button w-60 bg-theme-6 text-white">Cancel The Order</button>
+        </div>
+    </div>
+</div>
+

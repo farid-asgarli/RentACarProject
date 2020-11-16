@@ -1,0 +1,175 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "Blog",
+        HREF = Url.Action("Index", "BlogG")
+    });
+}
+
+@model g_auto.VM.BlogVM
+
+@if (Model.Blogs.FirstOrDefault() != null)
+{
+    <section class="gauto-blog-page-area section_70" style=" background: url(/Assets/img/bg-2.png) 50% 10% no-repeat;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="fl-vc-custom-title-container fl-animated-item-velocity text-center custom-title animation-complete" data-animate-type="slideUpIn" style="opacity: 1; transform: translateY(0px);">
+                        <div class="custom-title-content-wrapper">
+                            <div class="fl-title-vc vc-custom-title font-text fl-font-style-bolt fl-custom-title-5f33b48a1de90-5128">
+                                See The Latest News
+                            </div>
+                            <div class="fl-subtitle-vc fl-font-style-bolt vc-custom-sub-title back-text">OUR BLOG</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="blog-search-top" data-aos="fade-left">
+                        <form class="product_search" method="get">
+                            <input type="search" class="search_blog_area" placeholder="Keywords...">
+                            <button type="submit" class="search_blog_btn"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                    <div class="blog-page-left"  data-aos="fade-right">
+                        
+                        @foreach (g_auto.Models.Blog item in Model.Blogs)
+                        {
+                            <div class="blog-single bg-light">
+                                <div class="half-post-entry d-block d-lg-flex">
+                                    <a target="_blank" href="@Url.Action("Details","BlogG", new { id=item.Id })"> <div class="img-bg" style="background-image: url(/Uploads/@item.BlogCoverImage)"></div></a>
+                                    <div class="contents">
+                                        <span class="caption">Editor's Pick</span>
+                                        <h2><a target="_blank" href="@Url.Action("Details","BlogG", new { id=item.Id })">@item.Title</a></h2>
+                                        <p class="mb-3">@Html.Raw(item.Description)</p>
+                                        <div class="post-meta">
+                                            <span class="d-block">
+                                                <a href="#">@item.Admin.AdminSettings.FirstOrDefault().DisplayName</a> in <a href="#">
+                                                    @if (item.BlogToCategory.FirstOrDefault() != null)
+                                                    {@item.BlogToCategory.FirstOrDefault().BlogCategory.Name}
+                                                </a>
+                                            </span>
+                                            <span class="date-read">@item.PostDate.ToString("MMMM d") <span class="mx-1">•</span>  @((item.Content).Length/20000) min read <span class="icon-star2"></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    @if (Model.Blogs.Count >= 4)
+                    {
+                        <div class="pagination-box-row " style="display: flex; justify-content: center;">
+                            <button id="load_more_blog" style="width:50%" class="gauto-theme-btn">Load More</button>
+                        </div>
+                    }
+                </div>
+                <div class="col-lg-4">
+                    <div class="blog-page-right"  data-aos="fade-left">
+                        <div class="sidebar-widget blog-search-right">
+                            <form class="product_search" method="get">
+                            <input type="search" class="search_blog_area" placeholder="Keywords...">
+                            <button type="submit" class="search_blog_btn"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                        <div class="sidebar-widget"  data-aos="fade-left">
+                            <h3>By Category</h3>
+                            <ul class="service-menu" >
+                                @if (Model.Categories.FirstOrDefault() != null)
+                                {
+                                    foreach (g_auto.Models.BlogCategory item in Model.Categories)
+                                    {
+                                        var count = 0;
+
+                                        if (item.BlogToCategory.FirstOrDefault() != null && item.BlogToCategory.FirstOrDefault().Blog.isActive != false)
+                                        {
+                                            <li class="active_seeker">
+                                                <a class="blog_cat_btn" data-id="@item.Id" href="javascript:;">
+                                                    @item.Name
+                                                    @foreach (var item2 in item.BlogToCategory)
+                                                    {
+                                                        if (item2.Blog.isActive != false)
+                                                        {
+                                                            count++;
+                                                        }
+
+                                                    }
+                                                    <span>
+                                                        (@count)
+                                                    </span>
+                                                </a>
+
+                                            </li>
+
+                                        }
+                                    }
+                                }
+
+                            </ul>
+                        </div>
+                        <div class="sidebar-widget"  data-aos="fade-left">
+                            <h3>by tags</h3>
+                            <ul class="Tags-catagory">
+                                @if (Model.Tags.FirstOrDefault() != null)
+                                {
+                                    foreach (g_auto.Models.Tags item in Model.Tags)
+                                    {
+                                        if (item.BlogToTags.FirstOrDefault() != null && item.BlogToTags.FirstOrDefault().Blog.isActive == true)
+                                        {
+                                            <li class="active_seeker"><a class="blog_tag_btn" data-id="@item.Id" href="javascript:;">@item.Name </a></li>
+                                        }
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        @if (Model.Blogs.FirstOrDefault() != null)
+                        {
+                            <div class="sidebar-widget"  data-aos="fade-left">
+                                <h3>recent post</h3>
+                                <ul class="top-products">
+                                    @foreach (g_auto.Models.Blog item in Model.Blogs.OrderByDescending(c => c.PostDate).Take(5))
+                                    {
+                                        if (item.isActive != false)
+                                        {
+                                            <li>
+
+                                                <a href="@Url.Action("Details","BlogG", new {id=item.Id })">
+                                                    <div class="recent-img" style="background:url(/Uploads/@item.BlogCoverImage)">
+                                                    </div>
+                                                </a>
+
+                                                <div class="recent-text">
+                                                    <h4>
+                                                        <a href="@Url.Action("Details","BlogG", new {id=item.Id })">@(item.Title.Length > 60 ? item.Title.Substring(0, 60) + "..." : item.Title) </a>
+                                                    </h4>
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+
+                                </ul>
+                            </div>
+                        }
+                        <div class="sidebar-widget"  data-aos="fade-left">
+                            <h3>Archive</h3>
+                            <ul class="service-menu">
+                                <li>
+                                    <a href="#">
+                                        August - 2018 <span>(26)</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

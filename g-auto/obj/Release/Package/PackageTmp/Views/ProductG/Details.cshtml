@@ -1,0 +1,363 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model g_auto.VM.ProductVM
+
+
+@if (Model.Product != null)
+{
+    if (Model.Product.isActive != false)
+
+    {
+
+
+        Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+        {
+            Page = "Product Details",
+            HREF = Url.Action("Index", "ProductG")
+        });
+
+
+        <section class="gauto-product-details section_70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+
+                        <!-- MAIN SLIDES -->
+                        <div class="slider">
+                            @foreach (var item in Model.Product.ProductImages)
+                            { 
+                            <img src="~/Uploads/@item.Name" alt="Alternate Text" />
+                            }
+
+
+                            </div>
+
+                        <!-- THUMBNAILS -->
+                        <div class="slider-nav-thumbnails">
+                            @foreach (var item in Model.Product.ProductImages)
+                            {
+                                <div style="background: url(/Uploads/@item.Name);"></div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="product-details-text">
+                            <h3>@Model.Product.Name</h3>
+                            <div class="car-rating">
+                                @if (Model.Product.ReviewProducts.FirstOrDefault() != null)
+                                {
+                                    <ul>
+                                        @{
+                                            var rating_sum = 0;
+                                        }
+
+                                        @foreach (g_auto.Models.ReviewProduct item in Model.Product.ReviewProducts)
+                                        {
+                                            rating_sum = rating_sum + item.Rating;
+                                        }
+
+                                        @{
+                                            int totalrating_sum = rating_sum / Model.Product.ReviewProducts.Count();
+                                        }
+
+                                        @for (var i = 0; i < totalrating_sum; i++)
+                                        {
+                                            <li><i class="fa fa-star"></i></li>
+                                        }
+                                        @for (var i = 0; i < 5 - totalrating_sum; i++)
+                                        {
+                                            <li><i class="fa fa-star-o"></i></li>
+                                        }
+                                    </ul>
+                                    <p>(@Model.Product.ReviewProducts.Count() ratings)</p>
+                                }
+                                else
+                                {
+                                    <ul>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                    <p>No Ratings Yet</p>
+                                }
+                            </div>  
+                            <div class="category-container mt-3 ml-2">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        @if (Model.Product.ProductToCategory.FirstOrDefault() != null)
+                                        {
+                                            foreach (g_auto.Models.ProductToCategory item in Model.Product.ProductToCategory.Take(5))
+                                            {
+                                                <a class="item-category cursor-pointer mt-2 ml-1 mr-1" href="#">
+                                                    @item.ProductCategory.Name
+                                                </a>
+                                                
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-pro-page-para">
+                                <p>@(Html.Raw(Model.Product.Desc))</p>
+                            </div>
+                            <div class="single-shop-price">
+                                <p>Price: <span>$@Model.Product.Price.ToString("0.00")</span></p>
+                                @if (Model.Product.Amount != 0)
+                                {
+                                    <p class="qnt">Quantity:<input value="1" max="@Model.Product.Amount" min="1" class="productCount" type="number"></p>
+                                }
+                            </div>
+                            <div class="single-shop-page-btn">
+                                @if (Model.Product.Amount != 0)
+                                {
+                                    <a href="javascript:;" data-id="@Model.Product.Id" class="gauto-btn addToCart"><i class="fa fa-shopping-cart"></i> add to cart</a>
+                                }
+                                else
+                                {
+                                    <h5 style="color:#e2b71c">Sold Out.</h5>
+                                }
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    }
+
+    <section class="gauto-related-products section_b_70">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="site-heading">
+                        <h4>products</h4>
+                        <h2>related products</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="owl-carousel owl-theme" id="recommended">
+                    @foreach (g_auto.Models.Product item in Model.Products)
+                    {
+                        foreach (var item2 in item.ProductToCategory)
+                        {
+                            foreach (var item3 in Model.Product.ProductToCategory)
+                            {
+                                if (item2.ProductCategoryId == item3.ProductCategoryId && item.isActive != false && item.Id != Model.Product.Id)
+                                {
+                                    <div class="product-item ">
+                                        @if (item.ProductImages.FirstOrDefault() != null)
+                                        {
+                                        <div class="product-image">
+                                            <a href="@Url.Action("Details", "ProductG" , new { id =item.Id})">
+                                                <div class="pr-image" style="background:url(/Uploads/@item.ProductImages.FirstOrDefault().Name)">
+
+                                                </div>
+                                            </a>
+                                            @if (item.isNewlyAdded)
+                                            {
+                                                <div class="status-top">
+                                                    <a class="item-condition" href="">
+                                                        New
+                                                    </a>
+
+                                                </div>
+                                            } 
+                                            @if (item.Amount == 0)
+                                            {
+                                                <div class="status_sold_out">
+                                                    <span class="item_availability">Sold Out</span>
+                                                </div>
+                                            }
+                                        </div>
+                                        }
+                                        <div class="product-text">
+                                            <div class="product-title">
+                                                <h3><a href="@Url.Action("Details", "ProductG" , new { id =item.Id})">@(item.Name.Length > 25 ? item.Name.Substring(0, 25) + "..." : item.Name)</a></h3>
+                                                <span class="item-cat">@(item.ProductToCategory.FirstOrDefault()!=null?item.ProductToCategory.FirstOrDefault().ProductCategory.Name:"")</span>
+                                                <p>$@item.Price.ToString("0.00")</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="add-to-cart">
+                                            <a href="@Url.Action("Details", "ProductG", new { id=item.Id})">View Item</a>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="product_navlist">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="model-tabs">
+                        <ul class="nav nav-tabs" id="model-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="specs-tab" data-toggle="tab" href="#specs" role="tab" aria-controls="specs" aria-selected="true">Specifications</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Reviews</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="shipping-tab" data-toggle="tab" href="#shipping" role="tab" aria-controls="shipping" aria-selected="false">Shipping & Return</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="faq-tab" data-toggle="tab" href="#faq" role="tab" aria-controls="faq" aria-selected="false">FAQ</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="offerTabContent">
+                            <div class="tab-pane fade show active" id="specs" role="tabpanel" aria-labelledby="specs-tab">
+
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+                                        <p>
+                                            @Html.Raw(Model.Product.About)
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <p>
+                                            @Html.Raw(Model.Product.About)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <p>
+                                            @Html.Raw(Model.Product.About)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                                <div class="row">
+                                    <div class="col-lg-12">
+
+                                        @if (Model.Product.ReviewProducts.FirstOrDefault() != null)
+                                        {
+                                            <div id="reviews" class="woocommerce-Reviews">
+                                                <div id="comments">
+                                                    <ol class="commentlist">
+                                                        @foreach (g_auto.Models.ReviewProduct item in Model.Product.ReviewProducts)
+                                                        {
+                                                            <li class="review">
+                                                                <div class="comment_container">
+                                                                    <div class="profimage-container">
+                                                                        <div class="profimage" style="background:url(/Uploads/@item.User.ProfilePicture)">
+                                                                            
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="comment-text">
+                                                                        <div class="car-rating">
+                                                                            <ul>
+                                                                                @for (var i = 0; i < item.Rating; i++)
+                                                                                {
+                                                                                    <li><i class="fa fa-star"></i></li>
+
+                                                                                }
+                                                                                @for (var i = 0; i < 5 - item.Rating; i++)
+                                                                                {
+                                                                                    <li><i class="fa fa-star-o"></i></li>
+                                                                                }
+
+
+                                                                            </ul>
+                                                                        </div>
+                                                                        <p class="meta">
+                                                                            <strong class="woocommerce-review__author">@item.User.FullName </strong>
+                                                                            <span class="woocommerce-review__dash">–</span>
+                                                                            <time class="woocommerce-review__published-date">@item.PostedDate.ToString("MMMM d, yyyy")</time>
+                                                                        </p>
+                                                                        <div class="description"><p>@item.Content</p></div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            foreach (g_auto.Models.ProductReviewReply item2 in item.Replies)
+                                                            {
+                                                                <li class="review pl-5">
+                                                                    <div class="comment_container">
+                                                                        <img alt="" src="~/Uploads/@item2.Admin.ProfilePicture" srcset="~/Uploads/@item2.Admin.ProfilePicture" class="avatar avatar-60 photo ml-5" style="border-radius:50%;width:100%;height:60px">
+                                                                        <div class="comment-text">
+
+                                                                            <p class="meta">
+                                                                                @if (item2.Admin.AdminSettings.FirstOrDefault() != null)
+                                                                                {
+                                                                                    <strong class="woocommerce-review__author">@item2.Admin.AdminSettings.FirstOrDefault().DisplayName </strong>
+                                                                                }
+                                                                                <span class="woocommerce-review__dash">–</span>
+                                                                                <time class="woocommerce-review__published-date">@item2.PostedDate.ToString("MMMM d, yyyy")</time>
+                                                                            </p>
+                                                                            <p><strong>Replying To @item.User.FullName</strong></p>
+                                                                            <div class="description"><p>@item2.Content</p></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            }
+                                                        }
+
+                                                    </ol>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <h3 class="text-center mt-5">No Reviews Yet.</h3>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+}
+else
+{
+
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "404 Page",
+        HREF = Url.Action("Index")
+    });
+
+
+    Html.RenderPartial("~/Views/Partial/_NotFound.cshtml");
+
+}
+
+

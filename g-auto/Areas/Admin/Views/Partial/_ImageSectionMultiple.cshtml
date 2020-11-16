@@ -1,0 +1,71 @@
+﻿@{
+    Layout = null;
+}
+
+@model g_auto.ViewModels.ImageFile
+
+
+
+@*<div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 text-center">
+    <label>@Model.ImageText</label>
+    <div style="width:18rem;height:12rem" class="relative image-fit mt-5 cursor-pointer zoom-in mx-auto">
+        @if (Model.ImageDbLink == "Default2" || Model.ImageDbLink == null)
+        {
+
+            <img class="rounded-md" alt="Midone Tailwind HTML Admin Template" id="multi-image-@Model.ImageName" title="Default" src="~/Areas/Admin/Assets/images/profile-13.jpg">
+
+        }
+        else
+        {
+            <img class="rounded-md" alt="Midone Tailwind HTML Admin Template" id="multi-image-@Model.ImageName" title="@Model.ImageDbLink" src="~/Uploads/@Model.ImageDbLink">
+
+        }
+        <div class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-theme-6 right-0 top-0 -mr-2 -mt-2 tooltipstered remove-image-button" title="Remove this image?">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x w-4 h-4">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </div>
+    </div>
+    <div class="mx-auto cursor-pointer relative mt-3">
+        <button type="button" data-id="@Model.ImageName" style="max-width:100%" class="button w-full bg-theme-1 text-white btn-change">Change Photo</button>
+        <input type="file" id="change-image-@Model.ImageName" name=@Model.ImageName class="w-full h-full top-0 left-0 absolute opacity-0 imglink">
+    </div>
+</div>*@
+
+
+
+
+
+
+
+
+<div class="rounded-md p-5 text-left relative img-section" >
+    <label>@Model.ImageText</label>
+    <div style="width:@(Model.ImageWidth!=null?Model.ImageWidth:"100%");height:@(Model.ImageHeight!=null?Model.ImageHeight:"12rem")" class="relative image-fit mt-5 mx-auto img-container">
+        @if (Model.ImageDbLink == "Default2" || Model.ImageDbLink == null)
+        {
+
+            <img class="rounded-md" alt="Midone Tailwind HTML Admin Template" id="multi-image-@Model.ImageName" title="Default" src="https://imgur.com/nob5pRX.png">
+
+        }
+        else
+        {
+            <img class="rounded-md" alt="Midone Tailwind HTML Admin Template" id="multi-image-@Model.ImageName" title="@Model.ImageDbLink" src="~/Uploads/@Model.ImageDbLink">
+
+        }
+        <div class="overlay">
+
+        </div>
+        @*<div class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-theme-6 right-0 top-0 -mr-2 -mt-2 tooltipstered remove-image-button" title="Remove this image?">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x w-4 h-4">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </div>*@
+    </div>
+    <div class="mx-auto cursor-pointer position-absolute mt-3 input-div">
+        <button type="button" data-id="@Model.ImageName" style="max-width:100%" class="button w-full bg-theme-1 text-white btn-change ">Change Photo</button>
+        <input type="file" id="change-image-@Model.ImageName" name=@Model.ImageName class="w-full h-full top-0 left-0 absolute opacity-0 imglink ">
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+@model g_auto.ViewModels.ImageFile
+
+<div class="form-group mt-3 ImageSelector">
+    <label>@Model.ImageText</label>
+    <div class="modelimage-upload ">
+        <div class="modelimage-preview">
+            @if (Model.ImageDbLink == "Default2" || Model.ImageDbLink == null)
+            {
+                <div id="imagePreview" style="background-image: url(https://imgur.com/nob5pRX.png);"></div>
+            }
+            else
+            {
+                <div id="imagePreview" style="background-image: url('/Uploads/@Model.ImageDbLink'); "></div>
+            }
+            <div class="modelimage-edit">
+                <input type='file' id="imageUpload" name=@Model.ImageName accept=".png, .jpg, .jpeg" />
+
+                <label for="imageUpload"></label>
+            </div>
+            <div class="overlay">
+
+            </div>
+        </div>
+    </div>
+</div>

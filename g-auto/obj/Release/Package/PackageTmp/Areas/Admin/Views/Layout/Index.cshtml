@@ -1,0 +1,480 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+
+    g_auto.DAL.DBContext db = new g_auto.DAL.DBContext();
+}
+
+@model g_auto.Models.Layout
+
+
+
+    <h1 style="margin:50px 0">Home Layout</h1>
+
+    
+    <form enctype="multipart/form-data" class="text-left intro-y" method="post" id="submitToggleForm">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-6">
+                    <h1 class="m-5">Visibility</h1>
+                    <div class="toggles shadow-md box border pt-2 pb-2">
+                        <div class="h-12 flex items-center justify-between z-50 ">
+
+                            <div class="ml-10 text-gray-700 dark:text-gray-300 flex items-center"><i data-feather="film" class="mr-2"></i> Sliders</div>
+                            @Html.CheckBoxFor(x => x.sliderToggle, new { @class = "input input--switch border element-toggle mr-10", @type = "checkbox" })
+                        </div>
+                        <hr />
+                        <div class="  h-12 flex items-center justify-between z-50   ">
+                            <div class="ml-10 text-gray-700 dark:text-gray-300 flex items-center"><i data-feather="codesandbox" class="mr-2"></i> Models</div>
+                            @Html.CheckBoxFor(x => x.modelToggle, new { @class = "input input--switch border element-toggle mr-10", @type = "checkbox" })
+                        </div>
+                        <hr />
+
+                        <div class="  h-12 flex items-center justify-between z-50   ">
+                            <div class="ml-10 text-gray-700 dark:text-gray-300 flex items-center"><i data-feather="target" class="mr-2"></i> Services</div>
+                            @Html.CheckBoxFor(x => x.serviceToggle, new { @class = "input input--switch border element-toggle mr-10", @type = "checkbox" })
+                        </div>
+                        <hr />
+
+                        <div class="  h-12 flex items-center justify-between z-50    ">
+                            <div class="ml-10 text-gray-700 dark:text-gray-300 flex items-center"><i data-feather="book-open" class="mr-2"></i> Blogs</div>
+                            @Html.CheckBoxFor(x => x.blogToggle, new { @class = "input input--switch border element-toggle mr-10", @type = "checkbox" })
+                        </div>
+                        <hr />
+
+                        <div class="  h-12 flex items-center justify-between z-50   ">
+                            <div class="ml-10 text-gray-700 dark:text-gray-300 flex items-center"><i data-feather="user" class="mr-2"></i> Experts</div>
+                            @Html.CheckBoxFor(x => x.expertToggle, new { @class = "input input--switch border element-toggle mr-10", @type = "checkbox" })
+                        </div>
+                        <hr />
+
+                        <div class="  h-12 flex items-center justify-between z-50   ">
+                            <div class="ml-10 text-gray-700 dark:text-gray-300 flex items-center"><i data-feather="message-square" class="mr-2"></i> Testimonials</div>
+                            @Html.CheckBoxFor(x => x.testimonialToggle, new { @class = "input input--switch border element-toggle mr-10", @type = "checkbox" })
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-6">
+
+                    <h1 class="m-5">Amount to Display</h1>
+                    <div class="toggles shadow-md box border pt-2 pb-2">
+                        <div class="h-12 flex items-center justify-between z-50 ">
+
+                            <div class="ml-10 text-gray-700 dark:text-gray-300 flex items-center"><i data-feather="film" class="mr-2"></i> Sliders</div>
+                            @*@Html.CheckBoxFor(x => x.sliderToggle, new { @class = "input input--switch border element-toggle mr-10", @type = "checkbox" })*@
+                            @Html.EditorFor(model => model.sliderCount, new { htmlAttributes = new { @class = "form-control input w-full border custom-val-input mr-10 element-toggle", @style = "max-width:100px", @required = true, @type = "number", @placeholder = 0, @min = 0, @max = db.Sliders != null ? db.Sliders.Count() : 0 } })
+                        </div>
+                        <hr />
+                        <div class="  h-12 flex items-center justify-between z-50   ">
+                            <div class="ml-10 text-gray-700 dark:text-gray-300 flex items-center"><i data-feather="codesandbox" class="mr-2"></i> Models</div>
+                            @Html.EditorFor(model => model.modelCount, new { htmlAttributes = new { @class = "form-control input w-full border custom-val-input mr-10 element-toggle", @style = "max-width:100px", @required = true, @type = "number", @placeholder = 0, @min = 0, @max = db.Model != null ? db.Model.Count() : 0 } })
+                        </div>
+                        <hr />
+
+                        <div class="  h-12 flex items-center justify-between z-50   ">
+                            <div class="ml-10 text-gray-700 dark:text-gray-300 flex items-center"><i data-feather="target" class="mr-2"></i> Services</div>
+                            @Html.EditorFor(model => model.serviceCount, new { htmlAttributes = new { @class = "form-control input w-full border custom-val-input mr-10 element-toggle", @style = "max-width:100px", @required = true, @type = "number", @placeholder = 0, @min = 0, @max = db.Service != null ? db.Service.Count() : 0 } })
+                        </div>
+                        <hr />
+
+                        <div class="  h-12 flex items-center justify-between z-50    ">
+                            <div class="ml-10 text-gray-700 dark:text-gray-300 flex items-center"><i data-feather="book-open" class="mr-2"></i> Blogs</div>
+                            @Html.EditorFor(model => model.blogCount, new { htmlAttributes = new { @class = "form-control input w-full border custom-val-input mr-10 element-toggle", @style = "max-width:100px", @required = true, @type = "number", @placeholder = 0, @min = 0, @max = db.Blog != null ? db.Blog.Count() : 0 } })
+                        </div>
+                        <hr />
+
+                        <div class="  h-12 flex items-center justify-between z-50   ">
+                            <div class="ml-10 text-gray-700 dark:text-gray-300 flex items-center"><i data-feather="user" class="mr-2"></i> Experts</div>
+                            @Html.EditorFor(model => model.expertCount, new { htmlAttributes = new { @class = "form-control input w-full border custom-val-input mr-10 element-toggle", @style = "max-width:100px", @required = true, @type = "number", @placeholder = 0, @min = 0, @max = db.Expert != null ? db.Expert.Count() : 0 } })
+                        </div>
+                        <hr />
+
+                        <div class="  h-12 flex items-center justify-between z-50   ">
+                            <div class="ml-10 text-gray-700 dark:text-gray-300 flex items-center"><i data-feather="message-square" class="mr-2"></i> Testimonials</div>
+                            @Html.EditorFor(model => model.testiominalCount, new { htmlAttributes = new { @class = "form-control input w-full border custom-val-input mr-10 element-toggle", @style = "max-width:100px", @required = true, @type = "number", @placeholder = 0, @min = 0, @max = db.Testimonials != null ? db.Testimonials.Count() : 0 } })
+                        </div>
+
+                        @Html.HiddenFor(model => model.Id)
+
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-6">
+                    <h1 class="m-5">Header Logo</h1>
+                    <div class="toggles toggles-image shadow-md box border pt-2 pb-2 text-center">
+
+                        <div class="rounded-md p-5 text-left relative img-section">
+                            <div style="width:100%;height:340px" class="relative image-fit mx-auto img-container">
+                                @if (Model.Logo == "Default2" || Model.Logo == null)
+                                {
+
+                                    <img class="rounded-md" alt="Midone Tailwind HTML Admin Template" id="multi-image-LogoFile" title="Default" src="https://imgur.com/nob5pRX.png">
+
+                                }
+                                else
+                                {
+                                    <img class="rounded-md" alt="Midone Tailwind HTML Admin Template" id="multi-image-LogoFile" title="@Model.Logo" src="~/Uploads/@Model.Logo">
+
+                                }
+                                <div class="overlay">
+
+                                </div>
+
+                            </div>
+                            <div class="mx-auto cursor-pointer position-absolute mt-3 input-div">
+                                <button type="button" data-id="LogoFile" style="max-width:100%" class="button w-full bg-theme-1 text-white btn-change ">Change Photo</button>
+                                <input type="file" id="change-image-LogoFile" name=LogoFile class="w-full h-full top-0 left-0 absolute opacity-0 img-change">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-6">
+                    <h1 class="m-5">Footer Logo</h1>
+                    <div class="toggles toggles-image shadow-md box border pt-2 pb-2 text-center">
+
+                        <div class="rounded-md p-5 text-left relative img-section">
+                            <div style="width:100%;height:340px" class="relative image-fit mx-auto img-container">
+                                @if (Model.LogoFooter == "Default2" || Model.LogoFooter == null)
+                                {
+
+                                    <img class="rounded-md" alt="Midone Tailwind HTML Admin Template" id="multi-image-LogoFooterFile" title="Default" src="https://imgur.com/nob5pRX.png">
+
+                                }
+                                else
+                                {
+                                    <img class="rounded-md" alt="Midone Tailwind HTML Admin Template" id="multi-image-LogoFooterFile" title="@Model.LogoFooter" src="~/Uploads/@Model.LogoFooter">
+
+                                }
+                                <div class="overlay">
+
+                                </div>
+
+                            </div>
+                            <div class="mx-auto cursor-pointer position-absolute mt-3 input-div">
+                                <button type="button" data-id="LogoFooterFile" style="max-width:100%" class="button w-full bg-theme-1 text-white btn-change ">Change Photo</button>
+                                <input type="file" id="change-image-LogoFooterFile" name=LogoFooterFile class="w-full h-full top-0 left-0 absolute opacity-0 img-change">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-6">
+                    <h1 class="m-5">Company Info</h1>
+                    <div class="toggles toggles-image shadow-md box border pt-2 pb-2 text-left" style="padding:20px">
+
+
+
+                        <div class="form-group mb-1">
+                            <label class="control-label col-md-2">Email </label>
+                            <div class="mt-2">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg", @type = "email" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label col-md-2">Address </label>
+                            <div class="mt-1">
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg", @type = "text" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="control-label col-md-2">Phone </label>
+                            <div class="mt-1">
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg", @type = "text" } })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group mt-5 mb-5">
+                            <div class="row">
+                                
+                                <div class="col-lg-12">
+                                    <a href="" id="saveCompanySection" style="display:block" class="button w-20 bg-theme-1 text-white ml-auto">Save</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-6">
+                    <h1 class="m-5">Contact Section</h1>
+                    <div class="toggles toggles-image shadow-md box border pt-2 pb-2 text-left" style="padding:20px">
+
+
+
+                        <div class="form-group mb-3">
+                            <label class="control-label col-md-2">Title </label>
+                            <div class="mt-5">
+                                @Html.EditorFor(model => model.Contact_Title, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg" } })
+                                @Html.ValidationMessageFor(model => model.Contact_Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-3 mb-3">
+                            <label class="control-label col-md-2">Description </label>
+                            <div class=" mt-5">
+                                @Html.TextAreaFor(model => model.Contact_Content, new { @class = "custom_textarea intro-y box input--lg form-control input w-full border mt-2 mb-2", @placeholder = "Your Description " })
+                                @Html.ValidationMessageFor(model => model.Contact_Content, "", new { @class = "sm:ml-auto mt-1 sm:mt-0 text-xs text-red-600" })
+                            </div>
+                        </div>
+                        <div class="form-group mt-5 mb-5">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="flex items-center mt-2">
+                                        <label class="control-label col-md-2">Visibility </label>
+
+                                        @Html.CheckBoxFor(x => x.contactToggle, new { @class = "input input--switch border element-toggle ml-10", @type = "checkbox" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <a href="" id="saveContactSection" style="display:block" class="button w-20 bg-theme-1 text-white ml-auto">Save</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-6">
+                    <h1 class="m-5">Promo Section</h1>
+                    <div class="toggles toggles-image shadow-md box border pt-2 pb-2 text-left" style="padding:20px">
+
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="form-group mb-3">
+                                    <label class="control-label col-md-2">Promo Link </label>
+                                    <div class="mt-5">
+                                        @Html.EditorFor(model => model.Promo_Link, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg" } })
+                                        @Html.ValidationMessageFor(model => model.Promo_Link, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group mt-3 mb-3">
+                                    <label class="control-label col-md-2">Content </label>
+                                    <div class=" mt-5">
+                                        @Html.TextAreaFor(model => model.Promo_Content, new { @class = "custom_textarea intro-y box input--lg form-control input w-full border mt-2 mb-2", @placeholder = "Your Description " })
+                                        @Html.ValidationMessageFor(model => model.Promo_Content, "", new { @class = "sm:ml-auto mt-1 sm:mt-0 text-xs text-red-600" })
+                                    </div>
+                                </div>
+                                <div class="form-group mt-5 mb-5">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="flex items-center mt-2">
+                                                <label class="control-label col-md-2">Visibility </label>
+
+                                                @Html.CheckBoxFor(x => x.promoToggle, new { @class = "input input--switch border element-toggle ml-10", @type = "checkbox" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <a href="" style="display:block" class="button w-20 bg-theme-1 text-white ml-auto savePromoSection">Save</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="toggles toggles-image shadow-md box border pt-2 pb-2 text-center">
+
+                                    <div class="rounded-md p-5 text-left relative img-section">
+                                        <div style="width:100%;height:280px" class="relative image-fit mx-auto img-container">
+                                            @if (Model.Promo_Image == "Default2" || Model.Promo_Image == null)
+                                            {
+
+                                                <img class="rounded-md" alt="Midone Tailwind HTML Admin Template" id="multi-image-Promo_ImageFile" title="Default" src="https://imgur.com/nob5pRX.png">
+
+                                            }
+                                            else
+                                            {
+                                                <img class="rounded-md" alt="Midone Tailwind HTML Admin Template" id="multi-image-Promo_ImageFile" title="@Model.Promo_Image" src="~/Uploads/@Model.Promo_Image">
+
+                                            }
+                                            <div class="overlay">
+
+                                            </div>
+
+                                        </div>
+                                        <div class="mx-auto cursor-pointer position-absolute mt-3 input-div">
+                                            <button type="button" data-id="Promo_ImageFile" style="max-width:100%" class="button w-full bg-theme-1 text-white btn-change ">Change Photo</button>
+                                            <input type="file" id="change-image-Promo_ImageFile" name=Promo_ImageFile class="w-full h-full top-0 left-0 absolute opacity-0 img-change">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-6">
+                    <h1 class="m-5">About Section</h1>
+                    <div class="toggles toggles-image shadow-md box border pt-2 pb-2 text-left" style="padding:20px">
+
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="form-group mb-3">
+                                    <label class="control-label col-md-2">Title </label>
+                                    <div class="mt-5">
+                                        @Html.EditorFor(model => model.About_Title, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg" } })
+                                        @Html.ValidationMessageFor(model => model.About_Title, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group mt-3 mb-3">
+                                    <label class="control-label col-md-2">Description </label>
+                                    <div class=" mt-5">
+                                        @Html.TextAreaFor(model => model.About_Content, new { @class = "custom_textarea intro-y box input--lg form-control input w-full border mt-2 mb-2", @placeholder = "Your Description " })
+                                        @Html.ValidationMessageFor(model => model.About_Content, "", new { @class = "sm:ml-auto mt-1 sm:mt-0 text-xs text-red-600" })
+                                    </div>
+
+                                </div>
+                                <div class="form-group mt-5 mb-5">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="flex items-center mt-2">
+                                                <label class="control-label col-md-2">Visibility </label>
+
+                                                @Html.CheckBoxFor(x => x.aboutToggle, new { @class = "input input--switch border element-toggle ml-10", @type = "checkbox" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <a href="" style="display:block" class="button w-20 bg-theme-1 text-white ml-auto saveAboutSection">Save</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="toggles toggles-image shadow-md box border pt-2 pb-2 text-center">
+
+                                    <div class="rounded-md p-5 text-left relative img-section">
+                                        <div style="width:100%;height:280px" class="relative image-fit mx-auto img-container">
+                                            @if (Model.About_Image == "Default2" || Model.About_Image == null)
+                                            {
+
+                                                <img class="rounded-md" alt="Midone Tailwind HTML Admin Template" id="multi-image-About_ImageFile" title="Default" src="https://imgur.com/nob5pRX.png">
+
+                                            }
+                                            else
+                                            {
+                                                <img class="rounded-md" alt="Midone Tailwind HTML Admin Template" id="multi-image-About_ImageFile" title="@Model.About_Image" src="~/Uploads/@Model.About_Image">
+
+                                            }
+                                            <div class="overlay">
+
+                                            </div>
+
+                                        </div>
+                                        <div class="mx-auto cursor-pointer position-absolute mt-3 input-div">
+                                            <button type="button" data-id="About_ImageFile" style="max-width:100%" class="button w-full bg-theme-1 text-white btn-change ">Change Photo</button>
+                                            <input type="file" id="change-image-About_ImageFile" name=About_ImageFile class="w-full h-full top-0 left-0 absolute opacity-0 img-change">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-6">
+                    <div class="toggles toggles-image shadow-md box border pt-2 pb-2 text-left" style="padding:20px">
+
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="toggles toggles-image shadow-md box border pt-2 pb-2 text-center">
+
+                                    <div class="rounded-md p-5 text-left relative img-section">
+                                        <div style="width:100%;height:280px" class="relative image-fit mx-auto img-container">
+                                            @if (Model.Signature == "Default2" || Model.Signature == null)
+                                            {
+
+                                                <img class="rounded-md" alt="Midone Tailwind HTML Admin Template" id="multi-image-SignatureFile" title="Default" src="https://imgur.com/nob5pRX.png">
+
+                                            }
+                                            else
+                                            {
+                                                <img class="rounded-md" alt="Midone Tailwind HTML Admin Template" id="multi-image-SignatureFile" title="@Model.Signature" src="~/Uploads/@Model.Signature">
+
+                                            }
+                                            <div class="overlay">
+
+                                            </div>
+
+                                        </div>
+                                        <div class="mx-auto cursor-pointer position-absolute mt-3 input-div">
+                                            <button type="button" data-id="SignatureFile" style="max-width:100%" class="button w-full bg-theme-1 text-white btn-change ">Change Photo</button>
+                                            <input type="file" id="change-image-SignatureFile" name=SignatureFile class="w-full h-full top-0 left-0 absolute opacity-0 img-change">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="mt-5">
+                                    <label class="control-label mt-5 col-md-2">CEO Full Name</label>
+
+                                    @Html.EditorFor(model => model.About_CEO, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg" } })
+                                    @Html.ValidationMessageFor(model => model.About_CEO, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div id="benefit-section">
+
+                                    <h1 class="m-5 -ml-1">Signature</h1>
+
+                                    @if (Model.AboutBenefits != null)
+                                    {
+
+
+                                        foreach (g_auto.Models.AboutBenefits item in Model.AboutBenefits)
+                                        {
+                                            <div class="form-group mb-3">
+                                                <label class="control-label">Title </label>
+                                                <div class="mt-5">
+                                                    <input type="text" name="Benefits" placeholder="Add a Benefit" required value="@item.Content" class="form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg" />
+                                                </div>
+                                                <button type="button" class="rmvbenefitbtn  button w-36 inline-block mr-1 mb-2 mt-2 border border-theme-6 text-theme-6 dark:border-theme-6">Remove this field</button>
+                                                @Html.ValidationMessageFor(model => model.Benefits, "", new { @class = "text-danger", @style = "color:red" })
+                                            </div>
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (ViewBag.AboutBenefits != null)
+                                        {
+
+                                            foreach (g_auto.Models.AboutBenefits item in ViewBag.AboutBenefits)
+                                            {
+                                                <div class="form-group mb-3">
+                                                    <label class="control-label">Title </label>
+                                                    <div class="mt-5">
+                                                        <input type="text" name="Benefits" placeholder="Add a Benefit" required value="@item.Content" class="form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg" />
+                                                    </div>
+                                                    <button type="button" class="rmvbenefitbtn  button w-36 inline-block mr-1 mb-2 mt-2 border border-theme-6 text-theme-6 dark:border-theme-6">Remove this field</button>
+                                                    @Html.ValidationMessageFor(model => model.Benefits, "", new { @class = "text-danger", @style = "color:red" })
+                                                </div>
+
+                                            }
+                                        }
+                                    }
+
+
+                                </div>
+                                <button id="add-aboutbenefit" type="button" class="button w-36 inline-block mr-1 mb-2 mt-2 border border-theme-1 text-theme-1 dark:border-theme-10 dark:text-theme-10">Add Benefit</button>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group mt-5 mb-5">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <a href="" style="display:block" class="button w-20 bg-theme-1 text-white ml-auto saveAboutSection">Save</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>

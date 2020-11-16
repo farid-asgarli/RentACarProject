@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model g_auto.Models.Sliders
+
+
+@using (Html.BeginForm("Create", "Slider", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h1>Create a Slider Image</h1>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="round-section">
+                    <div class="col-lg-12">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                        <div class="form-group mt-3">
+                            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="">
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg", @required = true } })
+
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger", @style = "color:red" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group mt-3">
+                            @Html.LabelFor(model => model.Subtitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="">
+                                @Html.EditorFor(model => model.Subtitle, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg", @required = true } })
+
+                                @Html.ValidationMessageFor(model => model.Subtitle, "", new { @class = "text-danger", @style = "color:red" })
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            @Html.LabelFor(model => model.Link, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="">
+                                @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg", @required = true } })
+
+                                @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger", @style = "color:red" })
+                            </div>
+                        </div>
+
+
+                        <input type="hidden" name="AdminId" value="@ViewBag.Admin" />
+
+                        @{
+                            Html.RenderPartial("~/Areas/Admin/Views/Partial/_ButtonSection.cshtml", new g_auto.ViewModels.ButtonSection
+                            {
+                                url = "Slider",
+                                btntype = "Create"
+                            });
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="flex flex-wrap round-section" style="padding:30px 20px !important">
+                    <div class="col-md-12">
+                        @{
+                            Html.RenderPartial("~/Areas/Admin/Views/Partial/_ImageSectionMultiple.cshtml", new g_auto.ViewModels.ImageFile
+                            {
+                                ImageName = "ImageFile",
+                                ImageText = "Slider Image",
+                                ImageHeight="270px"
+
+                            });
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

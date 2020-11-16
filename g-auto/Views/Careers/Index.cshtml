@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<g_auto.Models.Vacancy>
+
+@{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "Careers",
+        HREF = Url.Action("Index", "Careers")
+    });
+}
+
+<section class="section-offers">
+    <div class="section-offers__inner">
+       
+        <div class="container">
+            <div class="text-center"  data-aos="fade-up">
+                <div class="ui-title-logo ui-title-logo_dark">AUTLINES</div>
+                <h2 class="ui-title ui-title_light text-uppercase">We are hiring</h2>
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <p>Dolore magna aliqua enim ad minim veniam, quis nostrud exercitation aliquip duis aute irure dolorin reprehenderits vol dolore fugiat nulla pariatur excepteur sint occaecat cupidatat.</p>
+                    </div>
+                </div>
+                <div class="b-offers-slider ui-slider_arr-prim js-slider" data-slick="{&quot;slidesToShow&quot;: 3, &quot;slidesToScroll&quot;: 1, &quot;dots&quot;: false, &quot;arrows&quot;: true, &quot;autoplay&quot;: true,   &quot;responsive&quot;: [{&quot;breakpoint&quot;: 992, &quot;settings&quot;: {&quot;slidesToShow&quot;: 1, &quot;slidesToScroll&quot;: 1}}]}">
+                    @foreach (g_auto.Models.Vacancy item in Model)
+                    {
+                        <div class="b-offers">
+                            <div class="b-offers__wrap">
+                                <div class="b-offers__ic text-primary  flaticon-sedan-car-model"></div>
+                                <a href="@Url.Action("Details", "Careers", new { id=item.Id})" class="b-offers__title">@item.Title</a>
+                                <div class="b-offers__inner ">
+                                    <div class="b-offers__img"><img class="img-scale" src="~/Uploads/@item.CoverImage" alt="photo"></div>
+                                    <div class="b-offers__info">@item.Description</div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

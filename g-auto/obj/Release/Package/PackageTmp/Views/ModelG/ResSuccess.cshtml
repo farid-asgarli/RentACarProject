@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "ResSuccess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model g_auto.Models.Reservation
+
+
+
+@if (Session["SuccessRes-" + Model.Id] != null)
+{
+    Session["SuccessRes-" + Model.Id] = null;
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center mb-3 mt-3">
+                <div class="ui-title-logo">AUTLINES</div>
+                <h2 class="ui-title">Reservation Summary</h2>
+            </div>
+        </div>
+    </div>
+    <div id="res_summary">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="fl-content">
+                        <div class="woocommerce">
+                            <div class="woocommerce-order">
+                                <p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received">Thank you. Your Reservation has been received.</p>
+                                <ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
+                                    <li class="woocommerce-order-overview__order order"> Reservation number: <strong>GA<span class="order_number">@Model.Id</span></strong></li>
+                                    <li class="woocommerce-order-overview__date date"> Date: <strong><span class="order_date">@Model.PostDate.ToString("MMMM d yyyy, HH:mm")</span></strong></li>
+                                    <li class="woocommerce-order-overview__total total">
+                                        Total: <strong>
+                                            <span class="woocommerce-Price-amount amount">
+                                                <span class="woocommerce-Price-currencySymbol">$</span><span class="total_price">@Model.Price.ToString("0.00")</span>
+                                            </span>
+                                        </strong>
+                                    </li>
+                                    <li class="woocommerce-order-overview__payment-method method">
+                                        Payment method: <strong>Direct bank transfer</strong>
+                                    </li>
+                                </ul>
+                                <section class="woocommerce-order-details ">
+                                    <h2 class="woocommerce-order-details__title">Reservation details</h2>
+                                    <table class="woocommerce-table woocommerce-table--order-details shop_table order_details mt-5">
+                                        <thead>
+                                            <tr>
+                                                <th class="woocommerce-table__product-name product-name">Model</th>
+                                                <th class="woocommerce-table__product-table product-total">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="appendix">
+                                            <tr class="woocommerce-table__line-item order_item">
+                                                <td class="woocommerce-table__product-name product-name">
+                                                    <a href="/ProductG/Details/7">@Model.Model.Name</a><strong class="product-quantity">×&nbsp;@((Model.EndDate-Model.StartDate).TotalDays) Days</strong>
+                                                </td>
+                                                <td class="woocommerce-table__product-total product-total"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>@(((Convert.ToDecimal((Model.EndDate - Model.StartDate).TotalDays)) *Model.Model.PriceDaily).ToString("0.00"))</span></td>
+                                            </tr>
+                                            @if (Model.ReservationToFeatures.FirstOrDefault() != null)
+                                            {
+                                                foreach (g_auto.Models.ReservationToFeatures item in Model.ReservationToFeatures)
+                                                {
+                                                    <tr class="woocommerce-table__line-item order_item">
+                                                        <td class="woocommerce-table__product-name product-name">
+                                                            <a href="/ProductG/Details/7">@item.FeatureSet.Title</a><strong class="product-quantity">×&nbsp;1</strong>
+                                                        </td>
+                                                        <td class="woocommerce-table__product-total product-total"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>@item.FeatureSet.Price</span></td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th scope="row">Subtotal:</th>
+                                                <td>
+                                                    <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span><span class="total_price">@Model.Price.ToString("0.00")</span></span>
+                                                </td>
+                                            </tr>
+                                            <tr><th scope="row">Payment method:</th><td>Direct bank transfer</td></tr>
+                                            <tr><th scope="row">Total:</th><td><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span><span class="total_price">@Model.Price.ToString("0.00")</span></span></td></tr>
+                                        </tfoot>
+                                    </table>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+else
+{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "404 Page",
+        HREF = Url.Action("Index")
+    });
+
+
+    Html.RenderPartial("~/Views/Partial/_NotFound.cshtml");
+}

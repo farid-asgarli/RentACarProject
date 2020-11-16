@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<g_auto.Models.GalleryImage>
+
+@{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "Gallery",
+        HREF = Url.Action("Index", "GalleryG")
+    });
+}
+
+
+
+
+@if (Model.FirstOrDefault() != null)
+{
+    <section class="gauto-gallery-area section_70" style=" background: url(/Assets/img/bg-2.png) 50% 10% no-repeat;">
+        <div class="container-fluid" data-aos="fade-up">
+            <div class="row" id="lightgallery">
+                <div class="col-md-12">
+
+                    <div class="fl-vc-custom-title-container fl-animated-item-velocity text-center custom-title animation-complete" data-animate-type="slideUpIn" style="opacity: 1; transform: translateY(0px);">
+                        <div class="custom-title-content-wrapper">
+                            <div class="fl-title-vc vc-custom-title font-text fl-font-style-bolt fl-custom-title-5f33b48a1de90-5128">
+                                WELCOME TO OUR<br>
+                                GALLERY
+                            </div><div class="fl-subtitle-vc fl-font-style-bolt vc-custom-sub-title back-text">AUTLINES</div>
+                        </div>
+                    </div>
+                </div>
+                @foreach (g_auto.Models.GalleryImage item in Model)
+                {
+                    if (item.isActive)
+                    {
+                        <div class="col-lg-4" data-src="/Uploads/@item.Picture">
+                            <div class="single-gallery">
+                                <div class="img-holder">
+                                    <img src="~/Uploads/@item.Picture" alt="@Html.Raw(@item.Content)">
+                                    <div class="overlay-content">
+                                        <div class="inner-content">
+                                            <div class="title-box">
+                                                <h3><a href="#">@item.Title</a></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="link-zoom-button">
+                                        <div class="single-button">
+                                            <a href="#"><span class="fa fa-link"></span>Details</a>
+                                        </div>
+                                        <div class="single-button">
+                                            <a class="zoom lightbox-image" href="~/Uploads/@item.Picture">
+                                                <span class="fa fa-search"></span>Zoom
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+            
+        </div>
+    </section>
+
+
+}

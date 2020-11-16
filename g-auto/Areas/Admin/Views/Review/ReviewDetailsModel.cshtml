@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model g_auto.Models.Review
+
+
+@if (Model != null)
+{
+    <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+        <h2 class="text-lg font-medium mr-auto">
+            Review № @(Model.Id)
+        </h2>
+        <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+            <a href="javascript:;" data-toggle="modal" data-target="#reply-modal" class="button text-white bg-theme-1 shadow-md mr-2">Write A Reply</a>
+
+        </div>
+    </div>
+    <div class="pos intro-y grid grid-cols-12 gap-5 ">
+        <!-- BEGIN: Item List -->
+        <div class="intro-y col-span-12 lg:col-span-12">
+
+            <div class="grid grid-cols-12 gap-5 mt-5">
+                <div class="col-span-12 sm:col-span-4 xxl:col-span-2 box p-5  zoom-in">
+                    <div class="font-medium text-base">Date Posted</div>
+                    <div class="text-gray-600">@Model.PostedDate.ToString("MMM d yyyy, HH:mm:ss")</div>
+                </div>
+                <div class="col-span-12 sm:col-span-4 xxl:col-span-2 box p-5  zoom-in">
+                    <div class="font-medium text-base">Reservation Date</div>
+                    <div class="text-gray-600">@Model.Reservation.PostDate.ToString("MMM d yyyy, HH:mm:ss")</div>
+                </div>
+                @if (Model.User != null)
+                {
+
+                    <div class="col-span-12 sm:col-span-4 xxl:col-span-2 box bg-theme-1 p-5 cursor-pointer zoom-in">
+                        <a href="@Url.Action("Details", "User", new {id=Model.UserId })">
+                            <div class="font-medium text-base text-white">Reserved By</div>
+                            <div class="text-theme-25">@Model.User.FullName</div>
+                        </a>
+                    </div>
+                    <div class="col-span-12 sm:col-span-4 xxl:col-span-2 box p-5  zoom-in">
+                        <div class="font-medium text-base">Customer's Phone</div>
+                        <div class="text-gray-600">@Model.User.Phone</div>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 xxl:col-span-2 box p-5  zoom-in">
+                        <div class="font-medium text-base">Customer's Email</div>
+                        <div class="text-gray-600">@Model.User.Email</div>
+                    </div>
+
+                }
+
+                <div class="col-span-12 sm:col-span-6 xxl:col-span-2 box p-5  zoom-in">
+                    <div class="font-medium text-base">Total Price Paid</div>
+                    <div class="text-gray-600">$@Model.Reservation.Price.ToString("0.00")</div>
+                </div>
+
+
+            </div>
+
+            <div class="grid grid-cols-12 gap-5 mt-5 pt-5 border-t border-theme-5">
+                @if (Model.Model != null)
+                {
+                    <div class="intro-y block col-span-12 sm:col-span-4 xxl:col-span-3">
+                        <a href="@Url.Action("Details", "Reservation", new { id=Model.ReservationId })">
+                            <div class="box rounded-md p-3 relative zoom-in">
+                                <div class="flex-none pos-image relative block">
+                                    <div class="pos-image__preview image-fit">
+                                        <img alt="Midone Tailwind HTML Admin Template" src="~/Uploads/@Model.Model.ModelImages.FirstOrDefault().Name">
+                                    </div>
+                                </div>
+                                <div class="block font-medium text-center truncate mt-3">Model: @Model.Model.Name</div>
+                            </div>
+                        </a>
+                    </div>
+                }
+
+                <div class="col-span-12 sm:col-span-8 xxl:col-span-9 box p-5 cursor-pointer zoom-in">
+                    <div class="font-medium text-base">User Review</div>
+                    <div class="font-medium text-base mt-3">Total Rating : @Model.Rating out of 5</div>
+                    <div class="text-gray-600 mt-3">@Model.Content</div>
+                </div>
+
+
+            </div>
+
+           
+            <div class="grid grid-cols-12 gap-5 mt-5 pt-5 border-t border-theme-5 replies-container">
+                @if (Model.Replies.FirstOrDefault() != null)
+                {
+                    <div class="col-span-12 sm:col-span-6 xxl:col-span-12">
+                        <h2 class="text-lg font-medium mr-auto mt-5">
+                            Replies
+                        </h2>
+                    </div>
+
+                    foreach (g_auto.Models.ModelReviewReply item in Model.Replies)
+                    {
+                        <div class="col-span-12 sm:col-span-6 xxl:col-span-6 box p-5 cursor-pointer zoom-in">
+                            <div class="font-medium text-base">Replied by @item.Admin.FullName on @item.PostedDate.ToString("MMM d yyyy, HH:mm")</div>
+                            <div class="text-gray-600 mt-3">@item.Content</div>
+                        </div>
+                    }
+
+                }
+
+            </div>
+        </div>
+        <!-- END: Item List -->
+
+    </div>
+
+    <div class="modal" id="delete-confirmation-modal">
+        <div class="modal__content">
+            <div class="p-5 text-center">
+                <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                <div class="text-3xl mt-5">Are you sure?</div>
+                <div class="text-gray-600 mt-2">Are you sure you want to cancel the Reservation? This process cannot be undone.</div>
+            </div>
+            <div class="px-5 pb-8 text-center">
+                <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Dismiss</button>
+                <button type="button" id="btn-cancel-res" data-id="" class="button w-60 bg-theme-6 text-white">Cancel The Reservation</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="reply-modal">
+        <div class="modal__content modal__content--xl">
+            <div class="p-5">
+                <h2 class="text-lg font-medium mr-auto mt-5">
+                    Review № @(Model.Id)
+                </h2>
+                <div class="grid grid-cols-12 gap-5 mt-5" id="modal_container">
+
+
+                    <div class="col-span-12 sm:col-span-12 xxl:col-span-12 box bg-theme-1 p-5 cursor-pointer zoom-in">
+                        <a href="@Url.Action("Index", "Settings")">
+                            <div class="font-medium text-base text-white">Your Display Name</div>
+                            <div class="text-theme-25">@(ViewBag.DisplayName!=null?ViewBag.DisplayName:"Not Defined")</div>
+                        </a>
+                    </div>
+                  
+
+                    <div class="col-span-12 sm:col-span-12 xxl:col-span-12 box p-5">
+                        <form id="replyToReview" method="post">
+                            <div class="pt-4 pb-10 sm:py-4 flex items-center border-t border-gray-200">
+                                <input type="hidden" name="ReviewId" value="@Model.Id" />
+                                <textarea class="chat__box__input input w-full h-16 resize-none border-transparent px-5 py-3 focus:shadow-none" rows="1" name="Content" required maxlength="1000" placeholder="Type your message..."></textarea>
+                                <a href="javascript:;" id="replyToReview-btn" class="w-8 h-8 sm:w-10 sm:h-10 block bg-theme-1 text-white rounded-full flex-none flex items-center justify-center mr-5"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send w-4 h-4"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> </a>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                <div class="px-5 pb-8 text-center mt-5">
+                    <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Dismiss</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

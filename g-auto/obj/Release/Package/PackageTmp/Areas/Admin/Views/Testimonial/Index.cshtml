@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model List<g_auto.Models.Testimonial>
+
+<div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+    <h1 class="mr-auto">
+        Testimonials
+    </h1>
+    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+
+    </div>
+</div>
+<!-- BEGIN: Datatable -->
+<div class="intro-y datatable-wrapper box p-5 mt-5">
+    <table class="table table-report table-report--bordered display datatable w-full">
+        <thead>
+            <tr>
+                <th class="border-b-2 whitespace-no-wrap">ID</th>
+                <th class="border-b-2 text-left whitespace-no-wrap">USER</th>
+                <th class="border-b-2 text-left whitespace-no-wrap">DATE</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">ACTIONS</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">STATUS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (g_auto.Models.Testimonial item in Model)
+            {
+                <tr>
+                    <td class=" border-b">@(item.Id)</td>
+
+                    <td class="border-b">
+                        @if (item.User != null)
+                        {
+                            <div class="font-medium whitespace-no-wrap">@item.User.FullName</div>
+                            <div class="text-gray-600 text-xs whitespace-no-wrap">@item.User.Email</div>
+                        }
+                    </td>
+
+                    <td class="text-left border-b">@item.PostedDate.ToString("MMM d yyyy, HH:mm")</td>
+                    <td class="border-b w-5 status_container">
+                        <div class="flex sm:justify-center items-center">
+                            <a class="flex items-center mr-3 testimonialmodal" data-id="@item.Id" href="javascript:;"> <i data-feather="eye" class="w-4 h-4 mr-1" ></i> View </a>
+                            <a class="flex items-center text-theme-6 del-testimonial" href="javascript:;" data-id="@item.Id"> <i data-feather="x" class="w-4 h-4 mr-1"></i> Delete </a>
+                        </div>
+                    </td>
+                    <td class="text-left border-b">
+                        <div class="flex justify-center items-center">
+                            <input class="input input--switch border input-activate-Testimonial" data-id="@item.Id" type="checkbox" @(item.isActive == false ? "" : "checked") value="1">
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<div class="modal" id="delete-confirmation-modal">
+    <div class="modal__content">
+        <div class="p-5 text-center">
+            <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+            <div class="text-3xl mt-5">Are you sure?</div>
+            <div class="text-gray-600 mt-2">Do you really want to delete these records? This process cannot be undone.</div>
+        </div>
+        <div class="px-5 pb-8 text-center">
+            <button type="button" id="cancel-delete" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Cancel</button>
+            <button type="button" id="confirm-delete-testimonial" data-id="" class="button w-24 bg-theme-6 text-white">Delete</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="details-testimonialmodal">
+    <div class="modal__content modal__content--xl">
+        <div class="p-5">
+            <div class="grid grid-cols-12 gap-5 mt-5" id="modal_container">
+                <div class="col-span-12 sm:col-span-12 xxl:col-span-12  p-5 ">
+                    <h2>Properties</h2>
+                </div>
+                <div class="col-span-6 sm:col-span-6 xxl:col-span-6 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Testimonial Id</div>
+                    <div class="text-theme-25 tag_modal_id"></div>
+                </div>
+                <div class="col-span-6 sm:col-span-6 xxl:col-span-6 box p-5 ">
+                    <div class="font-medium text-base">Post Properties</div>
+                    <div class="text-gray-600 tag_modal_post"></div>
+                </div>
+                <div class="col-span-6 sm:col-span-3 xxl:col-span-3 box p-5">
+                    <div class="flex-none pos-image relative block">
+                        <div class="pos-image__preview">
+                            <img class="tag_modal_img img-fluid" src="~/Uploads/200820201937574098mercedes1.jpg">
+                        </div>
+                    </div>
+                    <div class="block font-medium text-center truncate mt-3">User's Avatar</div>
+                </div>
+                <div class="col-span-6 sm:col-span-9 xxl:col-span-9 box p-5 ">
+                    <div class="font-medium text-base mb-5">Content</div>
+                    <div class="text-gray-600 tag_modal_content"></div>
+                </div>
+                <div class="col-span-12 sm:col-span-12 xxl:col-span-12">
+                    <div class="px-5 pb-8 justify-between flex mt-5">
+                        <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Dismiss</button>
+                       @* <a href="/Admin/Tags/Update/" data-dismiss="modal" class="button w-24 border text-white-700 mr-1 bg-theme-1 text-white tag_modal_link">Update</a>*@
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

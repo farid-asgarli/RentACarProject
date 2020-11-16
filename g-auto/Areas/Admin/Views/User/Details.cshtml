@@ -1,0 +1,602 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model g_auto.Models.User
+
+@if (Model != null)
+{
+    <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+        <h1 class="mr-auto">
+            User Details
+        </h1>
+        <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+            <button type="button" class="button w-40 mr-2 mb-2 flex items-center justify-center bg-theme-6 text-white rmv-usr"><i data-feather="trash" class="w-4 h-4 mr-2"></i>Remove User</button>
+
+        </div>
+    </div>
+    <div class="pos intro-y grid grid-cols-12 gap-5 ">
+        <!-- BEGIN: Item List -->
+        <div class="intro-y col-span-12 lg:col-span-12">
+
+            <div class="grid grid-cols-12 gap-5 mt-5">
+                <div class="col-span-12 sm:col-span-4 xxl:col-span-3 box p-5 cursor-pointer zoom-in">
+                    <div class="font-medium text-base">User ID</div>
+                    <div class="text-gray-600">@Model.Id</div>
+                </div>
+
+                <div class="col-span-12 sm:col-span-4 xxl:col-span-3 box p-5 cursor-pointer zoom-in">
+                    <div class="font-medium text-base">Date Registered</div>
+                    <div class="text-gray-600">@Model.PostDate.ToString("MMM d yyyy, HH:mm:ss")</div>
+                </div>
+                @if (Model.IsRegistered)
+                {
+                    if (Model.isBlocked)
+                    {
+                        <div class="col-span-12 sm:col-span-4 xxl:col-span-3 box bg-theme-6 p-5 cursor-pointer zoom-in">
+                            <div class="font-medium text-base text-white">Status</div>
+                            <div class="text-white">Blocked</div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-span-12 sm:col-span-4 xxl:col-span-3 box p-5 cursor-pointer zoom-in">
+                            <div class="font-medium text-base"> Status</div>
+                            <div class="text-gray-600">Active</div>
+                        </div>
+                    }
+
+
+                    <div class="col-span-12 sm:col-span-4 xxl:col-span-3 box p-5 cursor-pointer zoom-in">
+                        <div class="font-medium text-base">Last Login Date</div>
+                        <div class="text-gray-600">@(Model.LastEntranceTime!=null? Model.LastEntranceTime.Value.ToString("MMM d yyyy, HH:mm:ss"):"N/A")</div>
+                    </div>
+
+
+                    <div class="col-span-12 sm:col-span-4 xxl:col-span-3 box p-5 cursor-pointer zoom-in">
+                        <div class="font-medium text-base">Total Number Of Login</div>
+                        <div class="text-gray-600">@Model.EntranceCount</div>
+                    </div>
+                    <div class="col-span-12 sm:col-span-4 xxl:col-span-3 box p-5 cursor-pointer zoom-in">
+                        <div class="font-medium text-base">Last Login IP Address</div>
+                        <div class="text-gray-600">@Model.LastIPAddress</div>
+                    </div>
+                }
+                <div class="col-span-12 sm:col-span-4 xxl:col-span-3 box bg-theme-1 p-5 cursor-pointer zoom-in">
+                    <div class="font-medium text-base text-white">Full Name</div>
+                    <div class="text-theme-25">@Model.FullName</div>
+                </div>
+                @if (Model.IsRegistered)
+                {
+                    <div class="col-span-12 sm:col-span-4 xxl:col-span-3 box bg-theme-9 p-5 cursor-pointer zoom-in">
+                        <div class="font-medium text-base text-white">Type</div>
+                        <div class="text-white">Registered</div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-span-12 sm:col-span-4 xxl:col-span-3 box bg-theme-12 p-5 cursor-pointer zoom-in">
+                        <div class="font-medium text-base text-white">Type</div>
+                        <div class="text-white">Not Registered</div>
+                    </div>
+                }
+                <div class="col-span-12 sm:col-span-4 xxl:col-span-3 box p-5 cursor-pointer zoom-in">
+                    <div class="font-medium text-base">Email</div>
+                    <div class="text-gray-600">@Model.Email</div>
+                </div>
+
+                <div class="col-span-12 sm:col-span-4 xxl:col-span-3 box p-5 cursor-pointer zoom-in">
+                    <div class="font-medium text-base">Phone Number</div>
+                    <div class="text-gray-600">@Model.Phone</div>
+                </div>
+                <div class="col-span-12 sm:col-span-6 xxl:col-span-6 box p-5 cursor-pointer zoom-in">
+                    <div class="font-medium text-base"> Address</div>
+                    <div class="text-gray-600">@Model.Address</div>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+        <!-- END: Item List -->
+        <!-- BEGIN: Ticket -->
+        <!-- END: Ticket -->
+    </div>
+    <div class="grid grid-cols-12 gap-6 mt-5">
+        <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+            <div class="box p-5 zoom-in">
+                <div class="flex">
+                    <i data-feather="shopping-cart" class="report-box__icon text-theme-10"></i>
+
+                </div>
+                <div class="text-3xl font-bold leading-8 mt-6">@(Model.Sales!=null?Model.Sales.Where(c=>c.isFinished).Count():0)</div>
+                <div class="text-base text-gray-600 mt-1">Total Product Sales</div>
+            </div>
+        </div>
+        <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+            <div class="box p-5 zoom-in">
+                <div class="flex">
+                    <i data-feather="credit-card" class="report-box__icon text-theme-11"></i>
+
+                </div>
+                <div class="text-3xl font-bold leading-8 mt-6">@(Model.Sales.FirstOrDefault()!=null?Model.Sales.Count():0)</div>
+                <div class="text-base text-gray-600 mt-1">Total Product Orders</div>
+            </div>
+        </div>
+        <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+            <div class="box zoom-in p-5">
+                <div class="flex">
+                    <i data-feather="pocket" class="report-box__icon text-theme-12"></i>
+
+                </div>
+                <div class="text-3xl font-bold leading-8 mt-6">@(Model.Reservations.FirstOrDefault()!=null?Model.Reservations.Count():0)</div>
+                <div class="text-base text-gray-600 mt-1">Total Reservations</div>
+            </div>
+        </div>
+        <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+            <div class="box p-5 zoom-in">
+                <div class="flex">
+                    <i data-feather="message-circle" class="report-box__icon text-theme-9"></i>
+
+                </div>
+                <div class="text-3xl font-bold leading-8 mt-6">@(Model.Comments.FirstOrDefault()!=null?Model.Comments.Count():0)</div>
+                <div class="text-base text-gray-600 mt-1">Total Comments</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BEGIN: Add Item Modal -->
+
+    <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+        <h2 class="mr-auto">
+            Orders
+        </h2>
+        <div class="w-full sm:w-auto flex mt-4 sm:mt-0"></div>
+    </div>
+    <!-- BEGIN: Datatable -->
+    <div class="intro-y datatable-wrapper box p-5 mt-5">
+        <table class="table table-report table-report--bordered display datatable w-full">
+            <thead>
+                <tr>
+                    <th class="border-b-2 whitespace-no-wrap">ORDER №</th>
+
+                    <th class="border-b-2 text-left whitespace-no-wrap">PRODUCT NAME</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">IMAGES</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">DATE</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">QUANTITY SOLD</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">TOTAL</th>
+
+                    <th class="border-b-2 text-center whitespace-no-wrap">STATUS</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (g_auto.Models.Sale item in Model.Sales)
+                {
+                    <tr>
+                        <td class=" border-b">GA@(item.Id)</td>
+                        <td class="border-b">
+                            @if (item.Product != null)
+                            {
+                                <div class="font-medium whitespace-no-wrap">@item.Product.Name</div>
+                                <div class="text-gray-600 text-xs whitespace-no-wrap">@item.Product.ProductToCategory.FirstOrDefault().ProductCategory.Name</div>
+                            }
+                        </td>
+                        <td class="text-center border-b">
+                            @if (item.Product != null && item.Product.ProductImages.FirstOrDefault() != null)
+                            {
+                                <div class="flex sm:justify-center">
+                                    <div class="intro-x w-10 h-10 image-fit">
+                                        <img alt="Midone Tailwind HTML Admin Template" class="rounded-full" src="~/Uploads/@item.Product.ProductImages.First().Name">
+                                    </div>
+
+                                    @foreach (g_auto.Models.ProductImages image in item.Product.ProductImages.Skip(1))
+                                    {
+                                        <div class="intro-x w-10 h-10 image-fit -ml-5">
+                                            <img alt="Midone Tailwind HTML Admin Template" class="rounded-full" src="~/Uploads/@image.Name">
+                                        </div>
+
+                                    }
+
+                                </div>
+                            }
+                            else
+                            {
+                                <span>No Images</span>
+                            }
+                        </td>
+                        <td class="text-center border-b">@item.PostDate.ToString("MMM d")</td>
+                        <td class="text-center border-b">@item.Amount.ToString("0")</td>
+                        <td class="text-center border-b">$@item.Price.ToString("0.00")</td>
+                        <td class="w-40 border-b">
+                            @if (item.isCancelled)
+                            {
+                                <div class="flex items-center sm:justify-center text-theme-6"> <i data-feather="x-circle" class="w-4 h-4 mr-2"></i> Cancelled </div>
+                            }
+                            else if (item.isActive)
+                            {
+                                <div class="flex items-center sm:justify-center text-theme-10"> <i data-feather="activity" class="w-4 h-4 mr-2"></i> Active </div>
+                            }
+                            else if (item.isFinished)
+                            {
+                                <div class="flex items-center sm:justify-center text-theme-9"> <i data-feather="check" class="w-4 h-4 mr-2"></i> Finished </div>
+                            }
+                            else
+                            {
+                                <div class="flex items-center sm:justify-center text-theme-11"> <i data-feather="alert-circle" class="w-4 h-4 mr-2"></i> Pending </div>
+                            }
+
+                        </td>
+                        <td class="border-b w-5 status_container">
+                            <div class="flex sm:justify-center items-center">
+                                <a class="flex items-center mr-3" href="@Url.Action("Details", "Sale", new { Id= item.Id}) "> <i data-feather="eye" class="w-4 h-4 mr-1"></i> View </a>
+                                @if (item.isCancelled == false && item.isFinished == false)
+                                {
+                                    <a class="flex items-center text-theme-6 cancel_order_index" href="" data-id="@item.Id"> <i data-feather="x" class="w-4 h-4 mr-1"></i> Cancel </a>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+    <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+        <h2 class="mr-auto">
+            Appointments
+        </h2>
+        <div class="w-full sm:w-auto flex mt-4 sm:mt-0"></div>
+    </div>
+    <!-- BEGIN: Datatable -->
+    <div class="intro-y datatable-wrapper box p-5 mt-5">
+        <table class="table table-report table-report--bordered display datatable w-full">
+            <thead>
+                <tr>
+                    <th class="border-b-2 whitespace-no-wrap">№</th>
+                    <th class="border-b-2 text-left whitespace-no-wrap">SERVICE NAME</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">DATE POSTED</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">APP DATE</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">APP TIME</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">CUSTOMER NAME</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">STATUS</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.ReservationServices.FirstOrDefault() != null)
+                {
+                    foreach (g_auto.Models.ReservationService item in Model.ReservationServices)
+                    {
+                        <tr>
+                            <td class=" border-b">@(item.Id)</td>
+                            <td class="border-b">
+                                <div class="font-medium whitespace-no-wrap">@(item.Service!=null?item.Service.Title:"*Deleted*")</div>
+                            </td>
+
+                            <td class="text-center border-b">@item.PostDate.ToString("MMM d, yyyy")</td>
+                            <td class="text-center border-b">@item.AppDate.ToString("MMM d, yyyy")</td>
+                            <td class="text-center border-b">@item.Time.ToString("HH:mm")</td>
+                            <td class="text-center border-b">@(item.User!=null? item.User.FullName:"*Deleted*")</td>
+
+                            <td class="w-40 border-b">
+                                @if (item.isCancelled)
+                                {
+                                    <div class="flex items-center sm:justify-center text-theme-6 service_status"> <i data-feather="x-circle" class="w-4 h-4 mr-2"></i> Cancelled </div>
+                                }
+                                else if (item.isActive)
+                                {
+                                    <div class="flex items-center sm:justify-center text-theme-10 service_status"> <i data-feather="activity" class="w-4 h-4 mr-2"></i> Active </div>
+                                }
+                                else if (item.isFinished)
+                                {
+                                    <div class="flex items-center sm:justify-center text-theme-9 service_status"> <i data-feather="check" class="w-4 h-4 mr-2"></i> Finished </div>
+                                }
+                                else
+                                {
+                                    <div class="flex items-center sm:justify-center text-theme-11 service_status"> <i data-feather="alert-circle" class="w-4 h-4 mr-2"></i> Pending </div>
+                                }
+
+                            </td>
+                            <td class="border-b w-5">
+                                <div class="flex sm:justify-center items-center status_container">
+
+                                    @if (item.isFinished)
+                                    {
+                                        <span>No Actions</span>
+                                    }
+                                    else if (item.isCancelled)
+                                    {
+                                        <span>No Actions</span>
+
+                                    }
+                                    else
+                                    {
+                                        if (item.isActive == false && item.isCancelled == false)
+                                        {
+                                            <a class="flex items-center mr-3 text-theme-9 confirm_app_service" href="javascript:;" data-id="@item.Id"> <i data-feather="check" class="w-4 h-4 mr-1"></i> Confirm</a>
+                                        }
+                                        if (item.isActive)
+                                        {
+                                            <a class="flex items-center mr-3 text-theme-1 finish_app_service" href="javascript:;" data-id="@item.Id"> <i data-feather="check" class="w-4 h-4 mr-1"></i> Finish</a>
+                                        }
+                                        if (item.isCancelled == false)
+                                        {
+                                            <a class="flex items-center text-theme-6 cancel_app_service" href="javascript:;" id="" data-id="@item.Id"> <i data-feather="x" class="w-4 h-4 mr-1"></i> Cancel </a>
+                                        }
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+        <h2 class="mr-auto">
+            Reservations
+        </h2>
+        <div class="w-full sm:w-auto flex mt-4 sm:mt-0"></div>
+    </div>
+    <!-- BEGIN: Datatable -->
+    <div class="intro-y datatable-wrapper box p-5 mt-5">
+        <table class="table table-report table-report--bordered display datatable w-full">
+            <thead>
+                <tr>
+                    <th class="border-b-2 whitespace-no-wrap">ORDER №</th>
+
+                    <th class="border-b-2 text-left whitespace-no-wrap">MODEL NAME</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">IMAGES</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">DATE</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">TOTAL</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">STATUS</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (g_auto.Models.Reservation item in Model.Reservations)
+                {
+                    <tr>
+                        <td class=" border-b">GA@(item.Id)</td>
+                        <td class="border-b">
+                            @if (item.Model != null)
+                            {
+                                <div class="font-medium whitespace-no-wrap">@item.Model.Name</div>
+                                <div class="text-gray-600 text-xs whitespace-no-wrap">@item.Model.Brand.Name</div>
+                            }
+                        </td>
+                        <td class="text-center border-b">
+                            @if (item.Model != null && item.Model.ModelImages.FirstOrDefault() != null)
+                            {
+                                <div class="flex sm:justify-center">
+                                    <div class="intro-x w-10 h-10 image-fit">
+                                        <img alt="Midone Tailwind HTML Admin Template" class="rounded-full" src="~/Uploads/@item.Model.ModelImages.First().Name">
+                                    </div>
+
+                                    @foreach (g_auto.Models.ModelImages image in item.Model.ModelImages.Skip(1))
+                                    {
+                                        <div class="intro-x w-10 h-10 image-fit -ml-5">
+                                            <img alt="Midone Tailwind HTML Admin Template" class="rounded-full" src="~/Uploads/@image.Name">
+                                        </div>
+
+                                    }
+
+                                </div>
+                            }
+                            else
+                            {
+                                <span>No Images</span>
+                            }
+                        </td>
+                        <td class="text-center border-b">@item.PostDate.ToString("MMM d")</td>
+                        @*<td class="text-center border-b">@item.Amount.ToString("0")</td>*@
+                        <td class="text-center border-b">$@item.Price.ToString("0.00")</td>
+                        <td class="w-40 border-b ">
+                            @if (item.isCancelled)
+                            {
+                                <div class="flex items-center sm:justify-center text-theme-6"> <i data-feather="x-circle" class="w-4 h-4 mr-2"></i> Cancelled </div>
+                            }
+                            else if (item.isActive)
+                            {
+                                <div class="flex items-center sm:justify-center text-theme-10"> <i data-feather="activity" class="w-4 h-4 mr-2"></i> Active </div>
+                            }
+                            else if (item.isFinished)
+                            {
+                                <div class="flex items-center sm:justify-center text-theme-9"> <i data-feather="check" class="w-4 h-4 mr-2"></i> Finished </div>
+                            }
+                            else
+                            {
+                                <div class="flex items-center sm:justify-center text-theme-11"> <i data-feather="alert-circle" class="w-4 h-4 mr-2"></i> Pending </div>
+                            }
+
+                        </td>
+                        <td class="border-b w-5 status_container">
+                            <div class="flex sm:justify-center items-center">
+                                <a class="flex items-center mr-3" href="@Url.Action("Details", "Reservation", new { Id= item.Id}) "> <i data-feather="eye" class="w-4 h-4 mr-1"></i> View </a>
+                                @if (item.isCancelled == false && item.isFinished == false)
+                                {
+                                    <a class="flex items-center text-theme-6 cancel_res_index" href="javascript:;" data-id="@item.Id"> <i data-feather="x" class="w-4 h-4 mr-1"></i> Cancel </a>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+    if (Model.ReviewProducts.FirstOrDefault() != null)
+    {
+
+        <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+            <h2 class="mr-auto">
+                Reviews for Orders
+            </h2>
+            <div class="w-full sm:w-auto flex mt-4 sm:mt-0"></div>
+        </div>
+        <div class="pos intro-y grid grid-cols-12 gap-5 mt-5">
+            <!-- BEGIN: Item List -->
+            <div class="intro-y col-span-6 lg:col-span-6">
+                @foreach (g_auto.Models.ReviewProduct item in Model.ReviewProducts)
+                {
+
+                    <div class="col-span-12 sm:col-span-8 xxl:col-span-9 box p-5 cursor-pointer zoom-in">
+                        <div class="font-medium text-base">Review for @item.Product.Name (@item.Rating out of 5)</div>
+                        <div class="text-gray-600">@item.Content</div>
+                    </div>
+                }
+
+
+            </div>
+
+
+            <div class="intro-y col-span-6 lg:col-span-6">
+            </div>
+            <!-- END: Item List -->
+            <!-- BEGIN: Ticket -->
+            <!-- END: Ticket -->
+        </div>
+
+    }
+    if (Model.Reviews.FirstOrDefault() != null)
+    {
+
+        <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+            <h2 class="mr-auto">
+                Reviews for Reservations
+            </h2>
+            <div class="w-full sm:w-auto flex mt-4 sm:mt-0"></div>
+        </div>
+        <div class="pos intro-y grid grid-cols-12 gap-5 mt-5">
+            <!-- BEGIN: Item List -->
+
+            @foreach (g_auto.Models.Review item in Model.Reviews)
+            {<div class="intro-y col-span-6 lg:col-span-6">
+
+                    <div class="col-span-12 sm:col-span-8 xxl:col-span-9 box p-5 cursor-pointer zoom-in">
+                        <div class="font-medium text-base">Review for @item.Model.Name (@item.Rating out of 5)</div>
+                        <div class="text-gray-600">@item.Content</div>
+                    </div>
+                </div>
+            }
+
+
+
+
+
+
+            <!-- END: Item List -->
+            <!-- BEGIN: Ticket -->
+            <!-- END: Ticket -->
+        </div>
+
+    }
+
+    <div class="modal" id="delete-confirmation-modal-app">
+        <div class="modal__content">
+            <div class="p-5 text-center">
+                <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                <div class="text-3xl mt-5">Are you sure?</div>
+                <div class="text-gray-600 mt-2">Are you sure you want to cancel the Appointment? This process cannot be undone.</div>
+            </div>
+            <div class="px-5 pb-8 text-center">
+                <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Dismiss</button>
+                <button type="button" id="btn-cancel-app" data-id="" class="button w-60 bg-theme-6 text-white">Cancel The Appointment</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="confirm-confirmation-modal">
+        <div class="modal__content">
+            <div class="p-5 text-center">
+                <i data-feather="help-circle" class="w-16 h-16 text-theme-10 mx-auto mt-3"></i>
+                <div class="text-3xl mt-5">Are you sure?</div>
+                <div class="text-gray-600 mt-2">Are you sure you want to confirm the Appointment?</div>
+            </div>
+            <div class="px-5 pb-8 text-center">
+                <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Dismiss</button>
+                <button type="button" id="btn-confirm-app" data-id="" class="button w-60 bg-theme-10 text-white">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="finish-confirmation-modal">
+        <div class="modal__content">
+            <div class="p-5 text-center">
+                <i data-feather="help-circle" class="w-16 h-16 text-theme-10 mx-auto mt-3"></i>
+                <div class="text-3xl mt-5">Are you sure?</div>
+                <div class="text-gray-600 mt-2">Are you sure you want to finish the Appointment?</div>
+            </div>
+            <div class="px-5 pb-8 text-center">
+                <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Dismiss</button>
+                <button type="button" id="btn-finish-app" data-id="" class="button w-60 bg-theme-10 text-white">Confirm</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="delete-confirmation-modal-res">
+        <div class="modal__content">
+            <div class="p-5 text-center">
+                <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                <div class="text-3xl mt-5">Are you sure?</div>
+                <div class="text-gray-600 mt-2">Are you sure you want to cancel the Reservation? This process cannot be undone.</div>
+            </div>
+            <div class="px-5 pb-8 text-center">
+                <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Dismiss</button>
+                <button type="button" id="btn-cancel-res-index" data-id="" class="button w-60 bg-theme-6 text-white">Cancel The Reservation</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="delete-confirmation-modal-order">
+        <div class="modal__content">
+            <div class="p-5 text-center">
+                <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                <div class="text-3xl mt-5">Are you sure?</div>
+                <div class="text-gray-600 mt-2">Are you sure you want to cancel the Order? This process cannot be undone.</div>
+            </div>
+            <div class="px-5 pb-8 text-center">
+                <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Dismiss</button>
+                <button type="button" id="btn-cancel-order-index" data-id="" class="button w-60 bg-theme-6 text-white">Cancel The Order</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="delete-confirmation-modal-user">
+        <div class="modal__content">
+            <div class="p-5 text-center">
+                <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                <div class="text-3xl mt-5">Are you sure?</div>
+                <div class="text-gray-600 mt-2">Are you sure you want to remove the user? This process cannot be undone.</div>
+            </div>
+            <div class="px-5 pb-8 text-center">
+                <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Dismiss</button>
+                <button type="button" id="btn-remove-user" class="button w-60 bg-theme-6 text-white">Remove the user</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="delete-confirmation-double-modal-user">
+        <div class="modal__content">
+            <div class="p-5 text-center">
+                <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                <div class="text-3xl mt-5">Are you sure?</div>
+                <div class="text-gray-600 mt-2">All the user related sales, reservations and appointments will be removed. Are you sure to continue?</div>
+            </div>
+            <div class="px-5 pb-8 text-center">
+                <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Dismiss</button>
+                <button type="button" id="btn-remove-user-double" data-id="@Model.Id" class="button w-60 bg-theme-6 text-white">Yes, remove the user</button>
+            </div>
+        </div>
+    </div>
+}

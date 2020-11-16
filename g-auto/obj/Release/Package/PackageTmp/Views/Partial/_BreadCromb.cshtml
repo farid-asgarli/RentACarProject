@@ -1,0 +1,30 @@
+﻿@************************************************************************@
+@************************************BC-AREA-START***********************@
+@************************************************************************@
+@model g_auto.VM.BreadCromb
+
+    <section class="gauto-breadcromb-area section_70">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcromb-box" data-aos="fade-down">
+                        <h3>@Model.Page</h3>
+                        <ul>
+                            <li><i class="fa fa-home"></i></li>
+                            <li><a href="@Url.Action("Index", "Main")">Home</a></li>
+                            <li><i class="fa fa-angle-right"></i></li>
+                            <li><a href="@Model.HREF">@Model.Page</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-decor fl-primary-bg">
+
+
+        </div>
+    </section>
+
+@************************************************************************@
+@************************************BC-AREA-END*************************@
+@************************************************************************@

@@ -1,0 +1,300 @@
+﻿
+@{
+    ViewBag.Title = "User Setup";
+    Layout = null;
+
+    g_auto.DAL.DBContext db = new g_auto.DAL.DBContext();
+
+}
+@model g_auto.Models.Admin
+<!DOCTYPE html>
+
+<html lang="en" style="background-image: linear-gradient(45deg, #1C3FAA 2%, #002025 100%)!important; height:100% !important">
+<!-- BEGIN: Head -->
+<head>
+    <meta charset="utf-8">
+    <link href="~/Areas/Admin/Assets/images/logo.svg" rel="shortcut icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Midone admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="LEFT4CODE">
+    <title>Setup</title>
+    <!-- BEGIN: CSS Assets-->
+    <link rel="stylesheet" href="~/Areas/Admin/Assets/css/app.css">
+    <link rel="stylesheet" href="~/Areas/Admin/Assets/css/style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- END: CSS Assets-->
+</head>
+<!-- END: Head -->
+<body class="app">
+    <a href="@Url.Action("Login", "Home")" class="intro-x flex items-center pl-5 pt-4">
+        <img alt="Midone Tailwind HTML Admin Template" class="w-6" src="~/Areas/Admin/Assets/images/logo.svg">
+        <span class="hidden xl:block text-white text-lg ml-3"> Cyber<span class="font-medium">Dream</span> </span>
+
+    </a>
+
+    @*@if (db.Layout.FirstOrDefault() == null)
+        {*@
+    @if (Session["UserRegister"] != null)
+    {
+        <div class="container">
+
+
+
+            <!-- BEGIN: Error Page -->
+            <div class=" flex flex-col lg:flex-row items-center justify-center h-screen text-center lg:text-left" id="loading-section">
+                <div class="-intro-x lg:mr-20">
+                    <div class="col-span-6 sm:col-span-3 xl:col-span-2 flex flex-col justify-end items-center">
+
+                        <svg width="20" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" style="width:200px; height:200px">
+                            <defs>
+                                <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
+                                    <stop stop-color="rgb(255,255,255)" stop-opacity="0" offset="0%"></stop>
+                                    <stop stop-color="rgb(255,255,255)" stop-opacity=".631" offset="63.146%"></stop>
+                                    <stop stop-color="rgb(255,255,255)" offset="100%"></stop>
+                                </linearGradient>
+                            </defs>
+                            <g fill="none" fill-rule="evenodd">
+                                <g transform="translate(1 1)">
+                                    <path d="M36 18c0-9.94-8.06-18-18-18" id="Oval-2" stroke="url(#a)" stroke-width="3">
+                                        <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"></animateTransform>
+                                    </path>
+                                    <circle fill="rgb(255,255,255)" cx="36" cy="18" r="1">
+                                        <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"></animateTransform>
+                                    </circle>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                <div class="text-white mt-10 lg:mt-0">
+                    <div class="intro-x text-6xl font-medium">Initializing User Setup</div>
+                    <div class="intro-x text-xl lg:text-3xl font-medium">Taking care of few things</div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col lg:flex-row items-center justify-center h-screen text-center lg:text-left" id="success-section" style="display:none">
+                <div class="-intro-x lg:mr-20">
+                    <div class="col-span-6 sm:col-span-3 xl:col-span-2 flex flex-col justify-end items-center">
+
+                        <div> <i data-feather="check-circle" style="width:200px; height:200px; color:white"></i> </div>
+
+                    </div>
+                </div>
+                <div class="text-white mt-10 lg:mt-0">
+                    <div class="intro-x text-6xl font-medium">Success</div>
+                    <div class="intro-x text-xl lg:text-3xl font-medium">Initializing Profile Setup...</div>
+
+                </div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row items-center justify-center h-screen text-center lg:text-left" id="success-section-finish" style="display:none">
+                <div class="-intro-x lg:mr-20">
+                    <div class="col-span-6 sm:col-span-3 xl:col-span-2 flex flex-col justify-end items-center">
+
+                        <div> <i data-feather="check-circle" style="width:200px; height:200px; color:white"></i> </div>
+
+                    </div>
+                </div>
+                <div class="text-white mt-10 lg:mt-0">
+                    <div class="intro-x text-6xl font-medium">Success</div>
+                    <div class="intro-x text-xl lg:text-3xl font-medium">Redirecting... </div>
+
+                </div>
+            </div>
+
+
+
+
+
+            @****************************************************ADMINFORM*************************************************@
+
+
+
+
+
+
+
+
+            <form enctype="multipart/form-data" method="post" id="profile-section" style="display:none">
+                <div class="form-horizontal" style="margin-top:150px">
+                    <h1 style="color:white">Add Your Details</h1>
+
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="round-section intro-x" id="profilepage_1">
+                                <div class="col-lg-12">
+                                    <div class="form-group mt-3">
+                                        <label class="control-label col-md-2">Full Name</label>
+
+                                        <div class="">
+                                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg", @required = true, @placeholder = "John Doe" } })
+
+                                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger", @style = "color:red" })
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group mt-3">
+                                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="">
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg", @required = true, @placeholder = "example@mail.com", @id = "prof_email_field" } })
+
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", @style = "color:red" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="">
+                                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg", @required = true, @placeholder = "(000) 000-0000" } })
+
+                                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger", @style = "color:red" })
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group button-group">
+                                        <div style="display:flex; justify-content:flex-end;">
+                                            <a href="javascript:;" id="next_btn" class="button w-32 mr-2 mb-2 flex items-center justify-center bg-theme-1 text-white">
+                                                Next  <i data-feather="arrow-right" class="w-4 h-4 ml-2"></i>
+
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="round-section intro-x" style="display:none" id="profilepage_2">
+                                <div class="col-lg-12">
+                                    <div class="form-group mt-3">
+                                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="">
+                                            <input type="password" id="ps_main" name="Password" class="form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg" value="" required />
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group mt-3">
+                                        <label class="control-label col-md-2">Confirm Password</label>
+                                        <div class="">
+                                            <input type="password" name="Password_Confirm" class="form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg" value="" required />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group button-group">
+                                        <div style="display:flex; justify-content:space-between;">
+
+                                            <a href="javascript:;" id="prev_btn" class="button w-32 mr-2 mb-2 flex items-center justify-center bg-theme-1 text-white">
+                                                <i data-feather="arrow-left" class="w-4 h-4 mr-2"></i> Back
+                                            </a>
+                                            <a href="javascript:;" id="finish_btn" class="button w-32 mr-2 mb-2 flex items-center justify-center bg-theme-9 text-white">
+                                                Finish  <i data-feather="check" class="w-4 h-4 ml-2"></i>
+
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="round-section toggles-image shadow-md box border text-center" style="padding:5px!important">
+
+                                <div class="rounded-md p-5 text-left relative img-section">
+                                    <div style="width:100%;height:360px" class="relative image-fit mx-auto img-container">
+                                        <img class="rounded-md" alt="Midone Tailwind HTML Admin Template" id="multi-image-ProfilePictureFile" title="Default" src="https://imgur.com/nob5pRX.png">
+                                        <div class="overlay">
+
+                                        </div>
+                                    </div>
+                                    <div class="mx-auto cursor-pointer position-absolute mt-3 input-div">
+                                        <button type="button" data-id="ProfilePictureFile" style="max-width:100%" class="button w-full bg-theme-1 text-white btn-change ">Upload Avatar</button>
+                                        <input type="file" id="change-image-ProfilePictureFile" name=ProfilePictureFile class="w-full h-full top-0 left-0 absolute opacity-0 ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+            <!-- END: Error Page -->
+        </div>
+
+        <script src="~/Scripts/jquery-3.5.1.js" type="text/javascript" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+
+                setTimeout(function () {
+
+                    $("#loading-section").fadeOut(function () {
+                        $("#success-section").fadeIn();
+
+                        setTimeout(function () {
+                            $("#success-section").fadeOut(function () {
+
+                                $("#profile-section").fadeIn();
+
+                            });
+                        }, 2000)
+
+                    })
+                }, 2000);
+
+
+
+            })
+
+        </script>
+    }
+    else
+    {
+        <div class="flex flex-col lg:flex-row items-center justify-center h-screen text-center lg:text-left" id="success-section">
+            <div class="-intro-x lg:mr-20">
+                <div class="col-span-6 sm:col-span-3 xl:col-span-2 flex flex-col justify-end items-center">
+
+                    <div> <i data-feather="check-circle" style="width:200px; height:200px; color:white"></i> </div>
+
+                </div>
+            </div>
+            <div class="text-white mt-10 lg:mt-0">
+                <div class="intro-x text-6xl font-medium">Your session has expired.</div>
+                <div class="intro-x text-xl lg:text-3xl font-medium">Redirecting...</div>
+
+            </div>
+        </div>
+
+        <script src="~/Scripts/jquery-3.5.1.js" type="text/javascript" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            setTimeout(function () {
+                window.location.href = "/Admin/Home/Login"
+
+
+
+            }, 2000);
+
+        </script>
+
+    }
+
+    <!-- BEGIN: JS Assets-->
+    <
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Assets/js/jquery.mask.js"></script>
+    <script src="~/Areas/Admin/Assets/js/app.js"></script>
+    <script src="~/Areas/Admin/Assets/js/initialscript.js"></script>
+
+
+    <!-- END: JS Assets-->
+
+</body>
+</html>

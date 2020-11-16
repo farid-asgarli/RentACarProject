@@ -1,0 +1,155 @@
+﻿
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "Car Listing",
+        HREF = Url.Action("Grid", "ModelG")
+    });
+}
+
+@model g_auto.VM.ModelVM
+
+@if (Model.Brands.FirstOrDefault() != null)
+{
+    <section class="gauto-car-listing section_70 view_type" data-view="list" style=" background: url(/Assets/img/bg-2.png) 50% 10% no-repeat;">
+        <div class="container">
+            <div class="col-md-12">
+
+                <div class="fl-vc-custom-title-container fl-animated-item-velocity text-center custom-title animation-complete" data-animate-type="slideUpIn" style="opacity: 1; transform: translateY(0px);">
+                    <div class="custom-title-content-wrapper">
+                        <div class="fl-title-vc vc-custom-title font-text fl-font-style-bolt fl-custom-title-5f33b48a1de90-5128">
+                            We Provide Variety Of High-End<br>
+                            Auto Customizations
+                        </div><div class="fl-subtitle-vc fl-font-style-bolt vc-custom-sub-title back-text">OFFERS</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="car-list-left">
+                        <div class="sidebar-widget">
+                            <form class="product_search">
+                                <input type="search" placeholder="Keywords..." id="model_searchpane">
+                                <button class="model_searchbtn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </form>
+                        </div>
+                        <div class="sidebar-widget">
+                            <ul class="service-menu">
+                                <li class="active brand_container">
+                                    <a class="brand-list-button valid" data-brandid="0" href="javascript:;">All<span>(@Model.Models.Count)</span></a>
+                                </li>
+                                @foreach (g_auto.Models.Brand item in Model.Brands)
+                                {
+                                    if (item.isActive && item.Models.Where(c => c.isActive).ToList().Count!=0)
+                                    {
+                                        <li>
+                                            <a class="brand-list-button" data-brandid="@item.Id" href="#@item.Name">@item.Name<span>(@item.Models.Where(c => c.isActive).ToList().Count)</span></a>
+                                        </li>
+                                    }
+                                }
+
+                            </ul>
+                        </div>
+                        <div class="sidebar-widget">
+                            <form method="get" id="model-properties">
+                                <p>
+                                    <select id="FuelType" name="FuelType">
+                                        <option value="Diesel">Diesel</option>
+                                        <option value="Ethanol">Ethanol</option>
+                                        <option value="Biodiesel">Biodiesel</option>
+                                        <option value="Propane">Propane</option>
+                                        <option value="Natural Gas"> Natural Gas</option>
+                                        <option value="Electric">Electric</option>
+                                    </select>
+                                </p>
+                                <p>
+                                    <select id="DriveTrain" name="DriveTrain">
+                                        <option value="Front-Wheel Drive"> Front-Wheel Drive</option>
+                                        <option value="Rear-Wheel Drive"> Rear-Wheel Drive</option>
+                                        <option value="Both"> Both</option>
+                                    </select>
+                                </p>
+                                <p>
+                                    <select id="EngineLayout" name="EngineLayout">
+                                        <option value="Front Engine"> Front Engine</option>
+                                        <option value="Mid Engine"> Mid Engine</option>
+                                        <option value="Rear Engine"> Rear Engine</option>
+                                    </select>
+                                </p>
+                                <p>
+                                    <select id="Transmission" name="Transmission">
+                                        <option value="Automated-Manual">Automated-Manual</option>
+                                        <option value="Automatic">Automatic</option>
+                                        <option value="Continuously Variable Transmission">Continuously Variable Transmission</option>
+                                        <option value="Dual-Clutch Transmission">Dual-Clutch Transmission</option>
+                                        <option value="Direct Shift Gearbox ">Direct Shift Gearbox</option>
+                                        <option value="Tiptronic">Tiptronic</option>
+                                    </select>
+                                </p>
+                                <p>
+                                    <select id="Condition" name="Condition">
+                                        <option value="New">New</option>
+                                        <option value="Deprecated">Deprecated</option>
+                                    </select>
+                                </p>
+
+                                <p>
+                                    <button id="model-properties-button" class="gauto-theme-btn">Find Car</button>
+                                </p>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="car-listing-right">
+                        <div class="property-page-heading">
+                            <div class="propertu-page-head">
+                                <ul>
+                                    <li class="active"><a href="@Url.Action("List", "ModelG")"><i class="fa fa-th-list"></i></a></li>
+                                    <li><a href="@Url.Action("Grid", "ModelG")"><i class="fa fa-th-large"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="paging_status">
+                                <p class="result_status">1-10 of 25 results</p>
+                            </div>
+                            <div class="propertu-page-shortby">
+                                <label><i class="fa fa-sort-amount-asc"></i>Sort By</label>
+                                <select class="chosen-select-no-single" id="sortList">
+                                    <option>Default</option>
+                                    <option>Price (Low to High)</option>
+                                    <option>Price (High to Low)</option>
+                                    <option>Year (Low to High)</option>
+                                    <option>Year (High to Low)</option>
+                                    <option>Name (A to Z)</option>
+                                    <option>Name (Z to A)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="car-grid-list">
+                            <div class="row car-grid-list-row">
+
+                            </div>
+                        </div>
+                        @*<div class="pagination-box-row">
+                        <p>Page 1 of 6</p>
+                        <ul class="pagination">
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li>...</li>
+                            <li><a href="#">6</a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                        </ul>
+                    </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

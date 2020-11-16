@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "All Services",
+        HREF = Url.Action("Index", "ServiceG")
+    });
+}
+
+
+@model List<g_auto.Models.Service>
+<!-- Service Area Start -->
+
+
+@if (Model.FirstOrDefault() != null)
+{
+    var i = 0;
+    <section class="service-page-area" style=" background: url(/Assets/img/bg-2.png) 50% 21% no-repeat;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" >
+                    <div class="fl-vc-custom-title-container fl-animated-item-velocity text-center custom-title animation-complete" data-animate-type="slideUpIn" style="opacity: 1; transform: translateY(0px);">
+                        <div class="custom-title-content-wrapper" >
+                            <div class="fl-title-vc vc-custom-title font-text fl-font-style-bolt fl-custom-title-5f33b48a1de90-5128" >
+                                Choose From Variety Of<br />
+                                Our Services
+                            </div><div class="fl-subtitle-vc fl-font-style-bolt vc-custom-sub-title back-text">SERVICES</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (g_auto.Models.Service item in Model)
+                {
+                    if (item.isActive != false)
+                    {
+                        i++;
+                        <div class="col-md-4">
+                            <div class="single-service">
+                                <span class="service-number">0@(i) </span>
+                                <div class="service-icon">
+                                    <img src="~/Uploads/@item.ServiceIcon" alt="city trasport">
+                                </div>
+                                <div class="service-text">
+                                    <a href="@Url.Action("ServiceReservation","ServiceG", new { id = item.Id })">
+                                        <h3>@item.Title</h3>
+                                    </a>
+                                    <p>  @(item.Description.Length > 170 ? item.Description.Substring(0, 170) + "..." : item.Description)</p>
+                                </div>
+                                <div class="service-details-button">
+                                    <a href="@Url.Action("ServiceReservation","ServiceG", new { id = item.Id })">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+    </section>
+
+}
+
+
+<!-- Service Area End -->

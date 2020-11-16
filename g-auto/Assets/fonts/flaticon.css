@@ -1,0 +1,210 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 15/05/2019 07:12
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("Flaticon.eot");
+  src: url("Flaticon-1.eot") format("embedded-opentype"),
+       url("Flaticon.txt") format("woff2"),
+       url("Flaticon-1.txt") format("woff"),
+       url("Flaticon-2.txt") format("truetype"),
+       url("Flaticon.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("Flaticon.svg") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {
+  font-family: Flaticon;
+font-style: normal;
+}
+
+.flaticon-car-of-hatchback-model:before { content: "\f100"; }
+.flaticon-sedan-car-model:before { content: "\f101"; }
+.flaticon-car-city-model:before { content: "\f102"; }
+.flaticon-jeep:before { content: "\f103"; }
+.flaticon-car:before { content: "\f104"; }
+.flaticon-car-suv:before { content: "\f105"; }
+.flaticon-minivan-car:before { content: "\f106"; }
+.flaticon-coupe-car:before { content: "\f107"; }
+.flaticon-sportive-car:before { content: "\f108"; }
+.flaticon-cabrio-car:before { content: "\f109"; }
+.flaticon-pick-up:before { content: "\f10a"; }
+.flaticon-car-black-side-view-pointing-left:before { content: "\f10b"; }
+.flaticon-timing-belt:before { content: "\f10c"; }
+.flaticon-key:before { content: "\f10d"; }
+.flaticon-car-1:before { content: "\f10e"; }
+.flaticon-fix-sign:before { content: "\f10f"; }
+.flaticon-gas:before { content: "\f110"; }
+.flaticon-speedometer:before { content: "\f111"; }
+.flaticon-fuel-station-pump:before { content: "\f112"; }
+.flaticon-gears:before { content: "\f113"; }
+.flaticon-gearshift:before { content: "\f114"; }
+.flaticon-loan:before { content: "\f115"; }
+.flaticon-car-2:before { content: "\f116"; }
+.flaticon-car-3:before { content: "\f117"; }
+.flaticon-calendar:before { content: "\f118"; }
+.flaticon-phone-call:before { content: "\f119"; }
+.flaticon-car-4:before { content: "\f11a"; }
+.flaticon-tyre:before { content: "\f11b"; }
+.flaticon-wrench:before { content: "\f11c"; }
+.flaticon-car-5:before { content: "\f11d"; }
+.flaticon-car-6:before { content: "\f11e"; }
+.flaticon-car-7:before { content: "\f11f"; }
+.flaticon-transport:before { content: "\f120"; }
+.flaticon-car-8:before { content: "\f121"; }
+.flaticon-car-9:before { content: "\f122"; }
+.flaticon-car-repair:before { content: "\f123"; }
+
+.flaticon-001-advertising:before {
+    content: "\f100";
+}
+
+.flaticon-002-airplane:before {
+    content: "\f101";
+}
+
+.flaticon-003-backpack:before {
+    content: "\f102";
+}
+
+.flaticon-004-calendar:before {
+    content: "\f103";
+}
+
+.flaticon-005-rent-a-car:before {
+    content: "\f104";
+}
+
+.flaticon-006-catalog:before {
+    content: "\f105";
+}
+
+.flaticon-007-smile:before {
+    content: "\f106";
+}
+
+.flaticon-008-forum:before {
+    content: "\f107";
+}
+
+.flaticon-009-guide-book:before {
+    content: "\f108";
+}
+
+.flaticon-010-hotel:before {
+    content: "\f109";
+}
+
+.flaticon-011-hotel-1:before {
+    content: "\f10a";
+}
+
+.flaticon-012-hotels:before {
+    content: "\f10b";
+}
+
+.flaticon-013-location:before {
+    content: "\f10c";
+}
+
+.flaticon-014-luggage:before {
+    content: "\f10d";
+}
+
+.flaticon-015-manual:before {
+    content: "\f10e";
+}
+
+.flaticon-016-vacation:before {
+    content: "\f10f";
+}
+
+.flaticon-017-information:before {
+    content: "\f110";
+}
+
+.flaticon-018-passport:before {
+    content: "\f111";
+}
+
+.flaticon-019-photo:before {
+    content: "\f112";
+}
+
+.flaticon-020-review:before {
+    content: "\f113";
+}
+
+.flaticon-021-compass:before {
+    content: "\f114";
+}
+
+.flaticon-022-baggage:before {
+    content: "\f115";
+}
+
+.flaticon-023-binoculars:before {
+    content: "\f116";
+}
+
+.flaticon-024-column:before {
+    content: "\f117";
+}
+
+.flaticon-025-story:before {
+    content: "\f118";
+}
+
+.flaticon-026-taxi:before {
+    content: "\f119";
+}
+
+.flaticon-027-thumb-up:before {
+    content: "\f11a";
+}
+
+.flaticon-028-suitcase:before {
+    content: "\f11b";
+}
+
+.flaticon-029-tourist:before {
+    content: "\f11c";
+}
+
+.flaticon-030-train:before {
+    content: "\f11d";
+}
+
+.flaticon-031-loupe:before {
+    content: "\f11e";
+}
+
+.flaticon-032-video:before {
+    content: "\f11f";
+}
+
+.flaticon-033-village:before {
+    content: "\f120";
+}
+
+.flaticon-034-visa:before {
+    content: "\f121";
+}
+
+.flaticon-035-weather:before {
+    content: "\f122";
+}
+
+.flaticon-036-world:before {
+    content: "\f123";
+}

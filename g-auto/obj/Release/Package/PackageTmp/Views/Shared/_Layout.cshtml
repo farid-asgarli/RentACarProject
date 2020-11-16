@@ -1,0 +1,374 @@
+﻿@{ 
+    g_auto.Models.User user = (g_auto.Models.User)Session["User"];
+}
+
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CyberAuto</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Assets/img/favicon.png">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Assets/slick/slick.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/Assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="/Assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/Assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/Assets/css/animate.min.css">
+    <link rel="stylesheet" href="/Assets/css/nice-select.css">
+    <link href="~/Assets/css/lightgallery.css" rel="stylesheet" />
+    <link href="~/Assets/css/lg-transitions.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/Assets/css/jquery-clockpicker.min.css">
+    <link rel="stylesheet" href="/Assets/css/slicknav.min.css">
+    <link rel="stylesheet" href="/Assets/css/style.css">
+    @*<link rel="stylesheet" href="/Assets/css/responsive.css">*@
+    <link href="~/Assets/datepicker/classic.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    @*<link rel="stylesheet" href="/Assets/css/jquery.datepicker.css">*@
+</head>
+<body>
+
+
+    <!-- Header Top Area Start -->
+    <section class="gauto-header-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="header-top-left">
+                        <p>Need Help?: <i class="fa fa-phone"></i> Call: +994 @(ViewBag.Phone!=null?ViewBag.Phone:"*N/A*")</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Header Top Area End -->
+    <!-- Main Header Area Start -->
+    <header class="gauto-main-header-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="site-logo">
+                        <a href="@Url.Action("Index", "Main")">
+                            <img src="~/Uploads/@ViewBag.HeaderLogo" alt="gauto">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-9">
+                    <div class="header-promo">
+                        <div class="single-header-promo">
+                            <i class="fas fa-globe-europe"></i>
+                            <div class="header-promo-info">
+                                <h3>Newyork, USA</h3>
+                                <p>Melbourne City, Austalia</p>
+                            </div>
+                        </div>
+                        <div class="single-header-promo">
+                            <i class="far fa-clock"></i>
+                            <div class="header-promo-info">
+                                <h3>Monday to Friday</h3>
+                                <p>9:00am - 6:00pm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header-action">
+                        <a href="tel:@(ViewBag.Phone!=null?ViewBag.Phone:"*N/A*")"><i class="fa fa-phone"></i> Request a call</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Header Area End -->
+    <!-- Mainmenu Area Start -->
+    <section class="gauto-mainmenu-area" id="gauto-navbar">
+        @*<div class="site-logo logo-nav" style="display:none">
+            <a href="@Url.Action("Index", "Main")">
+                <img src="~/Uploads/@ViewBag.HeaderLogo" alt="gauto">
+            </a>
+        </div>*@
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="mainmenu">
+                        <nav>
+                            <ul id="gauto_navigation">
+                                <li class="@(ViewBag.MainPage!=null?"active":"")"><a href="@Url.Action("Index", "Main")">home</a></li>
+                                <li class="@(ViewBag.AboutPage!=null?"active":"")"><a href="@Url.Action("Index", "AboutG")">about</a></li>
+                                <li class="@(ViewBag.ServicePage!=null?"active":"")">
+                                    <a href="@Url.Action("Index", "ServiceG")">Service</a>
+                                </li>
+                                <li class="@(ViewBag.ModelPage!=null?"active":"")">
+                                    <a href="@Url.Action("Grid", "ModelG")">cars</a>
+                                </li>
+                                <li class="@(ViewBag.GalleryPage!=null?"active":"")"><a href="@Url.Action("Index", "GalleryG")">gallery</a></li>
+                                <li class="@(ViewBag.ProductPage!=null?"active":"")">
+                                    <a href="@Url.Action("Index", "ProductG")">products</a>
+                                    <ul>
+                                        <li><a href="@Url.Action("ShoppingCart", "ProductG")">Shoping Cart</a></li>
+                                        <li><a href="@Url.Action("Checkout", "ProductG")">checkout</a></li>
+                                    </ul>
+                                </li>
+                                <li class="@(ViewBag.BlogPage!=null?"active":"")">
+                                    <a href="@Url.Action("Index", "BlogG")">blog</a>
+                                </li>
+                                <li class="@(ViewBag.CareersPage!=null?"active":"")">
+                                    <a href="@Url.Action("Index", "Careers")">careers</a>
+                                </li>
+                                <li class="@(ViewBag.ContactPage!=null?"active":"")"><a href="@Url.Action("Index", "ContactG")">contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-12">
+                    <div class="main-search-right">
+                        <!-- Responsive Menu Start -->
+                        <div class="gauto-responsive-menu"></div>
+                        <!-- Responsive Menu Start -->
+                        <!-- Cart Box Start -->
+                        <div class="header-cart-box">
+                            <div class="login dropdown">
+                                <a class="dropdown-toggle cart-icon dropdown_cart" id="dropdownMenu1">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    @if (ViewBag.CartListCount != null)
+                                    {
+                                        <span class="cartCount">@ViewBag.CartListCount</span>
+                                    }
+                                </a>
+                                <div class="dropdown-menu cart-dropdown">
+                                    <ul class="product_list pl_container">
+                                        @if (ViewBag.Products != null)
+                                        {
+                                            foreach (g_auto.Models.Product item in ViewBag.Products)
+                                            {
+                                                <li>
+                                                    <div class="cart-btn-product">
+                                                        <a class="product-remove" data-id="@item.Id" href="javascript:;">
+                                                            <i class="fa fa-times"></i>
+                                                        </a>
+                                                        <div class="cart-btn-pro-img">
+                                                            <a href="@Url.Action("Details", "ProductG", new { id = item.Id })">
+                                                                <img src="~/Uploads/@item.ProductImages.FirstOrDefault().Name" alt="product">
+                                                            </a>
+                                                        </div>
+                                                        <div class="cart-btn-pro-cont">
+                                                            <h4><a href="@Url.Action("Details", "ProductG", new { id = item.Id })">@item.Name</a></h4>
+                                                            <div class="shop-dd-info">
+
+                                                                <p>Quantity: @item.Count</p>
+                                                                <span class="price">
+                                                                    $@item.Price.ToString("0.00")
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                            }
+                                        }
+
+                                    </ul>
+                                    @if (ViewBag.Products != null)
+
+                                    {
+                                        decimal subTotal = 0;
+
+                                        foreach (g_auto.Models.Product item in ViewBag.Products)
+                                        {
+                                            decimal productTotal = item.Price * item.Count;
+
+                                            subTotal += productTotal;
+                                        }
+
+                                        <div class="cart-subtotal">
+                                            <p>
+                                                Subtotal :
+                                                <span class="drop-total">$<span id="subTotalPrice">@subTotal.ToString("0.00")</span></span>
+                                            </p>
+                                        </div>
+                                        <div class="cart-btn">
+                                            <a href="@Url.Action("ShoppingCart", "ProductG")" class="cart-btn-1">View Cart</a>
+                                            <a href="@Url.Action("CheckOut", "ProductG")" class="cart-btn-2">Checkout</a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="header-top-right">
+                                @if (user != null)
+                                {
+                                    <a href="@Url.Action("Index", "UserG")">
+                                        <i class="fas fa-user ml-1" style="font-size:20px"></i>
+
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Login","Main")">
+
+                                        <i class="fas fa-sign-in-alt" style="font-size:20px"></i>
+
+                                    </a>
+
+                                }
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Mainmenu Area End -->
+    @RenderBody()
+    <!-- Footer Area Start -->
+    <footer class="gauto-footer-area">
+        <div class="footer-top-area">
+            <div class="footer-decor"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="single-footer">
+                            <div class="footer-logo">
+                                <a href="#">
+                                    <img src="~/Uploads/@ViewBag.FooterLogo" alt="gauto">
+
+                                </a>
+                            </div>
+                            <p>sed do eiusmod tempor incididunt ut labore et dolore magna as aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                            <div class="footer-address">
+                                <h3>Head office</h3>
+                                <p>@(ViewBag.Address!=null?ViewBag.Address:"*N/A*")</p>
+                                <ul>
+                                    <li>Phone: @(ViewBag.Phone!=null?ViewBag.Phone:"*N/A*") </li>
+                                    <li>Email:@(ViewBag.Email!=null?ViewBag.Email:"*N/A*")</li>
+                                    <li>  © CyberDream 2020</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="single-footer quick_links">
+                            <h3>Quick Links</h3>
+                            <ul class="quick-links">
+                                <li><a href="@Url.Action("Index","AboutG")">About Us</a></li>
+                                <li><a href="@Url.Action("Index","ServiceG")">Our Services</a></li>
+                                <li><a href="@Url.Action("Index","ProductG")">Our Products</a></li>
+                            </ul>
+                            <ul class="quick-links">
+                                <li><a href="@Url.Action("Index","GalleryG")">Gallery</a></li>
+                                <li><a href="@Url.Action("Index","BlogG")">Latest News</a></li>
+                                <li><a href="@Url.Action("Index","ContactG")">Contact Us</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="single-footer newsletter_box">
+                            <h3>newsletter</h3>
+                            <form id="subscribeNews" method="post" onsubmit="return false">
+                                <input type="email" name="Email" placeholder="Email Address" required>
+                                <button type="submit" id="subscribeNewsbtn"><i class="fa fa-paper-plane"></i></button>
+
+                            </form>
+                            <div class="row mt-1">
+                                <div class="col-lg-12">
+                                    <span class="success_subcription">Succesfully subscribed!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="single-footer">
+                            @if (ViewBag.Blogs != null)
+                            {
+                                <h3>Recent post</h3>
+                                <ul>
+                                    @foreach (g_auto.Models.Blog item in ViewBag.Blogs)
+                                    {
+
+                                        <li>
+                                            <div class="single-footer-post">
+                                                <div class="footer-post-image">
+                                                    <a href="@Url.Action("Details","BlogG", new { id=item.Id})">
+                                                        <img src="~/Uploads/@item.BlogCoverImage" alt="footer post">
+                                                    </a>
+                                                </div>
+                                                <div class="footer-post-text">
+                                                    <h3>
+                                                        <a href="@Url.Action("Details","BlogG", new { id=item.Id})">
+                                                            @item.Title
+                                                        </a>
+                                                    </h3>
+                                                    <p>Posted on: @item.PostDate.ToString("MMM d, yyyy")</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+
+                                </ul>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="footer-bottom-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="footer-social">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Area End -->
+    <!--Jquery js-->
+
+    <div id="page-preloader" style="display: block;">
+        <span class="spinner border-t_second_b border-t_prim_a">
+        </span>
+    </div>
+
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
+    <script src="https://kit.fontawesome.com/714b24d2a0.js" crossorigin="anonymous"></script>
+    <script src="~/Assets/datepicker/legacy.js"></script>
+    <script src="~/Assets/js/jquery.mask.js"></script>
+    <script src="~/Assets/js/feather.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="~/Assets/js/niceScroll/jquery.nicescroll.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Assets/datepicker/picker.js"></script>
+    <script src="~/Assets/datepicker/picker.date.js"></script>
+    <script src="~/Assets/datepicker/picker.time.js"></script>
+    <script src="/Assets/js/popper.min.js"></script>
+    <script src="/Assets/js/bootstrap.min.js"></script>
+    <script src="/Assets/js/owl.carousel.min.js"></script>
+    <script src="/Assets/js/lightgallery-all.js"></script>
+    <script src="/Assets/js/custom_lightgallery.js"></script>
+    <script src="/Assets/js/jquery.slicknav.min.js"></script>
+    <script src="/Assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="/Assets/js/jquery.nice-select.min.js"></script>
+    <script src="~/Assets/js/jquery.easypiechart.min.js"></script>
+    <script src="~/Assets/js/jquery.waypoints.min.js"></script>
+    <script src="/Assets/js/jquery-clockpicker.min.js"></script>
+    <script src="~/Assets/slick/slick.js"></script>
+    <script src="~/Assets/js/scrollreveal.min.js"></script>
+    <script src="/Assets/js/main.js"></script>
+    <script src="~/Assets/js/autosize.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.min.js"></script>*@
+
+</body>
+</html>

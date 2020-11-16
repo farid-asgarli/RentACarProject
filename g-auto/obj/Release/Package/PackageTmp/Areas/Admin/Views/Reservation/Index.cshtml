@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model List<g_auto.Models.Reservation>
+
+
+<div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+    <h1 class="mr-auto">
+        Reservations
+    </h1>
+    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+        <a href="@Url.Action("ExportReservations","ExportExcel")" class="button box flex items-center text-gray-700 excel_export"> <i data-feather="file-text" class="hidden sm:block w-4 h-4 mr-2 "></i> Export to Excel </a>
+    </div>
+</div>
+<!-- BEGIN: Datatable -->
+<div class="intro-y datatable-wrapper box p-5 mt-5">
+    <table class="table table-report table-report--bordered display datatable w-full">
+        <thead>
+            <tr>
+                <th class="border-b-2 whitespace-no-wrap">ORDER №</th>
+
+                <th class="border-b-2 text-left whitespace-no-wrap">MODEL NAME</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">IMAGES</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">DATE</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">TOTAL</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">STATUS</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (g_auto.Models.Reservation item in Model)
+            {
+                <tr>
+                    <td class=" border-b">GA@(item.Id)</td>
+                    <td class="border-b">
+                        @if (item.Model != null)
+                        {
+                            <div class="font-medium whitespace-no-wrap">@item.Model.Name</div>
+                            <div class="text-gray-600 text-xs whitespace-no-wrap">@item.Model.Brand.Name</div>
+                        }
+                    </td>
+                    <td class="text-center border-b">
+                        @if (item.Model != null && item.Model.ModelImages.FirstOrDefault() != null)
+                        {
+                            <div class="flex sm:justify-center">
+                                <div class="intro-x w-10 h-10 image-fit">
+                                    <img alt="Midone Tailwind HTML Admin Template" class="rounded-full" src="~/Uploads/@item.Model.ModelImages.First().Name">
+                                </div>
+
+                                @foreach (g_auto.Models.ModelImages image in item.Model.ModelImages.Skip(1))
+                                {
+                                    <div class="intro-x w-10 h-10 image-fit -ml-5">
+                                        <img alt="Midone Tailwind HTML Admin Template" class="rounded-full" src="~/Uploads/@image.Name">
+                                    </div>
+
+                                }
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span>No Images</span>
+                        }
+                    </td>
+                    <td class="text-center border-b">@item.PostDate.ToString("MMM d")</td>
+                    @*<td class="text-center border-b">@item.Amount.ToString("0")</td>*@
+                    <td class="text-center border-b">$@item.Price.ToString("0.00")</td>
+                    <td class="w-40 border-b ">
+                        @if (item.isCancelled)
+                        {
+                            <div class="flex items-center sm:justify-center text-theme-6"> <i data-feather="x-circle" class="w-4 h-4 mr-2"></i> Cancelled </div>
+                        }
+                        else if (item.isActive)
+                        {
+                            <div class="flex items-center sm:justify-center text-theme-10"> <i data-feather="activity" class="w-4 h-4 mr-2"></i> Active </div>
+                        }
+                        else if (item.isFinished)
+                        {
+                            <div class="flex items-center sm:justify-center text-theme-9"> <i data-feather="check" class="w-4 h-4 mr-2"></i> Finished </div>
+                        }
+                        else
+                        {
+                            <div class="flex items-center sm:justify-center text-theme-11"> <i data-feather="alert-circle" class="w-4 h-4 mr-2"></i> Pending </div>
+                        }
+
+                    </td>
+                    <td class="border-b w-5 status_container">
+                        <div class="flex sm:justify-center items-center">
+                            <a class="flex items-center mr-3 action-pr-btn" href="@Url.Action("Details", "Reservation", new { Id= item.Id}) "> <i data-feather="eye" class="w-4 h-4 mr-1"></i> View </a>
+                            @if (item.isCancelled == false && item.isFinished == false)
+                            {
+                                <a class="flex items-center text-theme-6 cancel_res_index" href="javascript:;" data-id="@item.Id"> <i data-feather="x" class="w-4 h-4 mr-1"></i> Cancel </a>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+<div class="modal" id="delete-confirmation-modal-res">
+    <div class="modal__content">
+        <div class="p-5 text-center">
+            <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+            <div class="text-3xl mt-5">Are you sure?</div>
+            <div class="text-gray-600 mt-2">Are you sure you want to cancel the Reservation? This process cannot be undone.</div>
+        </div>
+        <div class="px-5 pb-8 text-center">
+            <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Dismiss</button>
+            <button type="button" id="btn-cancel-res-index" data-id="" class="button w-60 bg-theme-6 text-white">Cancel The Reservation</button>
+        </div>
+    </div>
+</div>

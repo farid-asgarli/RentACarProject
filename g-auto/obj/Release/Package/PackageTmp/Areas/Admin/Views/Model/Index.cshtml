@@ -1,0 +1,382 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    g_auto.DAL.DBContext db = new g_auto.DAL.DBContext();
+}
+
+@model List<g_auto.Models.Model>
+
+<h1 style="margin:50px 0">Models</h1>
+
+<div class="grid grid-cols-12 gap-6 mt-5">
+    <div class="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2">
+        <a href="@Url.Action("Create","Model")" class="button text-white bg-theme-1 shadow-md mr-2 action-pr-btn">Add New Model</a>
+        <div class="dropdown relative">
+            <button class="dropdown-toggle button px-2 box text-gray-700 dark:text-gray-300">
+                <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
+            </button>
+            <div class="dropdown-box mt-10 absolute w-40 top-0 left-0 z-20">
+                <div class="dropdown-box__content box dark:bg-dark-1 p-2">
+                    <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md print_page"> <i data-feather="printer" class="w-4 h-4 mr-2"></i> Print </a>
+                    <a href="@Url.Action("ExportModels", "ExportExcel")" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md excel_export"> <i data-feather="file-text" class="w-4 h-4 mr-2"></i> Export to Excel </a>
+                </div>
+            </div>
+        </div>
+        <div class="relative ml-2">
+            <button id="checkbutton" class=" button px-2 box text-gray-700 dark:text-gray-300" style="background-color:orangered; color:white;display:none">
+                <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="trash-2"></i> </span>
+                <div class="tooltip w-5 h-5 flex items-center justify-center absolute   -mr-2 -mt-2 tooltipstered" style="right:50%;top:50%" title="Remove selected items?">
+                </div>
+            </button>
+        </div>
+
+        @if (Model.FirstOrDefault() != null)
+        {
+            if (Model.Count() == 1)
+            {
+                <div class="hidden md:block mx-auto text-gray-600">
+                    Showing a Total of 1 entry
+                </div>
+            }
+            else
+            {
+                <div class="hidden md:block mx-auto text-gray-600">
+                    Showing a Total of <span id="total_entries_count"> @Model.Count()</span> entries
+                </div>
+            }
+        }
+        else
+        {
+            <div class="hidden md:block mx-auto text-gray-600">
+                Nothing to show here
+            </div>
+        }
+
+        @using (Html.BeginForm())
+        {
+            <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+                <div class="w-56 relative text-gray-700 dark:text-gray-300">
+                    <input type="text" id="SearchString" name="SearchString" class="input w-56 box pr-10 placeholder-theme-13" placeholder="Search...">
+                    <button style="border:none" class="absolute my-auto inset-y-0 mr-3 right-0" type="submit"><i class="w-4 h-4" data-feather="search"></i></button>
+
+                </div>
+            </div>
+        }
+    </div>
+    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+        <table class="table table-big table-report -mt-2">
+            @if (Model.FirstOrDefault() != null)
+            {
+                <thead>
+                    <tr>
+                        <th><a href="javascript:;" class="button mark-all text-white bg-theme-1 shadow-md -ml-5" style="white-space:nowrap">Mark All</a></th>
+                        <th class="whitespace-no-wrap">IMAGES</th>
+                        <th class="whitespace-no-wrap text-left">@Html.ActionLink("NAME", "Index", new { sortOrder = ViewBag.NameSortParam })</th>
+                        <th class="whitespace-no-wrap text-left">@Html.ActionLink("BRAND", "Index", new { sortOrder = ViewBag.BrandSortParam })</th>
+                        <th class="text-left whitespace-no-wrap">@Html.ActionLink("ENGINE", "Index", new { sortOrder = ViewBag.EngineSortParam })</th>
+                        <th class="text-left whitespace-no-wrap">@Html.ActionLink("HP", "Index", new { sortOrder = ViewBag.HPSortParam })</th>
+                        <th class="text-left whitespace-no-wrap">@Html.ActionLink("CONDITION", "Index", new { sortOrder = ViewBag.ConditionSortParam })</th>
+                        <th class="text-left whitespace-no-wrap">@Html.ActionLink("E.LAYOUT", "Index", new { sortOrder = ViewBag.ELSortParam })</th>
+                        <th class="text-left whitespace-no-wrap">@Html.ActionLink("MASS", "Index", new { sortOrder = ViewBag.MassSortParam })</th>
+                        <th class="text-left whitespace-no-wrap">@Html.ActionLink("TRANSMISSION", "Index", new { sortOrder = ViewBag.TMSortParam })</th>
+                        <th class="text-left whitespace-no-wrap">@Html.ActionLink("DRIVETRAIN", "Index", new { sortOrder = ViewBag.DTSortParam })</th>
+                        <th class="text-left whitespace-no-wrap">@Html.ActionLink("YEAR", "Index", new { sortOrder = ViewBag.YearSortParam })</th>
+                        <th class="text-left whitespace-no-wrap">@Html.ActionLink("PRICE", "Index", new { sortOrder = ViewBag.PDSortParam })</th>
+                        @*<th class="text-left whitespace-no-wrap">@Html.ActionLink("RATING", "Index", new { sortOrder = ViewBag.RatingSortParam })</th>*@
+                        <th class="text-left whitespace-no-wrap">@Html.ActionLink("FUELTYPE", "Index", new { sortOrder = ViewBag.FTSortParam })</th>
+                        <th class="text-left whitespace-no-wrap">@Html.ActionLink("MILEAGE", "Index", new { sortOrder = ViewBag.MileageSortParam })</th>
+                        <th class="text-center whitespace-no-wrap">ACTIONS</th>
+                        <th class="text-center whitespace-no-wrap">@Html.ActionLink("ACTIVE", "Index", new { sortOrder = ViewBag.IsSortParam })</th>
+                    </tr>
+                </thead>
+            }
+            <tbody>
+                @if (Model.FirstOrDefault() != null)
+                {
+                    foreach (g_auto.Models.Model item in Model)
+                    {
+                        <tr class="intro-x">
+                            <td class="text-left w-10"><input class="input flex-none border border-gray-500" data-id="@item.Id" data-controller="Model" name="list-check" type="checkbox" autocomplete="off"></td>
+                            <td class="w-40 ">
+                                <div class="flex">
+                                    @if (item.ModelImages.FirstOrDefault() != null)
+                                    {
+                                        foreach (g_auto.Models.ModelImages image in item.ModelImages)
+                                        {
+
+                                            <div class="w-10 h-10 image-fit zoom-in row-img -ml-5">
+                                                <img alt="Midone Tailwind HTML Admin Template" class=" rounded-full tooltip" src="~/Uploads/@image.Name" data-toggle="tooltip" title="Uploaded on @item.PostDate.ToString("d MMM yyyy")">
+                                            </div>
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span>N/A</span>
+                                    }
+                                </div>
+                            </td>
+                            <td class="text-left">
+                                <a href="javascript:;" class="font-medium whitespace-no-wrap modelmodal" data-id="@item.Id">@(item.Name.Length > 30 ? item.Name.Substring(0, 30) + "..." : item.Name)</a>
+                            </td>
+                            <td class="text-left">
+                                @if (item.Brand != null)
+                                {
+
+                                    <span>@item.Brand.Name</span>
+
+
+                                }
+                            </td>
+                            <td class="text-left">
+                                @if (item.Engine != null)
+                                {
+                                    <span>@item.Engine.ToString("0.0")</span>
+
+
+                                }
+                            </td>
+                            <td class="text-left">
+                                @if (item.HorsePower != null)
+                                {
+                                    <span>@item.HorsePower</span>
+
+
+                                }
+                            </td>
+                            <td class="text-left">
+                                @if (item.Condition != null)
+                                {
+                                    <span>@item.Condition</span>
+
+
+                                }
+                            </td>
+                            <td class="text-left">
+                                @if (item.EngineLayout != null)
+                                {
+                                    <span>@item.EngineLayout</span>
+
+
+                                }
+                            </td>
+                            <td class="text-left">
+                                @if (item.Mass != null)
+                                {
+                                    <span>@item.Mass.ToString("0")</span>
+
+
+                                }
+                            </td>
+
+                            <td class="text-left">
+                                @if (item.Transmission != null)
+                                {
+                                    <span>@item.Transmission</span>
+
+
+                                }
+                            </td>
+                            <td class="text-left">
+                                @if (item.DriveTrain != null)
+                                {
+                                    <span>@item.DriveTrain</span>
+
+
+                                }
+                            </td>
+
+                            <td class="text-left">
+                                @if (item.Year != null)
+                                {
+                                    <span>@item.Year</span>
+
+
+                                }
+                            </td>
+
+                            <td class="text-left">
+                                @if (item.PriceDaily != null)
+                                {
+                                    <span>$@item.PriceDaily.ToString("0.00")</span>
+
+
+                                }
+                            </td>
+
+                            @*<td class="text-left">
+                                    @if (item.Rating != null)
+                                    {
+                                        <span>@item.Rating</span>
+
+
+                                    }
+                                </td>*@
+
+                            <td class="text-left">
+                                @if (item.FuelType != null)
+                                {
+                                    <span>@item.FuelType</span>
+
+
+                                }
+                            </td>
+                            <td class="text-left">
+                                @if (item.Mileage != null)
+                                {
+                                    <span>@item.Mileage</span>
+
+
+                                }
+                            </td>
+                            <td class="table-report__action w-56">
+                                <div class="flex justify-center items-center">
+                                    <a class="flex items-center mr-3" href="@Url.Action("Update", "Model", new { id = item.Id })"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                    <a class="flex items-center text-theme-6 del-model" href="javascript:;" data-id="@item.Id">
+                                        <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="table-report__action w-56">
+                                <div class="flex justify-center items-center">
+                                    <input class="input input--switch border input-activate-Model" data-id="@item.Id" type="checkbox" @(item.isActive == false ? "" : "checked") value="1">
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal" id="delete-confirmation-modal">
+    <div class="modal__content">
+        <div class="p-5 text-center">
+            <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+            <div class="text-3xl mt-5">Are you sure?</div>
+            <div class="text-gray-600 mt-2">Do you really want to delete these records? This process cannot be undone.</div>
+        </div>
+        <div class="px-5 pb-8 text-center">
+            <button type="button" id="cancel-delete" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Cancel</button>
+            <button type="button" id="confirm-delete-model" data-id="" class="button w-24 bg-theme-6 text-white">Delete</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="details-modelmodal">
+    <div class="modal__content modal__content--xl">
+        <div class="p-5">
+            <div class="grid grid-cols-12 gap-5 mt-5 " id="modal_container">
+                <div class="col-span-12 sm:col-span-12 xxl:col-span-12  p-5 ">
+                    <h2>Properties</h2>
+                </div>
+                <div class="col-span-12 sm:col-span-3 xxl:col-span-3 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Id</div>
+                    <div class="text-theme-25 tag_modal_id"></div>
+                </div>
+                <div class="col-span-12 sm:col-span-3 xxl:col-span-3 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Total Views</div>
+                    <div class="text-theme-25 tag_modal_totalviews"></div>
+                </div>
+                <div class="col-span-12 sm:col-span-6 xxl:col-span-6 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Model Name</div>
+                    <div class="text-theme-25 tag_modal_name">423225879</div>
+                </div>
+                <div class="col-span-12 sm:col-span-6 xxl:col-span-6 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Price</div>
+                    <div class="text-theme-25 tag_modal_price">423225879</div>
+                </div>
+                <div class="col-span-12 sm:col-span-6 xxl:col-span-6 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Brand</div>
+                    <div class="text-theme-25 tag_modal_brand">423225879</div>
+                </div>
+                <div class="col-span-3 sm:col-span-3 xxl:col-span-3 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Condition</div>
+                    <div class="text-theme-25 tag_modal_condition">423225879</div>
+                </div>
+                <div class="col-span-3 sm:col-span-3 xxl:col-span-3 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Doors</div>
+                    <div class="text-theme-25 tag_modal_doors">423225879</div>
+                </div>
+                <div class="col-span-3 sm:col-span-3 xxl:col-span-3 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Engine</div>
+                    <div class="text-theme-25 tag_modal_engine">423225879</div>
+                </div>
+
+                <div class="col-span-3 sm:col-span-3 xxl:col-span-3 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Fuel Type</div>
+                    <div class="text-theme-25 tag_modal_ft">423225879</div>
+                </div>
+                <div class="col-span-3 sm:col-span-3 xxl:col-span-3 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">HP</div>
+                    <div class="text-theme-25 tag_modal_hp">423225879</div>
+                </div>
+                <div class="col-span-3 sm:col-span-3 xxl:col-span-3 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Mass</div>
+                    <div class="text-theme-25 tag_modal_mass">423225879</div>
+                </div>
+                <div class="col-span-3 sm:col-span-3 xxl:col-span-3 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Mileage</div>
+                    <div class="text-theme-25 tag_modal_mileage">423225879</div>
+                </div>
+
+                <div class="col-span-3 sm:col-span-3 xxl:col-span-3 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Year</div>
+                    <div class="text-theme-25 tag_modal_year">423225879</div>
+                </div>
+                <div class="col-span-6 sm:col-span-6 xxl:col-span-6 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Transmission</div>
+                    <div class="text-theme-25 tag_modal_transmission">423225879</div>
+                </div>
+                <div class="col-span-6 sm:col-span-6 xxl:col-span-6 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Engine Layout</div>
+                    <div class="text-theme-25 tag_modal_el">423225879</div>
+                </div>
+                <div class="col-span-12 sm:col-span-12 xxl:col-span-12 box p-5 ">
+                    <div class="font-medium text-base">Post Properties</div>
+                    <div class="text-gray-600 tag_modal_post">What Can I do?</div>
+                </div>
+                <div class="col-span-12 sm:col-span-12 xxl:col-span-12 box p-5 ">
+                    <div class="font-medium text-base ">Edit Properties</div>
+                    <div class="text-gray-600 tag_modal_modify">What Can I do?</div>
+                </div>
+                <div class="col-span-12 sm:col-span-12 xxl:col-span-12 box p-5">
+                    <div class="accordion">
+                        <div class="accordion__pane py-4">
+                            <a href="javascript:;" class="accordion__pane__toggle font-medium block">Description (Tap to display)</a>
+                            <div class="accordion__pane__content mt-3 text-gray-700 leading-relaxed tag_modal_desc"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 sm:col-span-12 xxl:col-span-12 box p-5 cursor-pointer tag_slider_container">
+                    <div class="mx-6 tag_modal_slider">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="px-5 pb-8 justify-between flex mt-5">
+                <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Dismiss</button>
+                <a href="/Admin/Tags/Update/" data-dismiss="modal" class="button w-24 border text-white-700 mr-1 bg-theme-1 text-white tag_modal_link">Update</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="delete-all-modal">
+    <div class="modal__content">
+        <div class="p-5 text-center">
+            <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+            <div class="text-3xl mt-5">Are you sure?</div>
+            <div class="text-gray-600 mt-2">Do you really want to delete these (<span id="total_delete_count"></span>) records? This process cannot be undone.</div>
+        </div>
+        <div class="px-5 pb-8 text-center">
+            <button type="button" id="cancel-delete" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Cancel</button>
+            <button type="button" id="confirm-delete-all" class="button w-24 bg-theme-6 text-white">Delete</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+@model g_auto.Models.Expert
+
+@using (Html.BeginForm("Create", "Expert", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <h1>Create an Expert</h1>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="round-section">
+                    <div class="col-lg-12">
+                        <div class="form-group mt-3">
+
+                            <label class="control-label col-md-2">Full Name</label>
+                            <div class="mb-2">
+                                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control input  w-full border mt-2 mb-2 custom-val-input intro-y box input--lg", @required = true, @autocomplete = "off" } })
+
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+
+
+                        <div class="form-group mt-3">
+                            <label class="control-label col-md-2 ">Experience (Year)</label>
+                            <div class="relative mx-auto mt-2 mb-2">
+                                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4">
+                                    <i data-feather="calendar" class="w-4 h-4"></i>
+                                </div>
+                                <input type="number" min="0" max="60" name="ExperienceYear" onkeyup="if (parseInt(this.value) >60) { this.value =@DateTime.Now.ToString("yyyy")return false; }" style="width:100%" class="input pl-12 border custom-val-input">
+                            </div>
+                            @Html.ValidationMessageFor(model => model.ExperienceYear, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="control-label col-md-2 ">Facebook Profile</label>
+                            <div class="relative mx-auto mt-2 mb-2">
+                                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4">
+                                    <i data-feather="facebook" class="w-4 h-4"></i>
+                                </div>
+                                <input type="text" name="FacebookProfile" style="width:100%" class="input pl-12 border">
+                            </div>
+                            @Html.ValidationMessageFor(model => model.FacebookProfile, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="control-label col-md-2 ">Instagram Profile</label>
+                            <div class="relative mx-auto mt-2 mb-2">
+                                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4">
+                                    <i data-feather="instagram" class="w-4 h-4"></i>
+                                </div>
+                                <input type="text" name="InstagramProfile" style="width:100%" class="input pl-12 border">
+                            </div>
+                            @Html.ValidationMessageFor(model => model.InstagramProfile, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="control-label  col-md-2 ">Linkedin Profile</label>
+                            <div class="relative mx-auto mt-2 mb-2">
+                                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4">
+                                    <i data-feather="linkedin" class="w-4 h-4"></i>
+                                </div>
+                                <input type="text" name="LinkedInProfile" style="width:100%" class="input pl-12 border">
+                            </div>
+                            @Html.ValidationMessageFor(model => model.LinkedInProfile, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="control-label col-md-2 ">Twitter Profile</label>
+                            <div class="relative mx-auto mt-2 mb-2">
+                                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4">
+                                    <i data-feather="twitter" class="w-4 h-4"></i>
+                                </div>
+                                <input type="text" name="TwitterProfile" style="width:100%" class="input pl-12 border">
+                            </div>
+                            @Html.ValidationMessageFor(model => model.TwitterProfile, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+
+                        <input type="hidden" name="AdminId" value="@ViewBag.Admin" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="flex flex-wrap round-section">
+                    <div class="col-md-12">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        @{
+                            Html.RenderPartial("~/Areas/Admin/Views/Partial/_ImageSectionMultiple.cshtml", new g_auto.ViewModels.ImageFile
+                            {
+                                ImageName = "ProfilePictureFile",
+                                ImageText = "Profile picture",
+                                ImageHeight="340px"
+
+                            });
+                        }
+                    </div>
+                    <div class="col-md-12">
+                        @{
+                            Html.RenderPartial("~/Areas/Admin/Views/Partial/_ButtonSection.cshtml", new g_auto.ViewModels.ButtonSection
+                            {
+                                url = "Expert",
+                                btntype = "Create"
+                            });
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

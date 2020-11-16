@@ -1,0 +1,294 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+@model g_auto.Models.About
+
+@using (Html.BeginForm("Create", "About", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal ">
+        <h1>Create Details</h1>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <input type="hidden" name="AdminId" value="@ViewBag.Admin" />
+
+        <div class="row">
+
+            <div class="col-lg-8">
+
+                <div class="round-section">
+                    <div class="col-lg-12">
+                        <div class="form-group mt-3">
+
+                            <label class="control-label col-md-2">Title</label>
+                            <div class=" mb-2 mt-2">
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 custom-val-input intro-y box input--lg", @required = true } })
+
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+
+                        <div class="form-group mt-3 mb-3">
+                            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2 " })
+                            <div class=" mt-5">
+                                @Html.TextAreaFor(model => model.Content, new { @class = "custom_textarea intro-y box input--lg form-control input w-full border mt-2 mb-2 custom-val-input", @placeholder = "Your Description " })
+                                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "sm:ml-auto mt-1 sm:mt-0 text-xs text-red-600 " })
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-3">
+
+                            <label class="control-label col-md-2">Address</label>
+                            <div class=" mt-2 mb-2">
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control input w-full border mt-2  custom-val-input intro-y box input--lg", @required = true } })
+
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+
+
+
+
+                        <div class="form-group mt-3">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="mt-2 mt-2 mb-2  relative">
+                                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 dark:bg-dark-1 dark:border-dark-4 border text-gray-600 ">@@</div>
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control input pl-12 w-full border col-span-4  custom-val-input", @required = true, @type = "email", @placeholder = "company@companymail.com" } })
+
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger ", @style = "color:red" })
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label class="control-label col-md-2 ">Phone</label>
+                            <div class="relative mx-auto mt-2 mb-2">
+                                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4">
+                                    <i data-feather="phone" class="w-4 h-4"></i>
+                                </div>
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control input pl-12 w-full border col-span-4 custom-val-input", @required = true, @type = "text", @placeholder = "(330) 777-0000" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+
+
+                        <div class="form-group mt-3">
+                            <label class="control-label col-md-2 ">Facebook Profile</label>
+                            <div class="relative mx-auto mt-2 mb-2">
+                                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4">
+                                    <i data-feather="facebook" class="w-4 h-4"></i>
+                                </div>
+                                @Html.EditorFor(model => model.FacebookLink, new { htmlAttributes = new { @class = "form-control input pl-12 w-full border col-span-4", @type = "text" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.FacebookLink, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="control-label col-md-2 ">Instagram Profile</label>
+                            <div class="relative mx-auto mt-2 mb-2">
+                                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4">
+                                    <i data-feather="instagram" class="w-4 h-4"></i>
+                                </div>
+                                @Html.EditorFor(model => model.InstagramLink, new { htmlAttributes = new { @class = "form-control input pl-12 w-full border col-span-4", @type = "text" } })
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.InstagramLink, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="control-label col-md-2 ">Linkedin Profile</label>
+                            <div class="relative mx-auto mt-2 mb-2">
+                                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4">
+                                    <i data-feather="linkedin" class="w-4 h-4"></i>
+                                </div>
+                                @Html.EditorFor(model => model.LinkedinLink, new { htmlAttributes = new { @class = "form-control input pl-12 w-full border col-span-4", @type = "text" } })
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.LinkedinLink, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="control-label col-md-2 ">Twitter Profile</label>
+                            <div class="relative mx-auto mt-2 mb-2">
+                                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4">
+                                    <i data-feather="twitter" class="w-4 h-4"></i>
+                                </div>
+                                @Html.EditorFor(model => model.TwitterLink, new { htmlAttributes = new { @class = "form-control input pl-12 w-full border col-span-4", @type = "text" } })
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.TwitterLink, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label class="control-label col-md-2 ">Pinterest Profile</label>
+                            <div class="relative mx-auto mt-2 mb-2">
+                                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4">
+                                    @*<i data-feather="pinterest" class="w-4 h-4"></i>*@
+                                    <i class="fab fa-pinterest-p w-4 h-4"></i>
+                                </div>
+                                @Html.EditorFor(model => model.PinterestLink, new { htmlAttributes = new { @class = "form-control input pl-12 w-full border col-span-4", @type = "text" } })
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.PinterestLink, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label class="control-label col-md-2 ">Vimeo Profile</label>
+                            <div class="relative mx-auto mt-2 mb-2">
+                                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4">
+                                    @*<i data-feather="vimeo" class="w-4 h-4"></i>*@
+
+                                    <i class="fab fa-vimeo-v w-4 h-4"></i>
+                                </div>
+                                @Html.EditorFor(model => model.VimeoLink, new { htmlAttributes = new { @class = "form-control input pl-12 w-full border col-span-4", @type = "text" } })
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.VimeoLink, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label class="control-label col-md-2 ">Skype Profile</label>
+                            <div class="relative mx-auto mt-2 mb-2">
+                                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4">
+                                    @*<i data-feather="skype" class="w-4 h-4"></i>*@
+                                    <i class="fab fa-skype w-4 h-4"></i>
+                                </div>
+                                @Html.EditorFor(model => model.SkypeLink, new { htmlAttributes = new { @class = "form-control input pl-12 w-full border col-span-4", @type = "text" } })
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.SkypeLink, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+
+
+
+                    </div>
+                    <div class="col-md-12">
+                        @{
+                            Html.RenderPartial("~/Areas/Admin/Views/Partial/_ButtonSection.cshtml", new g_auto.ViewModels.ButtonSection
+                            {
+                                url = "About",
+                                btntype = "Create"
+                            });
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="flex flex-wrap round-section">
+
+                    <div class="col-md-12">
+                        @{
+                            Html.RenderPartial("~/Areas/Admin/Views/Partial/_ImageSectionMultiple.cshtml", new g_auto.ViewModels.ImageFile
+                            {
+
+                                ImageName = "CoverImageFirstFile",
+                                ImageText = "First Cover Image"
+
+                            });
+                        }
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group mt-3 mb-3 p-5">
+                            <label class="control-label col-md-2 ">Title of First Cover Image</label>
+                            <div class=" mt-5">
+                                @Html.EditorFor(model => model.CoverImageFirstTitle, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 custom-val-input intro-y box input--lg", @required = true } })
+                                @Html.ValidationMessageFor(model => model.CoverImageFirstTitle, "", new { @class = "sm:ml-auto mt-1 sm:mt-0 text-xs text-red-600" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group mb-3 p-5">
+                            <label class="control-label col-md-2 ">Content of First Cover Image</label>
+                            <div class=" mt-5">
+                                @Html.TextAreaFor(model => model.CoverImageFirstContent, new { @class = "custom_textarea intro-y box input--lg form-control input w-full border mt-2 mb-2 custom-val-input", @placeholder = "Your Description " })
+                                @Html.ValidationMessageFor(model => model.CoverImageFirstContent, "", new { @class = "sm:ml-auto mt-1 sm:mt-0 text-xs text-red-600" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        @{
+                            Html.RenderPartial("~/Areas/Admin/Views/Partial/_ImageSectionMultiple.cshtml", new g_auto.ViewModels.ImageFile
+                            {
+
+                                ImageName = "CoverImageSecondFile",
+                                ImageText = "Second Cover Image"
+
+
+                            });
+                        }
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group mt-3 mb-3 p-5">
+                            <label class="control-label col-md-2 ">Title of Second Cover Image</label>
+                            <div class=" mt-5">
+                                @Html.EditorFor(model => model.CoverImageSecondTitle, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 custom-val-input intro-y box input--lg", @required = true } })
+                                @Html.ValidationMessageFor(model => model.CoverImageSecondTitle, "", new { @class = "sm:ml-auto mt-1 sm:mt-0 text-xs text-red-600" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group mb-3 p-5">
+                            <label class="control-label col-md-2 ">Content of Second Cover Image</label>
+                            <div class=" mt-5">
+                                @Html.TextAreaFor(model => model.CoverImageSecondContent, new { @class = "custom_textarea intro-y box input--lg form-control input w-full border mt-2 mb-2 custom-val-input", @placeholder = "Your Description " })
+                                @Html.ValidationMessageFor(model => model.CoverImageSecondContent, "", new { @class = "sm:ml-auto mt-1 sm:mt-0 text-xs text-red-600" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        @{
+                            Html.RenderPartial("~/Areas/Admin/Views/Partial/_ImageSectionMultiple.cshtml", new g_auto.ViewModels.ImageFile
+                            {
+
+                                ImageName = "CoverImageThirdFile",
+                                ImageText = "Third Cover Image"
+
+
+                            });
+                        }
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group mt-3 mb-3 p-5">
+                            <label class="control-label col-md-2 ">Title of Third Cover Image</label>
+                            <div class=" mt-5">
+                                @Html.EditorFor(model => model.CoverImageThirdTitle, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 custom-val-input intro-y box input--lg", @required = true } })
+                                @Html.ValidationMessageFor(model => model.CoverImageThirdTitle, "", new { @class = "sm:ml-auto mt-1 sm:mt-0 text-xs text-red-600" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group mb-3 p-5">
+                            <label class="control-label col-md-2 ">Content of Third Cover Image</label>
+                            <div class=" mt-5">
+                                @Html.TextAreaFor(model => model.CoverImageThirdContent, new { @class = "custom_textarea intro-y box input--lg form-control input w-full border mt-2 mb-2 custom-val-input", @placeholder = "Your Description " })
+                                @Html.ValidationMessageFor(model => model.CoverImageThirdContent, "", new { @class = "sm:ml-auto mt-1 sm:mt-0 text-xs text-red-600" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        @{
+                            Html.RenderPartial("~/Areas/Admin/Views/Partial/_ImageSectionMultiple.cshtml", new g_auto.ViewModels.ImageFile
+                            {
+
+                                ImageName = "CoverImageFourthFile",
+                                ImageText = "Fourth Cover Image"
+
+
+                            });
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

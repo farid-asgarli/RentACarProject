@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model g_auto.Models.FeatureSet
+
+@using (Html.BeginForm("Update", "FeatureSet", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h1>Update the Feature</h1>
+
+        <div class="round-section" style="padding:50px!important">
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="form-group mt-3">
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="">
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control input w-full border mt-2 mb-2 custom-val-input intro-y box input--lg", @required = true } })
+
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label class="control-label col-md-2">Price </label>
+                        <div class=" mt-2 mb-2 relative">
+                            <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 dark:bg-dark-1 dark:border-dark-4 border text-gray-600">$</div>
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "input pl-12 w-full border col-span-4  custom-val-input", @required = true, @step = "0.01", @type = "number", @value = "0.00", @placeholder = "0.00" } })
+
+
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger", @style = "color:red" })
+                    </div>
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    @{
+                        Html.RenderPartial("~/Areas/Admin/Views/Partial/_ButtonSection.cshtml", new g_auto.ViewModels.ButtonSection
+                        {
+                            url = "FeatureSet",
+                            btntype = "Update"
+                        });
+                    }
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group mt-3 mb-3">
+                        @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2 " })
+                        <div class=" mt-2">
+                            @Html.TextAreaFor(model => model.Content, new { @class = "custom_textarea fs_textarea intro-y box input--lg form-control input w-full border", @placeholder = "Your Description " })
+                            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "sm:ml-auto mt-1 sm:mt-0 text-xs text-red-600" })
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+}

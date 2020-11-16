@@ -1,0 +1,236 @@
+﻿
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "Checkout",
+        HREF = Url.Action("Index", "ProductG")
+    });
+}
+
+@model List<g_auto.Models.Product>
+
+
+<section class="checkout-page-area section_70">
+    <div id="order_summary">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center mb-3 mt-3">
+                    <div class="ui-title-logo">AUTLINES</div>
+                    <h2 class="ui-title">Order Summary</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="fl-content">
+                        <div class="woocommerce">
+                            <div class="woocommerce-order">
+                                <p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received">Thank you. Your order has been received.</p>
+                                <ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
+                                    <li class="woocommerce-order-overview__order order"> Order number: <strong>GA<span class="order_number"></span></strong></li>
+                                    <li class="woocommerce-order-overview__date date"> Date: <strong><span class="order_date"></span></strong></li>
+                                    <li class="woocommerce-order-overview__total total">
+                                        Total: <strong>
+                                            <span class="woocommerce-Price-amount amount">
+                                                <span class="woocommerce-Price-currencySymbol">$</span><span class="total_price"></span>
+                                            </span>
+                                        </strong>
+                                    </li>
+                                    <li class="woocommerce-order-overview__payment-method method">
+                                        Payment method: <strong>Direct bank transfer</strong>
+                                    </li>
+                                </ul>
+                                <section class="woocommerce-order-details ">
+                                    <h2 class="woocommerce-order-details__title">Order details</h2>
+                                    <table class="woocommerce-table woocommerce-table--order-details shop_table order_details mt-5">
+                                        <thead>
+                                            <tr>
+                                                <th class="woocommerce-table__product-name product-name">Product</th>
+                                                <th class="woocommerce-table__product-table product-total">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="appendix">
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th scope="row">Subtotal:</th>
+                                                <td>
+                                                    <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span><span class="total_price"></span></span>
+                                                </td>
+                                            </tr>
+                                            <tr><th scope="row">Payment method:</th><td>Direct bank transfer</td></tr>
+                                            <tr><th scope="row">Total:</th><td><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span><span class="total_price"></span></span></td></tr>
+                                        </tfoot>
+                                    </table>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @if (Model.Count != 0)
+    {
+
+        
+<form method="post" id="checkoutForm" class="mt-10" onsubmit="return false">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center mb-3 mt-3">
+                <div class="ui-title-logo">AUTLINES</div>
+                <h2 class="ui-title">Order Summary</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="checkout-left-box">
+
+                    <div class="woocommerce-notices-wrapper" id="notifyUserProfileUpdate">
+                        <ul class="woocommerce-error" role="alert">
+                            <li> Succesfully Updated!</li>
+                        </ul>
+                    </div>
+                    <div class="woocommerce-notices-wrapper" id="notifyUserProfileError">
+                        <ul class="woocommerce-error woocommerce-custom-error" role="alert">
+                            <li>Unofrtunately, your order was unsuccesful. This might be due to following:</li>
+                            <li>· The item you requested is no longer available.</li>
+                            <li>· The requested quantity exceeded the allowed amount.</li>
+                        </ul>
+                    </div>
+                    @if (Session["User"] == null)
+                    {
+                        <h3>Billing Details</h3>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="form-label">Full Name*</label>
+                                <input class="form-control" name="FullName" minlength="6" type="text" required>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Email Address*</label>
+                                        <input class="form-control" name="Email" type="email" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Phone *</label>
+                                        <input type="text" class="form-control" maxlength="14" minlength="14" name="Phone" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Address*</label>
+                                <input class="form-control" name="Address" minlength="6" type="text" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Order Note</label>
+                                <textarea class="form-control" name="OrderNote" rows="3"></textarea>
+                            </div>
+                        </fieldset>
+                    }
+                </div>
+            </div>
+
+
+            @{
+
+                decimal TotalSum = 0;
+                decimal ProductSum = 0;
+                foreach (var item in Model)
+                {
+                    TotalSum = (item.Count * item.Price);
+
+                    ProductSum += TotalSum;
+                }
+            }
+
+
+            <div class="col-lg-12">
+                <div id="order_review" class="woocommerce-checkout-review-order woocommerce single-post-wrapper pt-5 ">
+                    <table class="shop_table woocommerce-checkout-review-order-table">
+                        <thead>
+                            <tr>
+                                <th class="product-name">Product</th>
+                                <th class="product-total">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <input type="hidden" name="ProductId" value="@item.Id" />
+                                <input type="hidden" name="ProductCount" value="@item.Count" />
+                                <tr class="cart_item">
+                                    <td class="product-name">
+                                        @item.Name&nbsp;<strong class="product-quantity">×&nbsp;@item.Count</strong>
+                                    </td>
+                                    <td class="product-total">
+                                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>@item.Price.ToString("0.00")</span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="cart-subtotal">
+                                <th>Subtotal</th>
+                                <td><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>@ProductSum.ToString("0.00")</span></td>
+                            </tr>
+                            <tr class="order-total">
+                                <th>Total</th>
+                                <td><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>@ProductSum.ToString("0.00")</span></strong> </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    @if (Session["User"] != null)
+                    {
+                        g_auto.Models.User xdb = (g_auto.Models.User)Session["User"];
+
+                        <div class="form-group">
+                            <label class="form-label">Address*</label>
+                            <input class="form-control" name="Address" minlength="6" type="text" value="@(ViewBag.User!=null?ViewBag.User.Address:"")" required>
+                        </div>
+                    }
+                    <div class="action-btn">
+                        <button type="submit" class="gauto-btn submit-btn" id="place_order" style="color:#e2b71c">Place Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    }
+    else
+    {
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="checkout-left-box">
+                        <h3 class="text-center">Looks like your card is empty.</h3>
+                    </div>
+
+                    <div class="action-btn text-center">
+                        <a href="@Url.Action("Index", "ProductG")" class="gauto-btn submit-btn" style="color:#e2b71c">Add Product</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    }
+</section>

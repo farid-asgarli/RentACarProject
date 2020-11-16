@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+@model g_auto.ViewModels.ButtonSection
+
+<div class="form-group button-group">
+    <div  style="display:flex; justify-content:space-around;">
+        <button type="submit" class="button w-32 mr-2 mb-2 flex items-center justify-center bg-theme-1 text-white action-pr-btn">
+            @if (Model.btntype == "Create")
+            {
+            <i data-feather="plus" class="w-4 h-4 mr-2"></i>
+            }
+            else { 
+            <i data-feather="corner-down-right" class="w-4 h-4 mr-2"></i>
+            }@Model.btntype
+        </button>
+        <a href="@Url.Action("Index", Model.url)" class="button w-32 mr-2 mb-2 flex items-center justify-center bg-theme-6 text-white action-pr-btn">
+            <i data-feather="x" class="w-4 h-4 mr-2"></i> Cancel
+        </a>
+    </div>
+</div>
+
+@*@{
+    Html.RenderPartial("~/Areas/Admin/Views/Partial/_ButtonSection.cshtml", new g_auto.ViewModels.ButtonSection
+    {
+        url = "Tags"
+    });
+}*@

@@ -1,0 +1,244 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    g_auto.DAL.DBContext db = new g_auto.DAL.DBContext();
+}
+
+@model List<g_auto.Models.Blog>
+
+<h1 style="margin:50px 0">Blogs</h1>
+
+<div class="grid grid-cols-12 gap-6 mt-5">
+    <div class="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2">
+        <a href="@Url.Action("Create","Blog")" class="button text-white bg-theme-1 shadow-md mr-2 action-pr-btn">Add New Blog</a>
+        <div class="dropdown relative">
+            <button class="dropdown-toggle button px-2 box text-gray-700 dark:text-gray-300">
+                <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
+            </button>
+            <div class="dropdown-box mt-10 absolute w-40 top-0 left-0 z-20">
+                <div class="dropdown-box__content box dark:bg-dark-1 p-2">
+                    <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md print_page"> <i data-feather="printer" class="w-4 h-4 mr-2"></i> Print </a>
+                </div>
+            </div>
+        </div>
+        <div class="relative ml-2">
+            <button id="checkbutton" class=" button px-2 box text-gray-700 dark:text-gray-300" style="background-color:orangered; color:white;display:none">
+                <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="trash-2"></i> </span>
+                <div class="tooltip w-5 h-5 flex items-center justify-center absolute   -mr-2 -mt-2 tooltipstered" style="right:50%;top:50%" title="Remove selected items?">
+                </div>
+            </button>
+        </div>
+
+        @if (Model.FirstOrDefault() != null)
+        {
+            if (Model.Count() == 1)
+            {
+                <div class="hidden md:block mx-auto text-gray-600">
+                    Showing a Total of 1 entry
+                </div>
+            }
+            else
+            {
+                <div class="hidden md:block mx-auto text-gray-600">
+                    Showing a Total of <span id="total_entries_count"> @Model.Count()</span> entries
+                </div>
+            }
+        }
+        else
+        {
+            <div class="hidden md:block mx-auto text-gray-600">
+                Nothing to show here
+            </div>
+        }
+
+        @using (Html.BeginForm())
+        {
+            <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+                <div class="w-56 relative text-gray-700 dark:text-gray-300">
+                    <input type="text" id="SearchString" name="SearchString" class="input w-56 box pr-10 placeholder-theme-13" placeholder="Search...">
+                    <button style="border:none" class="absolute my-auto inset-y-0 mr-3 right-0" type="submit"><i class="w-4 h-4" data-feather="search"></i></button>
+
+                </div>
+            </div>
+        }
+    </div>
+    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+        <table class="table table-report -mt-2">
+            @if (Model.FirstOrDefault() != null)
+            {
+                <thead>
+                    <tr>
+                        <th><a href="javascript:;" class="button mark-all text-white bg-theme-1 shadow-md -ml-5" style="white-space:nowrap">Mark All</a></th>
+                        <th class="whitespace-no-wrap">IMAGES</th>
+                        <th class="whitespace-no-wrap text-left">@Html.ActionLink("TITLE", "Index", new { sortOrder = ViewBag.NameSortParam })</th>
+                        <th class="text-left whitespace-no-wrap">@Html.ActionLink("ASSIGNED CATEGORY", "Index", new { sortOrder = ViewBag.CatSortParam })</th>
+                        <th class="text-left whitespace-no-wrap">@Html.ActionLink("ASSIGNED TAG", "Index", new { sortOrder = ViewBag.TagSortParam })</th>
+                        <th class="text-center whitespace-no-wrap">ACTIONS</th>
+                        <th class="text-center whitespace-no-wrap">@Html.ActionLink("ACTIVE", "Index", new { sortOrder = ViewBag.IsSortParam })</th>
+                    </tr>
+                </thead>
+            }
+            <tbody>
+                @if (Model.FirstOrDefault() != null)
+                {
+                    foreach (g_auto.Models.Blog item in Model)
+                    {
+                        <tr class="intro-x">
+                            <td class="text-left w-10"><input class="input flex-none border border-gray-500" data-id="@item.Id" data-controller="Blog" name="list-check" type="checkbox" autocomplete="off"></td>
+                            <td class="w-40">
+                                @if (item.BlogCoverImage != "Default2" && item.BlogCoverImage != null)
+                                {
+                                    <div class="flex">
+                                        <div class="w-10 h-10 image-fit zoom-in ">
+                                            <img alt="Midone Tailwind HTML Admin Template" class="rounded-full tooltip" data-toggle="tooltip" src="~/Uploads/@item.BlogCoverImage" title="Uploaded on @item.PostDate.ToString("d MMM yyyy")">
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span>N/A</span>
+                                }
+                            </td>
+                            <td class="text-left">
+                                <a href="javascript:;" class="font-medium whitespace-no-wrap blogmodal" data-id="@item.Id">@(item.Title.Length > 50 ? item.Title.Substring(0, 50) + "..." : item.Title)</a>
+                            </td>
+
+                            <td class="text-left">
+                                @if (item.BlogToCategory.FirstOrDefault() != null)
+                                {
+                                    foreach (var item2 in item.BlogToCategory)
+                                    {
+                                        <span>@item2.BlogCategory.Name</span>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <span> N/A</span>
+                                }
+                            </td>
+                            <td class="text-left">
+                                @if (item.BlogToTags.FirstOrDefault() != null)
+                                {
+                                    foreach (var item2 in item.BlogToTags)
+                                    {
+                                        <span>@item2.Tag.Name</span>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <span> N/A</span>
+                                }
+                            </td>
+                            <td class="table-report__action w-56">
+                                <div class="flex justify-center items-center">
+                                    <a class="flex items-center mr-3" href="@Url.Action("Update", "Blog", new { id = item.Id })"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                    <a class="flex items-center text-theme-6 del-blog" href="javascript:;" data-id="@item.Id">
+                                        <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="table-report__action w-56">
+                                <div class="flex justify-center items-center">
+                                    <input class="input input--switch border input-activate-Blog" data-id="@item.Id" type="checkbox" @(item.isActive == false ? "" : "checked") value="1">
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal" id="delete-confirmation-modal">
+    <div class="modal__content">
+        <div class="p-5 text-center">
+            <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+            <div class="text-3xl mt-5">Are you sure?</div>
+            <div class="text-gray-600 mt-2">Do you really want to delete these records? This process cannot be undone.</div>
+        </div>
+        <div class="px-5 pb-8 text-center">
+            <button type="button" id="cancel-delete" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Cancel</button>
+            <button type="button" id="confirm-delete-blog" data-id="" class="button w-24 bg-theme-6 text-white">Delete</button>
+        </div>
+    </div>
+</div>
+<div class="modal" id="details-blogmodal">
+    <div class="modal__content modal__content--xl">
+        <div class="p-5">
+            <div class="grid grid-cols-12 gap-5 mt-5" id="modal_container">
+                <div class="col-span-12 sm:col-span-12 xxl:col-span-12  p-5 ">
+                    <h2>Properties</h2>
+                </div>
+                <div class="col-span-12 sm:col-span-3 xxl:col-span-3 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Id</div>
+                    <div class="text-theme-25 tag_modal_id"></div>
+                </div>
+                <div class="col-span-12 sm:col-span-3 xxl:col-span-3 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Total Views</div>
+                    <div class="text-theme-25 tag_modal_totalviews"></div>
+                </div>
+                <div class="col-span-12 sm:col-span-6 xxl:col-span-6 box bg-theme-1 p-5 ">
+                    <div class="font-medium text-base text-white">Image Title</div>
+                    <div class="text-theme-25 tag_modal_name"></div>
+                </div>
+                <div class="col-span-12 sm:col-span-12 xxl:col-span-12 box p-5 ">
+                    <div class="font-medium text-base">Post Properties</div>
+                    <div class="text-gray-600 tag_modal_post"></div>
+                </div>
+                <div class="col-span-12 sm:col-span-12 xxl:col-span-12 box p-5 ">
+                    <div class="font-medium text-base ">Edit Properties</div>
+                    <div class="text-gray-600 tag_modal_modify"></div>
+                </div>
+                <div class="col-span-12 sm:col-span-12 xxl:col-span-12 box p-5">
+                    <div class="accordion">
+                        <div class="accordion__pane py-4">
+                            <a href="javascript:;" class="accordion__pane__toggle font-medium block">Content (Tap to display)</a>
+                            <div class="accordion__pane__content mt-3 text-gray-700 leading-relaxed tag_modal_content"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 sm:col-span-12 xxl:col-span-12 box p-5">
+                    <div class="accordion">
+                        <div class="accordion__pane py-4">
+                            <a href="javascript:;" class="accordion__pane__toggle font-medium block">Description (Tap to display)</a>
+                            <div class="accordion__pane__content mt-3 text-gray-700 leading-relaxed tag_modal_desc"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 sm:col-span-12 xxl:col-span-12 box p-5">
+                    <div class="flex-none pos-image relative block">
+                        <div class="pos-image__preview">
+                            <img alt="Midone Tailwind HTML Admin Template" class="tag_modal_img img-fluid" src="~/Uploads/200820201937574098mercedes1.jpg">
+                        </div>
+                    </div>
+                    <div class="block font-medium text-center truncate mt-3">Cover Image</div>
+
+                </div>
+
+            </div>
+            <div class="px-5 pb-8 justify-between flex mt-5">
+                <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Dismiss</button>
+                <a href="/Admin/Tags/Update/" data-dismiss="modal" class="button w-24 border text-white-700 mr-1 bg-theme-1 text-white tag_modal_link">Update</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="delete-all-modal">
+    <div class="modal__content">
+        <div class="p-5 text-center">
+            <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+            <div class="text-3xl mt-5">Are you sure?</div>
+            <div class="text-gray-600 mt-2">Do you really want to delete these (<span id="total_delete_count"></span>) records? This process cannot be undone.</div>
+        </div>
+        <div class="px-5 pb-8 text-center">
+            <button type="button" id="cancel-delete" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Cancel</button>
+            <button type="button" id="confirm-delete-all" class="button w-24 bg-theme-6 text-white">Delete</button>
+        </div>
+    </div>
+</div>

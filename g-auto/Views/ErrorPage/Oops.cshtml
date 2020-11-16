@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Oops! Error Encountered";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "404 Page",
+        HREF = Url.Action("Index")
+    });
+
+
+}
+
+<section class="gauto-notfound-area section_70">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="notfound-box">
+                    <h1 style="font-size:150px"> @Response.StatusCode</h1>
+                    <h3>@Response.StatusDescription</h3>
+                    <p>The page you are looking for might have been removed had its name changed or temporarily unavailable.</p>
+                    <div class="text-center" style="display:flex; justify-content:center">
+                        <a href="@Url.Action("Index","Main")" class="gauto-theme-btn mt-5" style="width:200px">back to home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

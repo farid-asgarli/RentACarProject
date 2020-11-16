@@ -1,0 +1,41 @@
+﻿@model g_auto.VM.Home
+
+
+
+@if (Model.Layout != null && Model.Experts.FirstOrDefault() != null)
+{
+
+    if (Model.Layout.expertToggle != false)
+    {
+
+        <section class="section-team" >
+            <div class="container"data-aos="fade-up">
+                <div class="text-center">
+                    <div class="ui-title-logo">OUR EXPERTS</div>
+                    <h2 class="ui-title">Specialist Team Members</h2>
+                    <div class="b-goods-slider ui-slider ui-slider_dots-gray ui-slider_arr_btm-center ui-slider_arr_gray js-slider" data-slick="{&quot;slidesToShow&quot;: 3, &quot;slidesToScroll&quot;: 2, &quot;autoplay&quot;: false, &quot;dots&quot;: true, &quot;arrows&quot;: true, &quot;responsive&quot;: [{&quot;breakpoint&quot;: 992, &quot;settings&quot;: {&quot;slidesToShow&quot;: 2, &quot;slidesToScroll&quot;: 2}}, {&quot;breakpoint&quot;: 768, &quot;settings&quot;: {&quot;slidesToShow&quot;: 1, &quot;slidesToScroll&quot;: 1}}]}">
+                        @foreach (g_auto.Models.Expert item in Model.Experts.Where(c=>c.isActive).Take(Model.Layout.expertCount.Value))
+                        {<section class="b-team">
+                                <div class="b-team__inner">
+                                    <div class="b-team__media" style="background-image:url(/Uploads/@item.ProfilePicture)" ></div>
+                                    <h3 class="b-team__name">@item.FullName</h3>
+                                    <div class="b-team__category">@item.ExperienceYear Years of Experience</div>
+                                    <ul class="b-team-soc list-unstyled">
+                                        <li class="b-team-soc__item"><a class="b-team-soc__link" href="#" target="_blank"><i class="ic fab fa-twitter"></i></a></li>
+                                        <li class="b-team-soc__item"><a class="b-team-soc__link" href="#" target="_blank"><i class="ic fab fa-behance"></i></a></li>
+                                        <li class="b-team-soc__item"><a class="b-team-soc__link" href="#" target="_blank"><i class="ic fab fa-facebook"></i></a></li>
+                                        <li class="b-team-soc__item"><a class="b-team-soc__link" href="#" target="_blank"><i class="ic fab fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                            </section>}
+
+                        <!-- end .b-team-->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    }
+
+}
+

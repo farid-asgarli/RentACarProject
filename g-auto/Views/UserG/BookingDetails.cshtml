@@ -1,0 +1,235 @@
+﻿
+@{
+    ViewBag.Title = "BookingDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model g_auto.Models.Reservation
+
+@if (Model != null)
+{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "Booking Details",
+        HREF = Url.Action("Index", "UserG")
+    });
+
+
+    <section class="gauto-order-details">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="b-booking-main__section container">
+                        <h2 class="b-booking-main__title">Reservation Details</h2>
+                        <div class="row">
+                            <div class="col-4">
+                                <span class="b-booking-price__inner">
+                                    <span class="b-booking-price__title">@Model.Model.Name</span><br />
+                                </span>
+                                <p style=" color: #22ABC3; font-weight: 700;">@Model.Model.Brand.Name<span class="ml-2 logo-container"><img src="~/Uploads/@Model.Model.Brand.Logo" alt="Alternate Text" /></span></p>
+                            </div>
+                            <div class="col-8">
+                                <div class="b-booking-price__price text-primary text-right">
+                                    <span class="b-booking-price__price-up">$@Model.Price.ToString("0.00")</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="b-booking__image">
+                                    <img src="~/Uploads/@Model.Model.ModelImages.FirstOrDefault().Name" alt="Alternate Text" style="width:100%" />
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="order-details">
+
+                                    <dl class="row">
+                                        <dt class="col-7 text-right">
+                                            Reservation №:
+                                        </dt>
+                                        <dd class="col-5 text-right">
+                                            GA@(Model.Id)
+                                        </dd>
+
+                                        <dt class="col-7 text-right">
+                                            Status:
+                                        </dt>
+                                        <dd class="col-5 text-right">
+                                            @if (Model.isPending)
+                                            {
+                                                <span>Pending</span>
+                                            }
+                                            else if (Model.isActive)
+                                            {
+                                                <span>Processing</span>
+                                            }
+                                            else if (Model.isFinished)
+                                            {
+                                                <span>Delivered</span>
+                                            }
+                                            else if (Model.isCancelled)
+                                            {
+                                                <span>Cancelled</span>
+
+                                            }
+
+                                        </dd>
+                                        <dt class="col-7 text-right">
+                                            Collection Date:
+                                        </dt>
+                                        <dd class="col-5 text-right">
+                                            @Model.EndDate.ToString("MMM d, yyyy")
+                                        </dd>
+                                        <dt class="col-7 text-right">
+                                            Reservation Date:
+                                        </dt>
+                                        <dd class="col-5 text-right">
+                                            @Model.StartDate.ToString("MMM d, yyyy")
+                                        </dd>
+                                        <dt class="col-7 text-right">
+                                            Model's Price:
+                                        </dt>
+                                        <dd class="col-5 text-right">
+                                            $@Model.Model.PriceDaily.ToString("0.00")
+                                        </dd>
+                                        <dt class="col-7 text-right">
+                                           Number of Days Reserved:
+                                        </dt>
+                                        <dd class="col-5 text-right">
+                                            @((Model.EndDate-Model.StartDate).TotalDays)
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="button-container">
+                                    <a href="" class="gauto-btn">Request Refund</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="b-booking-main__section pb-1">
+                        <div class="container">
+                            <h2 class="b-booking-main__title">Included Services</h2>
+                            <div class="row">
+                                @if (Model.ReservationToFeatures.FirstOrDefault() != null)
+                                {
+                                    foreach (g_auto.Models.ReservationToFeatures item in Model.ReservationToFeatures)
+                                    {
+                                        <div class="col-md-6">
+                                            <div class="b-booking-total">
+                                                <div class="b-booking-total__main">
+                                                    <div class="b-booking-total__title">@item.FeatureSet.Title</div>
+                                                    <div class="b-booking-total__info">@item.FeatureSet.Content</div>
+                                                </div>
+                                                <div class="ic">
+                                                    <span>$@item.FeatureSet.Price.ToString("0.00")</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="b-booking-main__section pb-1">
+                        <div class="container">
+                            <h2 class="b-booking-main__title">Tracking</h2>
+                            <p><b>Booking Date: </b>@Model.PostDate.ToString("MMM d HH:mm")</p>
+                            <p><b>Pickup Date: </b>@Model.StartDate.ToString("MMM d HH:mm")</p>
+                            <p><b>Return Date: </b>@Model.EndDate.ToString("MMM d HH:mm")</p>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="b-steps">
+                                        <div class="b-steps__item">
+                                            <button class="b-steps__btn tracking-active" type="button"><i class="fas fa-box-open"></i></button><span class="b-steps__info">Reserved</span>
+                                        </div>
+                                        <div class="b-steps__item">
+                                            <button class="b-steps__btn @(Model.isActive||Model.isFinished?"tracking-active":"tracking-inactive")" type="button"><i class="fas fa-tasks"></i></button><span class="b-steps__info">Processing</span>
+                                        </div>
+                                        <div class="b-steps__item">
+                                            <button class="b-steps__btn @(Model.isFinished?"tracking-active":"tracking-inactive")" type="button"><i class="fas fa-check"></i></button><span class="b-steps__info">Delivered</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    @if (Model.isFinished)
+                    {
+                        if (Model.User.Reviews.FirstOrDefault() == null || Model.User.Reviews.FirstOrDefault().ModelId != Model.ModelId)
+                        {
+                            <div class="b-booking-main__section pb-1">
+                                <div class="container">
+                                    <div class="woocommerce-notices-wrapper" id="notifyProfileUpdate">
+                                        <ul class="woocommerce-error" role="alert">
+                                            <li> Thank you for your feedback!</li>
+                                        </ul>
+                                    </div>
+                                    <div class="woocommerce-notices-wrapper" id="notifyProfileError">
+                                        <ul class="woocommerce-error" role="alert">
+                                            <li>Sorry, looks like you have already submitted your review.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <form enctype="multipart/form-data" method="post" id="bookingReviewPost">
+
+                                    <input type="hidden" name="ModelId" value="@Model.ModelId" />
+                                    <input type="hidden" name="UserId" value="@Model.UserId" />
+                                    <input type="hidden" name="ReservationId" value="@Model.Id" />
+
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <h2 class="b-booking-main__title">Post A Review</h2>
+                                                <div id="review_form_wrapper">
+                                                    <label for="rating"><b>Your rating:</b></label>
+                                                    <div class="comment-form-rating">
+                                                        <fieldset class="rating">
+                                                            <input type="radio" required id="star5" name="Rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars"></label>
+                                                            <input type="radio" required id="star4" name="Rating" value="4" /><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                                            <input type="radio" required id="star3" name="Rating" value="3" /><label class="full" for="star3" title="Meh - 3 stars"></label>
+                                                            <input type="radio" required id="star2" name="Rating" value="2" /><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                                            <input type="radio" required id="star1" name="Rating" value="1" /><label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label id="rating_error" style="display:none;color: #e2b71c;" class=" ml-3" for="Content">Your rating is required.</label>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group mt-3">
+                                                    <label class="form-label"><b>Content:</b></label>
+                                                    <textarea class="form-control" name="Content" rows="7" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="button-container">
+                                                    <p>* Your Email is not going to be shared. Only name will be publicly visible.</p>
+                                                    <button type="submit" id="postBookingReview" class="gauto-btn">Post Your Review</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+}
+

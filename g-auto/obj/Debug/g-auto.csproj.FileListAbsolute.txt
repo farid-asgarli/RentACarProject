@@ -1,0 +1,248 @@
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\g-auto.dll.config
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\g-auto.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\g-auto.pdb
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\csc.exe
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\csc.exe.config
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\csc.rsp
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\csi.exe
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\csi.exe.config
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\csi.rsp
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.Managed.Core.targets
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Buffers.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Collections.Immutable.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Memory.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Numerics.Vectors.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Reflection.Metadata.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\vbc.exe
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\vbc.exe.config
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\vbc.rsp
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\VBCSCompiler.exe
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\VBCSCompiler.exe.config
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g-auto.csproj.CoreCompileInputs.cache
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g-auto.csproj.CopyComplete
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g-auto.dll
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g-auto.pdb
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g_auto.Migrations.MIG.resources
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g-auto.csproj.GenerateResource.cache
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g-auto.csprojAssemblyReference.cache
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g_auto.Migrations.MIG1.resources
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g_auto.Migrations.MIG2.resources
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g_auto.Migrations.MIG3.resources
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g_auto.Migrations.MIG4.resources
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g_auto.Migrations.MIG5.resources
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g_auto.Migrations.MIG6.resources
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g_auto.Migrations.MIG7.resources
+D:\Backup\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g_auto.Migrations.MIG8.resources
+C:\Cyber\Code\projects\g-auto\g-auto\bin\g-auto.dll.config
+C:\Cyber\Code\projects\g-auto\g-auto\bin\g-auto.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\g-auto.pdb
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\csc.exe
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\csc.exe.config
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\csc.rsp
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\csi.exe
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\csi.exe.config
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\csi.rsp
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Buffers.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Collections.Immutable.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Memory.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Numerics.Vectors.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Reflection.Metadata.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\vbc.exe
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\vbc.exe.config
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\vbc.rsp
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\VBCSCompiler.exe
+C:\Cyber\Code\projects\g-auto\g-auto\bin\roslyn\VBCSCompiler.exe.config
+C:\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g-auto.csprojAssemblyReference.cache
+C:\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g-auto.csproj.CoreCompileInputs.cache
+C:\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g-auto.csproj.CopyComplete
+C:\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g-auto.dll
+C:\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g-auto.pdb
+C:\Cyber\Code\projects\g-auto\g-auto\bin\RazorEngine.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\RazorEngine.xml
+C:\Cyber\Code\projects\g-auto\g-auto\bin\ClosedXML.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\DocumentFormat.OpenXml.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\ExcelNumberFormat.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\System.IO.Packaging.dll
+C:\Cyber\Code\projects\g-auto\g-auto\bin\ClosedXML.pdb
+C:\Cyber\Code\projects\g-auto\g-auto\bin\ClosedXML.xml
+C:\Cyber\Code\projects\g-auto\g-auto\bin\DocumentFormat.OpenXml.xml
+C:\Cyber\Code\projects\g-auto\g-auto\bin\ExcelNumberFormat.xml
+C:\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g_auto.Migrations.MIG1.resources
+C:\Cyber\Code\projects\g-auto\g-auto\obj\Debug\g-auto.csproj.GenerateResource.cache
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\g-auto.dll.config
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\g-auto.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\g-auto.pdb
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\csc.exe
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\csc.exe.config
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\csc.rsp
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\csi.exe
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\csi.exe.config
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\csi.rsp
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\System.Buffers.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\System.Memory.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\System.Numerics.Vectors.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\vbc.exe
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\vbc.exe.config
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\vbc.rsp
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\VBCSCompiler.exe
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\ClosedXML.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\DocumentFormat.OpenXml.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\ExcelNumberFormat.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\RazorEngine.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\System.IO.Packaging.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\ClosedXML.pdb
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\ClosedXML.xml
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\DocumentFormat.OpenXml.xml
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\ExcelNumberFormat.xml
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\bin\RazorEngine.xml
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\obj\Debug\g-auto.csprojAssemblyReference.cache
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\obj\Debug\g_auto.Migrations.MIG1.resources
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\obj\Debug\g-auto.csproj.GenerateResource.cache
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\obj\Debug\g-auto.csproj.CoreCompileInputs.cache
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\obj\Debug\g-auto.csproj.CopyComplete
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\obj\Debug\g-auto.dll
+C:\Users\CyberNA\Desktop\gauto Main\g-auto\obj\Debug\g-auto.pdb
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\g-auto.dll.config
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\g-auto.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\g-auto.pdb
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\csc.exe
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\csc.exe.config
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\csc.rsp
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\csi.exe
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\csi.exe.config
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\csi.rsp
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\System.Buffers.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\System.Memory.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\System.Numerics.Vectors.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\vbc.exe
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\vbc.exe.config
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\vbc.rsp
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\VBCSCompiler.exe
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\ClosedXML.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\DocumentFormat.OpenXml.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\ExcelNumberFormat.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\RazorEngine.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\System.IO.Packaging.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\ClosedXML.pdb
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\ClosedXML.xml
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\DocumentFormat.OpenXml.xml
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\ExcelNumberFormat.xml
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\bin\RazorEngine.xml
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\obj\Debug\g-auto.csprojAssemblyReference.cache
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\obj\Debug\g_auto.Migrations.MIG1.resources
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\obj\Debug\g-auto.csproj.GenerateResource.cache
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\obj\Debug\g-auto.csproj.CoreCompileInputs.cache
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\obj\Debug\g-auto.csproj.CopyComplete
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\obj\Debug\g-auto.dll
+C:\Users\CyberNA\Desktop\gauto Final\g-auto\obj\Debug\g-auto.pdb
+D:\Others\gauto Final\g-auto\bin\g-auto.dll.config
+D:\Others\gauto Final\g-auto\bin\g-auto.dll
+D:\Others\gauto Final\g-auto\bin\g-auto.pdb
+D:\Others\gauto Final\g-auto\bin\roslyn\csc.exe
+D:\Others\gauto Final\g-auto\bin\roslyn\csc.exe.config
+D:\Others\gauto Final\g-auto\bin\roslyn\csc.rsp
+D:\Others\gauto Final\g-auto\bin\roslyn\csi.exe
+D:\Others\gauto Final\g-auto\bin\roslyn\csi.exe.config
+D:\Others\gauto Final\g-auto\bin\roslyn\csi.rsp
+D:\Others\gauto Final\g-auto\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Others\gauto Final\g-auto\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\Microsoft.Managed.Core.targets
+D:\Others\gauto Final\g-auto\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Others\gauto Final\g-auto\bin\roslyn\System.Buffers.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\System.Collections.Immutable.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\System.Memory.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\System.Numerics.Vectors.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\System.Reflection.Metadata.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\Others\gauto Final\g-auto\bin\roslyn\vbc.exe
+D:\Others\gauto Final\g-auto\bin\roslyn\vbc.exe.config
+D:\Others\gauto Final\g-auto\bin\roslyn\vbc.rsp
+D:\Others\gauto Final\g-auto\bin\roslyn\VBCSCompiler.exe
+D:\Others\gauto Final\g-auto\bin\roslyn\VBCSCompiler.exe.config
+D:\Others\gauto Final\g-auto\bin\ClosedXML.dll
+D:\Others\gauto Final\g-auto\bin\DocumentFormat.OpenXml.dll
+D:\Others\gauto Final\g-auto\bin\ExcelNumberFormat.dll
+D:\Others\gauto Final\g-auto\bin\RazorEngine.dll
+D:\Others\gauto Final\g-auto\bin\System.IO.Packaging.dll
+D:\Others\gauto Final\g-auto\bin\ClosedXML.pdb
+D:\Others\gauto Final\g-auto\bin\ClosedXML.xml
+D:\Others\gauto Final\g-auto\bin\DocumentFormat.OpenXml.xml
+D:\Others\gauto Final\g-auto\bin\ExcelNumberFormat.xml
+D:\Others\gauto Final\g-auto\bin\RazorEngine.xml
+D:\Others\gauto Final\g-auto\obj\Debug\g-auto.csprojAssemblyReference.cache
+D:\Others\gauto Final\g-auto\obj\Debug\g_auto.Migrations.MIG1.resources
+D:\Others\gauto Final\g-auto\obj\Debug\g-auto.csproj.GenerateResource.cache
+D:\Others\gauto Final\g-auto\obj\Debug\g-auto.csproj.CoreCompileInputs.cache
+D:\Others\gauto Final\g-auto\obj\Debug\g-auto.csproj.CopyComplete
+D:\Others\gauto Final\g-auto\obj\Debug\g-auto.dll
+D:\Others\gauto Final\g-auto\obj\Debug\g-auto.pdb

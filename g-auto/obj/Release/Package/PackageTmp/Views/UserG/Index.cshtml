@@ -1,0 +1,491 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model g_auto.Models.User
+
+
+
+@if (Model != null && Model.isBlocked == false)
+{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "My Profile",
+        HREF = Url.Action("Index", "UserG")
+    });
+
+
+    <section class="gauto-user-area" style=" background: url(/Assets/img/bg-2.png) 50% 21% no-repeat;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="fl-vc-custom-title-container fl-animated-item-velocity text-center custom-title animation-complete">
+                        <div class="custom-title-content-wrapper">
+                            <div class="fl-title-vc vc-custom-title font-text fl-font-style-bolt fl-custom-title-5f33b48a1de90-5128">
+                                Manage Your
+                                <span class="fl-change">Account</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 account-management">
+                    <div class="car-list-left">
+                        <ul class="">
+                            <li class="active">
+                                <a class="item-selection cursor-pointer mt-2 ml-1 mr-1" id="u_account_sidebtn" href="javascript:;">
+                                    <i class="fas fa-user-cog mr-3"></i> Account
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="item-selection cursor-pointer mt-2 ml-1 mr-1" id="u_orders_sidebtn" href="javascript:;">
+                                    <i class="fas fa-shopping-bag mr-3"></i>  Orders
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="item-selection cursor-pointer mt-2 ml-1 mr-1" id="u_res_sidebtn" href="javascript:;">
+                                    <i class="fas fa-warehouse mr-3"></i>  Reservations
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="item-selection cursor-pointer mt-2 ml-1 mr-1" id="u_app_sidebtn" href="javascript:;">
+                                    <i class="fas fa-calendar-check mr-3"></i>  Appointments
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="item-selection cursor-pointer mt-2 ml-1 mr-1" id="u_testify_sidebtn" href="javascript:;">
+                                    <i class="fas fa-comment-alt mr-3"></i>Rate Us
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="item-selection cursor-pointer mt-2 ml-1 mr-1" id="u_logout_sidebtn" href="@Url.Action("Logout","Main")">
+                                    <i class="fas fa-sign-out-alt mr-3"></i>  Logout
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-8">
+
+                    <section id="u-profile" style="display:block">
+                        <h2 style="color:#e2b71c">Basic Info</h2>
+                        <form method="post" enctype="multipart/form-data" id="userUpdateForm" onsubmit="return false">
+                            <input type="hidden" name="Id" value="@Model.Id" />
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="center-object">
+                                        <div class="form-group ">
+                                            <label class="form-label"><b>Your Avatar</b></label><br />
+                                            <label class="form-label">Supported formats : jpeg, png, gif </label><br />
+                                            <label class="form-label">Maximum upload size : 2 MB </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <input type='file' id="imageUpload" name="ProfilePictureFile" accept="image/*" />
+                                                <label for="imageUpload"></label>
+                                            </div>
+                                            <div class="avatar-preview">
+                                                @if (Model.ProfilePicture == "Default")
+                                                {
+
+
+                                                    <div id="imagePreview" style="background-image: url(/Assets/img/user-avatar-default.png)">
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div id="imagePreview" style="background-image: url(/Uploads/@Model.ProfilePicture);">
+                                                    </div>
+
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="woocommerce-notices-wrapper" id="notifyImageSizeError">
+                                        <ul class="woocommerce-error woocommerce-custom-error" role="alert">
+                                            <li>Image size should not be more than 500kb.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="woocommerce-notices-wrapper" id="notifyImageTypeError">
+                                        <ul class="woocommerce-error woocommerce-custom-error" role="alert">
+                                            <li>Only image can be uploaded as a profile photo.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Full Name*</label>
+                                <input class="form-control" name="FullName" minlength="6" maxlength="150" type="text" value="@Model.FullName" required>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Email Address*</label>
+                                        <input class="form-control" name="Email" type="email" required value="@Model.Email">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Phone *</label>
+                                        <input type="text" class="form-control" maxlength="14" minlength="14" name="Phone" required value="@Model.Phone" />
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Address*</label>
+                                <input class="form-control" name="Address" type="text" required value="@Model.Address">
+                            </div>
+
+
+
+                            <div class="woocommerce-notices-wrapper" id="notifyUserProfileUpdate">
+                                <ul class="woocommerce-error" role="alert">
+                                    <li> Succesfully Updated!</li>
+                                </ul>
+                            </div>
+                            <div class="woocommerce-notices-wrapper" id="notifyUserProfileError">
+                                <ul class="woocommerce-error woocommerce-custom-error" role="alert">
+                                    <li>Your session has expired. Redirecting to Login...</li>
+                                </ul>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" id="userUpdateButton" class="gauto-btn mt-5">Update Credentials</button>
+                            </div>
+                        </form>
+                        <h2 class="mb-3 mt-3" style="color:#e2b71c">Update Your Password</h2>
+                        <form method="post" class="mt-5" enctype="multipart/form-data" id="userPasswordForm" onsubmit="return false">
+                            <input type="hidden" name="Id" value="@Model.Id" />
+                            <div class="form-group">
+                                <label class="form-label">Your Current Password</label>
+                                <input class="form-control" name="Cur_Password" type="password" required value="">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">New Password</label>
+                                <input id="confirm_pass" class="form-control" name="Password" type="password" required value="">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Confirm Your New Password</label>
+                                <input class="form-control" name="Con_Password" type="password" required value="">
+                            </div>
+                            <div class="woocommerce-notices-wrapper" id="notifyPasswordUpdate">
+                                <ul class="woocommerce-error" role="alert">
+                                    <li> Succesfully Updated!</li>
+                                </ul>
+                            </div>
+                            <div class="woocommerce-notices-wrapper" id="notifySessionError">
+                                <ul class="woocommerce-error woocommerce-custom-error" role="alert">
+                                    <li>Your session has expired. Redirecting to Login...</li>
+                                </ul>
+                            </div>
+                            <div class="woocommerce-notices-wrapper" id="notifyPasswordError">
+                                <ul class="woocommerce-error woocommerce-custom-error" role="alert">
+                                    <li>Password is wrong.</li>
+                                </ul>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" id="update-pass-btn" class="gauto-btn mt-5">Update Password</button>
+                            </div>
+                        </form>
+                    </section>
+                    <section id="u-products" style="display:none">
+                        <div class="b-booking-main__section">
+
+
+                            @if (Model.Sales.FirstOrDefault() != null)
+                            {
+                                foreach (g_auto.Models.Sale item in Model.Sales.OrderByDescending(c => c.PostDate))
+                                {
+                                    <div class="col-md-12 mb-5">
+                                        <div class="product-container">
+                                            <div class="product-item">
+
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <div class="product-image">
+                                                            <a target="_blank" href="@Url.Action("OrderDetails","UserG",new {id=item.Id })">
+                                                                <div class="pr-image" style="background:url(/Uploads/@item.Product.ProductImages.FirstOrDefault().Name)"></div>
+                                                            </a>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <div class="product-text">
+                                                            <div class="product-title">
+                                                                <h3><a target="_blank" href="@Url.Action("OrderDetails","UserG",new {id=item.Id })">@(item.Product.Name.Length>25?item.Product.Name.Substring(0,25)+"...":item.Product.Name)</a></h3>
+                                                                @if (item.Product.ProductToCategory.FirstOrDefault() != null)
+                                                                {
+                                                                    <p>@item.Product.ProductToCategory.FirstOrDefault().ProductCategory.Name</p>
+                                                                }
+
+                                                                <div class="details_span">
+                                                                    <span class="d-block">
+                                                                        <b> Status:</b>
+                                                                        @if (item.isCancelled)
+                                                                        {
+                                                                            <span>Cancelled</span>
+                                                                        }
+                                                                        else if (item.isActive)
+                                                                        {
+                                                                            <span>Active</span>
+                                                                        }
+                                                                        else if (item.isFinished)
+                                                                        {
+                                                                            <span>Delivered</span>
+                                                                        }
+                                                                        else if (item.isPending)
+                                                                        {
+                                                                            <span>Pending</span>
+                                                                        }
+                                                                    </span>
+                                                                    <span class="d-block"><b>Amount:</b> @item.Amount.ToString("0")</span>
+                                                                    <span class="d-block"><b>Date Ordered:</b> @item.PostDate.ToString("MMM d, yyyy")</span>
+                                                                    <span class="d-block"><b>Order №:</b> GA@(item.Id)</span>
+                                                                </div>
+
+                                                                <p class="custom-price">$@item.Price.ToString("0.00")</p>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <a target="_blank" href="@Url.Action("OrderDetails","UserG",new {id=item.Id })">View Item</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h3 class="text-center mt-5">
+                                            No Orders
+                                        </h3>
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                    </section>
+                    <section id="u-reservations" style="display:none">
+                        <div class="b-booking-main__section">
+                            @if (Model.Reservations.FirstOrDefault() != null)
+                            {
+                                foreach (g_auto.Models.Reservation item in Model.Reservations)
+                                {
+                                    <div class="col-md-12 mb-5">
+                                        <div class="product-container">
+                                            <div class="product-item">
+
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <div class="product-image">
+                                                            <a target="_blank" href="@Url.Action("BookingDetails","UserG",new {id=item.Id })">
+                                                                <div class="pr-image" style="background:url(/Uploads/@item.Model.ModelImages.FirstOrDefault().Name)"></div>
+                                                            </a>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <div class="product-text">
+                                                            <div class="product-title">
+                                                                <h3 class="mb-3"><a target="_blank" href="@Url.Action("BookingDetails","UserG",new {id=item.Id })">@(item.Model.Name.Length>25?item.Model.Name.Substring(0,25)+"...":item.Model.Name)</a></h3>
+                                                                <p>@item.Model.Brand.Name<span class="ml-2 logo-container"><img src="~/Uploads/@item.Model.Brand.Logo" alt="Alternate Text" /></span></p>
+                                                                <div class="details_span">
+                                                                    <span class="d-block">
+                                                                        <b> Status:</b>
+                                                                        @if (item.isCancelled)
+                                                                        {
+                                                                            <span>Cancelled</span>
+                                                                        }
+                                                                        else if (item.isActive)
+                                                                        {
+                                                                            <span>Active</span>
+                                                                        }
+                                                                        else if (item.isFinished)
+                                                                        {
+                                                                            <span>Delivered</span>
+                                                                        }
+                                                                        else if (item.isPending)
+                                                                        {
+                                                                            <span>Pending</span>
+                                                                        }
+                                                                    </span>
+                                                                    <span class="d-block"><b>Collection Date:</b> @item.StartDate.ToString("MMM d, yyyy")</span>
+                                                                    <span class="d-block"><b>Date Ordered:</b> @item.PostDate.ToString("MMM d, yyyy")</span>
+                                                                    <span class="d-block"><b>Order №:</b> GA@(item.Id)</span>
+                                                                </div>
+
+                                                                <p class="custom-price">$@item.Price.ToString("0.00")</p>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <a target="_blank" href="@Url.Action("BookingDetails","UserG",new {id=item.Id })">View Item</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h3 class="text-center mt-5">
+                                            No Reservations
+                                        </h3>
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                    </section>
+                    <section id="u-appointments" style="display:none">
+                        <div class="b-booking-main__section">
+                            <div class="woocommerce-notices-wrapper" id="notifyAppUpdate">
+                                <ul class="woocommerce-error" role="alert">
+                                    <li> Succesfully Cancelled.</li>
+                                </ul>
+                            </div>
+                            <div class="woocommerce-notices-wrapper" id="notifyAppError">
+                                <ul class="woocommerce-error woocommerce-custom-error" role="alert">
+                                    <li>Sorry, looks like you have an ongoing appointment. Contact us for further inquires.</li>
+                                </ul>
+                            </div>
+                            @if (Model.ReservationServices.FirstOrDefault(c => c.isCancelled == false) != null)
+                            {
+                                foreach (g_auto.Models.ReservationService item in Model.ReservationServices)
+                                {
+                                    <div class="col-md-12 mb-5">
+                                        <div class="product-container">
+                                            <div class="product-item">
+
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <div class="product-image">
+                                                            <a target="_blank" href="@Url.Action("ServiceReservation", "ServiceG", new{id=item.ServiceId })">
+                                                                <div class="pr-image" style="background:url(/Uploads/@item.Service.ServiceImageFirst)"></div>
+                                                            </a>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <div class="product-text">
+                                                            <div class="product-title">
+                                                                <h3 class="mb-5"><a target="_blank" href="@Url.Action("ServiceReservation", "ServiceG", new{id=item.ServiceId })">@(item.Service.Title.Length>25?item.Service.Title.Substring(0,25)+"...":item.Service.Title)</a></h3>
+                                                                <div class="details_span mt-3">
+                                                                    <span class="d-block">
+                                                                        <b> Status:</b>
+                                                                        @if (item.isCancelled)
+                                                                        {
+                                                                            <span>Cancelled</span>
+                                                                        }
+                                                                        else if (item.isActive)
+                                                                        {
+                                                                            <span>Active</span>
+                                                                        }
+                                                                        else if (item.isFinished)
+                                                                        {
+                                                                            <span>Delivered</span>
+                                                                        }
+                                                                        else if (item.isPending)
+                                                                        {
+                                                                            <span>Pending</span>
+                                                                        }
+                                                                    </span>
+                                                                    <span class="d-block"><b>Appointment Date:</b> @item.AppDate.ToString("MMM d, yyyy")</span>
+                                                                    <span class="d-block"><b>Date Placed:</b> @item.PostDate.ToString("MMM d, yyyy")</span>
+                                                                    <span class="d-block"><b>Apppointment №:</b> GA@(item.Id)</span>
+                                                                </div>
+
+                                                                <p class="custom-price">@item.Time.ToString("HH:mm")</p>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <a class="btn-track cancel_app" data-id="@item.Id" href="javascript:;">Cancel Appointment</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h3 class="text-center mt-5">
+                                            No Appointments
+                                        </h3>
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                    </section>
+                    <section id="u-testify" style="display:none">
+
+
+                        <h2 style="color:#e2b71c">We strive to deliver you our best. Please take a moment to rate us!</h2>
+                        <form method="post" enctype="multipart/form-data" id="addTestimonial" onsubmit="return false">
+
+
+                            <label class="form-label mt-5 ">· Please be as brief as possible. Maximum allowed content is 250 characters.</label><br />
+                            <label class="form-label mb-3">· Only three reviews can be posted per user.</label>
+
+                            <textarea class="form-control" maxlength="250" minlength="100" name="Content" rows="5" required style="overflow: hidden; overflow-wrap: break-word; resize: none; "></textarea>
+
+                            <div class="text-right">
+                                <button type="submit" id="addTestButton" class="gauto-btn mt-5">Post your review</button>
+                            </div>
+                        </form>
+                        <div class="woocommerce-notices-wrapper mt-5" id="notifyTestSuccess">
+                            <ul class="woocommerce-error" role="alert">
+                                <li> Thank you for your feedback!</li>
+                            </ul>
+                        </div>
+                        <div class="woocommerce-notices-wrapper mt-5" id="notifyTestSessionError">
+                            <ul class="woocommerce-error woocommerce-custom-error" role="alert">
+                                <li>Your session has expired. Redirecting to Login...</li>
+                            </ul>
+                        </div>
+                        <div class="woocommerce-notices-wrapper mt-5" id="notifyTestError">
+                            <ul class="woocommerce-error woocommerce-custom-error" role="alert">
+                                <li>You have reached the maximum allowed number of reviews. Post is unsuccesful.</li>
+                            </ul>
+                        </div>
+
+                    </section>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+}

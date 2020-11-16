@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "ShoppingCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "Shopping Cart",
+        HREF = Url.Action("Index", "ProductG")
+    });
+}
+
+
+@model List<g_auto.Models.Product>
+
+<section class="gauto-cart-page-area section_70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="cart-table-left">
+                    <h3>Shopping Cart</h3>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Preview</th>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="shop_item_container">
+
+                                @foreach (g_auto.Models.Product item in Model)
+                                {
+                                    <tr class="shop-cart-item">
+                                        <td class="gauto-cart-preview">
+                                            <a href="#">
+                                                <img src="~/Uploads/@item.ProductImages.FirstOrDefault().Name" alt="cart-1">
+                                            </a>
+                                        </td>
+                                        <td class="gauto-cart-product">
+                                            <a href="@Url.Action("Details", "ProductG", new {id=item.Id })">
+                                                <p>@item.Name</p>
+                                            </a>
+                                        </td>
+                                        <td class="gauto-cart-price">
+                                            <p>$@item.Price.ToString("0.00")</p>
+                                        </td>
+                                        <td class="gauto-cart-quantity">
+                                            <input class="cartCountIndex" max="@item.Amount" min="0" type="number" value="@item.Count" data-id="@item.Id" data-price="@item.Price">
+                                        </td>
+                                        <td class="gauto-cart-total">
+                                            <p>$<span class="TotalPrice@(item.Id)">@((item.Count * item.Price).ToString("0.00")) </span></p>
+                                        </td>
+                                        <td class="gauto-cart-close">
+                                            <a href="" class="btn-remove" data-id="@item.Id"><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        @if (Model.Count == 0)
+                        {
+                            <h3 class="text-center d-block">
+                                Wow, Such Empty...
+                            </h3>
+                        }
+                    </div>
+                    @if (Model.Count != 0)
+                    {
+                        <div class="cart-clear">
+                            <a href="javascript:;" id="clearShoppingCart">clear cart</a>
+                            @*<a href="#">update cart</a>*@
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="order-summury-box">
+                    <h3>Order Summary</h3>
+                    @{ decimal total = 0;}
+                    @foreach (var item in Model)
+                    {
+                        total += item.Count * item.Price;
+                    }
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Cart Subtotal</td>
+                                <td>$<span class="AllTotalPrice">@total.ToString("0.00")</span></td>
+                            </tr>
+                            <tr>
+                                <td>Shipping and Handling</td>
+                                <td>Free Shipping</td>
+                            </tr>
+                            <tr>
+                                <td>Order Total</td>
+                                <td>$<span class="AllTotalPrice">@total.ToString("0.00")</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                @if (Model.Count != 0)
+                {
+                    <div class="checkout-action">
+                        <a href="@Url.Action("Checkout","ProductG")" class="gauto-btn">Proceed to checkout</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

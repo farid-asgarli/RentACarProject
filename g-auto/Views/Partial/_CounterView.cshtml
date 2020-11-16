@@ -1,0 +1,66 @@
+﻿
+@model g_auto.VM.CounterVM
+
+
+<div class="section-progress bg-dark-custom">
+    <div class="container-fluid">
+        <div class="section-progress__inner">
+            <div class="section-progress__img"><img class="img-scale" src="~/Assets/img/fig-1.png" alt="photo"></div>
+            <div class="b-progress-list">
+                <div class="row">
+                    <div class="b-progress-list__item col-md-6"><span class="b-progress-list__percent js-chart" data-percent="@Model.VehicleBase"><span class="js-percent"></span></span><span class="b-progress-list__name">Vehicles Stock</span></div>
+                    <div class="b-progress-list__item col-md-6 text-right"><span class="b-progress-list__percent js-chart" data-percent="@Model.ReservationsBase"><span class="js-percent"></span>+</span><span class="b-progress-list__name">Reservations Booked</span></div>
+                    <div class="b-progress-list__item col-md-6"><span class="b-progress-list__percent js-chart" data-percent="@Model.AppBase"><span class="js-percent"></span>+</span><span class="b-progress-list__name">Appointments Served</span></div>
+                    <div class="b-progress-list__item col-md-6 text-right"><span class="b-progress-list__percent js-chart" data-percent="@Model.CustomerBase"><span class="js-percent"></span></span><span class="b-progress-list__name">Total Sales</span></div>
+                </div>
+            </div>
+            <div class="section-progress__img ml-4"><img class="img-scale" src="~/Assets/img/fig-2.png" alt="photo"></div>
+        </div>
+    </div>
+</div>
+<section class="section-default bg-dark-custom">
+    <div class="ui-decor ui-decor_center"></div>
+    <div class="container mb-5">
+        <div class="text-center">
+            <div class="ui-title-logo ui-title-logo_dark">AUTLINES</div>
+            <h2 class="ui-title ui-title_light text-uppercase">Expertise You can Trust</h2>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <p>Dolore magna aliqua enim ad minim veniam, quis nostrud exercitation aliquip duis aute irure dolorin reprehenderits vol dolore fugiat nulla pariatur excepteur sint occaecat cupidatat.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid text-center mb-sm-5">
+        <div class="b-semicircle-wrap text-center">
+            <div class="b-semicircle b-semicircle_mod-a b-semicircle_primary">
+                <div class="b-semicircle__inner"></div>
+            </div>
+            <div class="b-semicircle__number text-primary">85%</div>
+            <div class="b-semicircle__title">Paint Jobs</div>
+        </div>
+        <div class="b-semicircle-wrap text-center">
+            <div class="b-semicircle b-semicircle_mod-b b-semicircle_secondary">
+                <div class="b-semicircle__inner"></div>
+            </div>
+            <div class="b-semicircle__number text-secondary">50%</div>
+            <div class="b-semicircle__title">Car Wraps</div>
+        </div>
+        <div class="b-semicircle-wrap text-center">
+            <div class="b-semicircle b-semicircle_mod-c b-semicircle_primary">
+                <div class="b-semicircle__inner"></div>
+            </div>
+            <div class="b-semicircle__number text-primary">90%</div>
+            <div class="b-semicircle__title">Window Tints</div>
+        </div>
+        <div class="b-semicircle-wrap text-center">
+            <div class="b-semicircle b-semicircle_mod-d b-semicircle_secondary">
+                <div class="b-semicircle__inner"></div>
+            </div>
+            <div class="b-semicircle__number text-secondary">22%</div>
+            <div class="b-semicircle__title">Custom Designs</div>
+        </div>
+        <!-- end .b-semicircle-->
+
+    </div>
+</section>

@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Help";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="intro-y flex items-center mt-8">
+    <h2 class="text-lg font-medium mr-auto">
+        FAQ Layout
+    </h2>
+</div>
+<div class="grid grid-cols-12 gap-6 mt-5">
+    <!-- BEGIN: FAQ Menu -->
+    <a href="" class="intro-y col-span-12 lg:col-span-4 box py-10 ">
+        <i data-feather="shield" class="w-12 h-12 text-theme-1 mx-auto"></i>
+        <div class="font-medium text-center text-base mt-3">Security</div>
+        <div class="text-gray-600 mt-2 w-3/4 text-center mx-auto">This application is not secure as of now</div>
+    </a>
+    <a href="" class="intro-y col-span-12 lg:col-span-4 box py-10">
+        <i data-feather="send" class="w-12 h-12 text-theme-1 mx-auto"></i>
+        <div class="font-medium text-center text-base mt-3">Multi Application</div>
+        <div class="text-gray-600 mt-2 w-3/4 text-center mx-auto">This application both contains admin and user side</div>
+    </a>
+    <a href="" class="intro-y col-span-12 lg:col-span-4 box py-10">
+        <i data-feather="trending-up" class="w-12 h-12 text-theme-1 mx-auto"></i>
+        <div class="font-medium text-center text-base mt-3">License</div>
+        <div class="text-gray-600 mt-2 w-3/4 text-center mx-auto">This application is not licensed yet</div>
+    </a>
+    <!-- END: FAQ Menu -->
+    <!-- BEGIN: FAQ Content -->
+    <div class="intro-y col-span-12 lg:col-span-12 box">
+        <div class="flex items-center p-5 border-b border-gray-200">
+            <h2 class="font-medium text-base mr-auto">
+              General Information
+            </h2>
+        </div>
+        <div class="accordion px-5 py-1">
+            <div class="accordion__pane border-b border-gray-200 py-4">
+                <a href="javascript:;" class="accordion__pane__toggle font-medium block">Setup</a>
+                <div class="accordion__pane__content mt-3 text-gray-700 leading-relaxed">This application requires setup for both layout and user settings during inital launch. If prevented, might result in errors that might not be corrected automatically.</div>
+            </div>
+            <div class="accordion__pane border-b border-gray-200 py-4">
+                <a href="javascript:;" class="accordion__pane__toggle font-medium block">Settings</a>
+                <div class="accordion__pane__content mt-3 text-gray-700 leading-relaxed">Settings are user-specific only. Changing any of them will not interfere with the other users'.</div>
+            </div>
+            <div class="accordion__pane border-b border-gray-200 py-4">
+                <a href="javascript:;" class="accordion__pane__toggle font-medium block">How To Troubleshoot Common HTTP Error Codes</a>
+                <div class="accordion__pane__content mt-3 text-gray-700 leading-relaxed">You might encounter errors with codes as such "404", "500", which are very common. Triggering them will display detailed information in the console log and notification on the bottom-left corner. Sharing detailed log information will ease the solving of the problem.</div>
+            </div>
+            <div class="accordion__pane  border-b border-gray-200 py-4 ">
+                <a href="javascript:;" class="accordion__pane__toggle font-medium block">Real Time Notification</a>
+                <div class="accordion__pane__content mt-3 text-gray-700 leading-relaxed">This application uses ASP.NET SignalR2. Any changes made from both admin side and user side will send notifications to all users.</div>
+            </div>
+            <div class="accordion__pane  border-b border-gray-200 py-4">
+                <a href="javascript:;" class="accordion__pane__toggle font-medium block">Session Time</a>
+                <div class="accordion__pane__content mt-3 text-gray-700 leading-relaxed">Default session timeout for all users is 20 minutes, regardless of activity.</div>
+            </div>
+            <div class="accordion__pane  py-4">
+                <a href="javascript:;" class="accordion__pane__toggle font-medium block">About</a>
+                <div class="accordion__pane__content mt-3 text-gray-700 leading-relaxed">This application was developed by Farid Asgarli in 2020, August. Website template credit goes to Midone, Left4Code.Com. Copyright credits of plugins goes to respectable owners. Bug reports are welcome.</div>
+            </div>
+        </div>
+    </div>
+   
+    <!-- END: FAQ Content -->
+</div>
+

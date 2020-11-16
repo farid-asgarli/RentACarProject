@@ -1,0 +1,274 @@
+﻿
+@{
+    ViewBag.Title = "Reservation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+@model g_auto.VM.ReservationVM
+
+@if (Model.Model != null && Model.Model.isActive != false)
+{
+
+
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "Booking",
+        HREF = Url.Action("Grid", "ModelG")
+    });
+
+
+    <section class="gauto-car-booking section_70">
+
+        <div class="container">
+            <div class="main">
+                <div class="b-booking-group">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="b-booking-nav sticky-position">
+                                    <a class="b-booking-nav__item active" id="car-style-btn" href="javascript:;">
+                                        <div class="b-booking-nav__header">Step 1</div>
+                                        <div class="b-booking-nav__main"><i class="ic fas fa-car-side"></i><span class="b-booking-nav__title">Select the Car</span><span class="b-booking-nav__info">Car of your liking</span></div>
+                                    </a>
+                                    <a class="b-booking-nav__item" href="javascript:;" id="service-btn">
+                                        <div class="b-booking-nav__header">Step 2</div>
+                                        <div class="b-booking-nav__main"><i class="ic fas fa-cog"></i><span class="b-booking-nav__title">Services Menu</span><span class="b-booking-nav__info">Services for you</span></div>
+                                    </a>
+                                    <a class="b-booking-nav__item" href="javascript:;" id="time-btn">
+                                        <div class="b-booking-nav__header">Step 3</div>
+                                        <div class="b-booking-nav__main"><i class="ic far fa-calendar"></i><span class="b-booking-nav__title">Date And Time</span><span class="b-booking-nav__info">Click on time for booking</span></div>
+                                    </a>
+                                    <a class="b-booking-nav__item" href="javascript:;" id="summary-btn">
+                                        <div class="b-booking-nav__header">Step 4</div>
+                                        <div class="b-booking-nav__main"><i class="ic fas fa-edit"></i><span class="b-booking-nav__title">Booking Summary</span><span class="b-booking-nav__info">Provide your contact infos</span></div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div id="sectionScroll">
+                                    <form class="b-booking-main" method="post" id="bookingForm" onsubmit="return false">
+
+                                        <div class="b-booking-main__section" id="car-style-section">
+                                            <h2 class="b-booking-main__title">Select The Car</h2>
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <span class="b-booking-price__inner">
+                                                        <span class="b-booking-price__title">@Model.Model.Name</span><br />
+                                                        <span class="b-booking-price__info">@Model.Model.Brand.Name</span>
+                                                    </span>
+
+                                                    <div class="b-booking__image">
+                                                        <img src="~/Uploads/@Model.Model.ModelImages.FirstOrDefault().Name" alt="Alternate Text" style="width:75%" />
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-auto">
+                                                    <div class="b-booking__model_price text-right">
+                                                        <span class="b-booking-price__price text-primary">
+                                                            <span class="b-booking-price__price-up">$</span>@Model.Model.PriceDaily.ToString("0")@*<span class="b-booking-price__price-up">95</span>*@
+                                                        </span>
+
+                                                        <div class="action-btn" style="display:flex; justify-content:left; flex-direction:column">
+                                                            <p>
+                                                                Not what you are looking for?
+                                                            </p>
+                                                            <a href="@Url.Action("Grid","ModelG")" class="gauto-btn">Change The Car</a>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="b-booking-main__section pb-1" id="service-section">
+                                            <h2 class="b-booking-main__title">Services Menu</h2>
+                                            @foreach (g_auto.Models.FeatureSet item in Model.FeatureSets)
+                                            {
+
+
+                                                <div class="b-booking-price">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input class="custom-control-input checkbox-validate" id="customCheck-@item.Id" type="checkbox">
+                                                        <input type="hidden" class="checkvalidate" name="isIncluded" value="no" />
+                                                        <input type="hidden" class="serviceBox" value="@item.Price.ToString("0.00")" />
+
+                                                        <input type="hidden" name="FeatureSetId" value="@item.Id" />
+                                                        <label class="custom-control-label row" for="customCheck-@item.Id">
+                                                            <span class="b-booking-price__inner col-sm">
+                                                                <span class="b-booking-price__title">@item.Title</span><br />
+                                                                <span class="b-booking-price__info">@item.Content</span>
+                                                            </span>
+                                                            <span class="col-sm-auto">
+                                                                <span class="b-booking-price__price text-primary">
+                                                                    <span class="b-booking-price__price-up">$</span>@item.Price.ToString("0")
+                                                                </span>
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            }
+                                            <input type="hidden" id="model-price-res" name="ModelPrice" value="@Model.Model.PriceDaily" />
+                                            <input type="hidden" name="ModelId" value="@Model.Model.Id" />
+                                            <input type="hidden" id="dtpModelId" data-id="@Model.Model.Id" />
+                                        </div>
+                                        <div class="b-booking-main__section" id="time-section">
+                                            <h2 class="b-booking-main__title">Select Date &amp; Time</h2>
+                                            <div class="row">
+                                                <div class="col-md-4 mt-2 mb-2">
+                                                    <p>
+                                                        <input type="text" name="StartDate" placeholder="Start Date" id="input_from" class="datepicker form-control" required>
+
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-4 mt-2 mb-2">
+                                                    <p>
+                                                        <input type="text" id="input_to" placeholder="End Date" name="EndDate" class="datepicker form-control" required>
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-4 mt-2 mb-2">
+                                                    <p class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                        <input type="text" name="Time" id="input_time" autocomplete="off" class="form-control" placeholder="Reservation Time" required>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="b-booking-main__section" id="summary-section">
+                                            <h2 class="b-booking-main__title">Booking Summary</h2>
+                                            <div class="row mb-4">
+                                                <div class="col-md-6">
+                                                    <div class="b-booking-total">
+                                                        <div class="b-booking-total__main">
+                                                            <div class="b-booking-total__title" id="startDateBox">@DateTime.Now.ToString("ddd, dd MMM")</div>
+                                                            <div class="b-booking-total__info">Start Date</div>
+                                                        </div>
+                                                        <div class="ic">
+                                                            <i class="far fa-calendar-alt"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="b-booking-total">
+                                                        <div class="b-booking-total__main">
+                                                            <div class="b-booking-total__title" id="startTimeBox">12:00 PM</div>
+                                                            <div class="b-booking-total__info">Start Time</div>
+                                                        </div>
+                                                        <div class="ic">
+                                                            <i class="far fa-clock"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="b-booking-total">
+                                                        <div class="b-booking-total__main">
+                                                            <div class="b-booking-total__title" id="endDateBox">@DateTime.Now.ToString("ddd, dd MMM")</div>
+                                                            <div class="b-booking-total__info">End Date</div>
+                                                        </div>
+                                                        <div class="ic">
+                                                            <i class="far fa-calendar-alt"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="b-booking-total">
+                                                        <div class="b-booking-total__main">
+                                                            <div class="b-booking-total__title">$ <span id="priceBox">@Model.Model.PriceDaily.ToString("0")</span></div>
+                                                            <div class="b-booking-total__info">Total Price</div>
+                                                        </div>
+                                                        <div class="ic">
+                                                            <i class="fas fa-money-check"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <fieldset>
+
+                                                @if (Session["User"] == null)
+                                                {
+                                                    <div class="form-group">
+                                                        <label class="form-label">Full Name*</label>
+                                                        <input class="form-control" name="FullName" minlength="6" type="text" required>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Email Address*</label>
+                                                                <input class="form-control" name="Email" type="email" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Phone *</label>
+                                                                <input type="text" class="form-control" maxlength="14" minlength="14" name="Phone" required />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                <div class="form-group">
+                                                    <label class="form-label">Address*</label>
+                                                    <input class="form-control" name="DeliveryAddress" type="text" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label">Message</label>
+                                                    <textarea class="form-control" name="Message" rows="5"></textarea>
+                                                </div>
+
+
+                                                <div class="text-center">
+                                                    Within 24 hours, Our representative we will confirm your appointment by call / email
+                                                    <button type="submit" id="bookingpost-btn" class="gauto-btn mt-5">Confirm Booking</button>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </form>
+                                    <div class="woocommerce-notices-wrapper" id="notifySessionError">
+                                        <ul class="woocommerce-error woocommerce-custom-error" role="alert">
+                                            <li>Looks like your session is over. Redirecting...</li>
+                                        </ul>
+                                    </div>
+                                    <div class="woocommerce-notices-wrapper" id="notifymodelerror">
+                                        <ul class="woocommerce-error woocommerce-custom-error" role="alert">
+                                            <li>You already have an ongoing appointment for this model. If you think this is an error, please contact us and report the problem.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="woocommerce-notices-wrapper" id="notifysuccess">
+                                        <ul class="woocommerce-error" role="alert">
+                                            <li>Success.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @*<div id="calendar"></div>*@
+
+
+   
+
+
+
+
+}
+else
+{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "404 Page",
+        HREF = Url.Action("Index")
+    });
+
+
+    Html.RenderPartial("~/Views/Partial/_NotFound.cshtml");
+}
+

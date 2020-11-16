@@ -1,0 +1,177 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "Products",
+        HREF = Url.Action("Index", "ProductG")
+    });
+}
+
+@model g_auto.VM.ProductVM
+
+<section class="gauto-product-page section_70">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="fl-vc-custom-title-container fl-animated-item-velocity text-center custom-title animation-complete" data-animate-type="slideUpIn" style="opacity: 1; transform: translateY(0px);">
+                    <div class="custom-title-content-wrapper">
+                        <div class="fl-title-vc vc-custom-title font-text fl-font-style-bolt fl-custom-title-5f33b48a1de90-5128">
+                            Wide Variety Of Products
+                        </div>
+                        <div class="fl-subtitle-vc fl-font-style-bolt vc-custom-sub-title back-text">OUR PRODUCTS</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+                <div class="product-page-left">
+                    <div class="sidebar-widget">
+                        <form class="product_search">
+                            <input type="search" placeholder="Keywords...">
+                            <button type="submit" class="search_product_btn"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                    <div class="sidebar-widget">
+                        <h3>By Category</h3>
+                        <ul class="service-menu">
+                            @if (Model.Categories.FirstOrDefault() != null)
+                            {
+                                foreach (g_auto.Models.ProductCategory item in Model.Categories)
+                                {
+                                    var count = 0;
+
+                                    if (item.ProductToCategory.FirstOrDefault() != null && item.ProductToCategory.FirstOrDefault().Product.isActive != false)
+                                    {
+                                        <li class="active_seeker">
+                                            <a class="pr_cat" data-id="@item.Id" href="javascript:;">
+                                                @item.Name
+                                                @foreach (var item2 in item.ProductToCategory)
+                                                {
+                                                    if (item2.Product.isActive != false)
+                                                    {
+                                                        count++;
+                                                    }
+
+                                                }
+                                                <span>
+                                                    (@count)
+                                                </span>
+                                            </a>
+
+                                        </li>
+
+                                    }
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                    <div class="sidebar-widget">
+                        <h3>top selling</h3>
+                        <ul class="top-products">
+                            @foreach (g_auto.Models.Product item in Model.Products.Where(c=>c.Sales.FirstOrDefault()!=null).OrderByDescending(c => c.Sales.Count()).Take(5))
+                            {
+                                <li>
+                                    <div class="recent-img">
+                                        <a href="@Url.Action("Details","ProductG", new { id=item.Id})">
+                                            <img src="~/Uploads/@item.ProductImages.FirstOrDefault().Name" alt="recent image">
+                                        </a>
+                                    </div>
+                                    <div class="recent-text">
+                                        <h4>
+                                            <a href="@Url.Action("Details","ProductG", new { id=item.Id})">@item.Name</a>
+                                        </h4>
+                                        <p>$@item.Price.ToString("0.00")</p>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-sm-12">
+                @if (Model.Products.FirstOrDefault() != null)
+                {
+                    <div class="product-page-right">
+                        <div class="property-page-heading mb-5">
+                            <div class="propertu-page-head">
+                              
+                            </div>
+                            <div class="paging_status">
+                                <p class="result_status">@Model.Products.Count() results</p>
+                            </div>
+                            <div class="propertu-page-shortby">
+                                <label><i class="fa fa-sort-amount-asc"></i>Sort By</label>
+                                <select class="chosen-select-no-single" id="sortProduct">
+                                    <option>Default</option>
+                                    <option>Price (Low to High)</option>
+                                    <option>Price (High to Low)</option>
+                                    <option>Date Added (Low to High)</option>
+                                    <option>Date Added (High to Low)</option>
+                                    <option>Name (A to Z)</option>
+                                    <option>Name (Z to A)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" id="productSort">
+                            @foreach (g_auto.Models.Product item in Model.Products)
+                            {
+                                if (item.isActive != false)
+                                {
+
+
+
+                                    <div data-name="@item.Name" data-addeddate="@item.PostDate" data-price="@item.Price" class="col-12 col-sm-6 col-md-4 col-lg-4 col-xs-12 mt-3 mb-3">
+                                        <div class="product-container">
+                                            <div class="product-item">
+                                                @if (item.ProductImages.FirstOrDefault() != null)
+                                                {
+                                                    <div class="product-image">
+                                                        <a target="_blank" href="@Url.Action("Details", "ProductG" , new { id =item.Id})">
+                                                            <div class="pr-image" style="background:url(/Uploads/@item.ProductImages.FirstOrDefault().Name)"></div>
+                                                        </a>
+                                                        @if (item.isNewlyAdded)
+                                                        {
+                                                            <div class="status-top" style="display:block!important">
+                                                                <a class="item-condition">New</a>
+                                                            </div>
+                                                        }
+                                                        @if (item.Amount == 0)
+                                                        {
+                                                            <div class="status_sold_out"><span class="item_availability">Sold Out</span></div>
+                                                        }
+
+
+                                                    </div>
+                                                }
+                                                <div class="product-text">
+                                                    <div class="product-title">
+                                                        <h3><a target="_blank" href="@Url.Action("Details", "ProductG" , new { id =item.Id})">@(item.Name.Length > 25 ? item.Name.Substring(0, 25) + "..." : item.Name)</a></h3>
+                                                        <span class="item-cat">@(item.ProductToCategory.FirstOrDefault()!=null?item.ProductToCategory.FirstOrDefault().ProductCategory.Name:"")</span>
+                                                        <p>$@item.Price.ToString("0.00")</p>
+                                                    </div>
+
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <a target="_blank" href="@Url.Action("Details", "ProductG", new { id=item.Id})">View Item</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

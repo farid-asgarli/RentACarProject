@@ -1,0 +1,324 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model g_auto.Models.Model
+
+
+@if (Model != null && Model.isActive != false)
+{
+
+
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "Car Details",
+        HREF = Url.Action("Grid", "ModelG")
+    });
+
+    <section class="gauto-car-booking section_70" style=" background: url(/Assets/img/bg-2.png) 50% 10% no-repeat;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>@Model.Brand.Name @Model.Name </h1>
+                    <div class="price-rating flex justify-between flex-row">
+                        <div>
+                            <div class="price-rent">
+                                <h4>$@Model.PriceDaily.ToString("0.00")<span>/ Day</span></h4>
+                            </div>
+                            <div class="car-rating">
+                                @if (Model.Reviews.FirstOrDefault() != null)
+                                {
+                                    <ul>
+                                        @{
+                                            var rating_sum = 0;
+                                        }
+
+                                        @foreach (g_auto.Models.Review item in Model.Reviews)
+                                        {
+                                            rating_sum = rating_sum + item.Rating;
+                                        }
+
+                                        @{
+                                            int totalrating_sum = rating_sum / Model.Reviews.Count();
+                                        }
+
+                                        @for (var i = 0; i < totalrating_sum; i++)
+                                        {
+                                            <li><i class="fa fa-star"></i></li>
+                                        }
+                                        @for (var i = 0; i < 5 - totalrating_sum; i++)
+                                        {
+                                            <li><i class="fa fa-star-o"></i></li>
+                                        }
+                                    </ul>
+                                    <p>(@Model.Reviews.Count() ratings)</p>
+                                }
+                                else
+                                {
+                                    <ul>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                    <p>No Ratings Yet</p>
+                                }
+                            </div>
+                        </div>
+                        <div class="car-booking-right">
+                            <p class="rental-tag">rental</p>
+                        </div>
+                    </div>
+
+                    <div class="slider"  data-aos="fade-up">
+                        @foreach (var item in Model.ModelImages)
+                        {
+                            <img src="~/Uploads/@item.Name" alt="Alternate Text" />
+                        }
+
+
+                    </div>
+
+                    <!-- THUMBNAILS -->
+                    <div class="slider-nav-thumbnails">
+                        @foreach (var item in Model.ModelImages)
+                        {
+                            <div style="background: url(/Uploads/@item.Name);"></div>
+                        }
+
+                    </div>
+
+                    <section class="vehicle-specs">
+                        <h3>Vehicle Specifications</h3>
+                        <div class="spec-sheet flex justify-center">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <dl class="b-goods-f__descr row">
+                                        <dt class="b-goods-f__descr-title col-md-5">Registration</dt>
+                                        <dd class="b-goods-f__descr-info col-md-7">@Model.Year</dd>
+                                        <dt class="b-goods-f__descr-title col-md-5">Brand / Model</dt>
+                                        <dd class="b-goods-f__descr-info col-md-7">@Model.Brand.Name</dd>
+                                        <dt class="b-goods-f__descr-title col-md-5">Mass</dt>
+                                        <dd class="b-goods-f__descr-info col-md-7">lb. @Model.Mass.ToString("0")</dd>
+                                        <dt class="b-goods-f__descr-title col-md-5">Color</dt>
+                                        <dd class="b-goods-f__descr-info col-md-7">@Model.Color</dd>
+                                        <dt class="b-goods-f__descr-title col-md-5">Fuel Type</dt>
+                                        <dd class="b-goods-f__descr-info col-md-7">@Model.FuelType</dd>
+                                        <dt class="b-goods-f__descr-title col-md-5">Engine</dt>
+                                        <dd class="b-goods-f__descr-info col-md-7">@Model.Engine.ToString("0.0")</dd>
+                                        <dt class="b-goods-f__descr-title col-md-5">Engine Layout</dt>
+                                        <dd class="b-goods-f__descr-info col-md-7">@Model.EngineLayout</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <dl class="b-goods-f__descr row">
+                                        <dt class="b-goods-f__descr-title col-md-5">Condition</dt>
+                                        <dd class="b-goods-f__descr-info col-md-7">@Model.Condition</dd>
+                                        <dt class="b-goods-f__descr-title col-md-5">Mileage</dt>
+                                        <dd class="b-goods-f__descr-info col-md-7">@Model.Mileage</dd>
+                                        <dt class="b-goods-f__descr-title col-md-5">Transmission</dt>
+                                        <dd class="b-goods-f__descr-info col-md-7">@Model.Transmission</dd>
+                                        <dt class="b-goods-f__descr-title col-md-5">Drivetrain</dt>
+                                        <dd class="b-goods-f__descr-info col-md-7">@Model.DriveTrain</dd>
+                                        <dt class="b-goods-f__descr-title col-md-5">Interior Color</dt>
+                                        <dd class="b-goods-f__descr-info col-md-7">@Model.Color</dd>
+                                        <dt class="b-goods-f__descr-title col-md-5">No. Of Seats</dt>
+                                        <dd class="b-goods-f__descr-info col-md-7">@Model.Seats</dd>
+                                        <dt class="b-goods-f__descr-title col-md-5">No.Of Doors</dt>
+                                        <dd class="b-goods-f__descr-info col-md-7">@Model.Doors</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="vehicle-desc">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="model-tabs">
+                                    <ul class="nav nav-tabs" id="model-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="specs-tab" data-toggle="tab" href="#specs" role="tab" aria-controls="specs" aria-selected="true">Vehicle Description</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Features & Options</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="shipping-tab" data-toggle="tab" href="#shipping" role="tab" aria-controls="shipping" aria-selected="false">Reviews</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="offerTabContent">
+                                        <div class="tab-pane fade show active" id="specs" role="tabpanel" aria-labelledby="specs-tab">
+
+                                            <div class="row">
+
+                                                <div class="col-lg-12">
+                                                    <p>
+                                                        @Html.Raw(Model.Description)
+                                                    </p>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                                            <div class="col-lg-12">
+                                                <ul class="pixad-features-list">
+                                                    @if (Model.hasABS)
+                                                    {
+                                                        <li class="pixad-exist "><i class="features-icon">+</i>ABS</li>
+                                                    }
+                                                    @if (Model.hasConditioner)
+                                                    {
+                                                        <li class="pixad-exist "><i class="features-icon">+</i>Air conditioning</li>
+                                                    }
+                                                    @if (Model.hasAlloyWheels)
+                                                    {
+                                                        <li class="pixad-exist "><i class="features-icon">+</i>Alloy wheels</li>
+                                                    }
+                                                    @if (Model.hasCC)
+                                                    {
+                                                        <li class="pixad-exist "><i class="features-icon">+</i>Cruise control</li>
+                                                    }
+                                                    @if (Model.hasESP)
+                                                    {
+                                                        <li class="pixad-exist "><i class="features-icon">+</i>ESP</li>
+                                                    }
+                                                    @if (Model.hasLeatherInterior)
+                                                    {
+                                                        <li class="pixad-exist "><i class="features-icon">+</i>Leather interior</li>
+                                                    }
+                                                    @if (Model.hasPSensors)
+                                                    {
+                                                        <li class="pixad-exist "><i class="features-icon">+</i>Parking sensors</li>
+                                                    }
+                                                    @if (Model.hasXenon)
+                                                    {
+                                                        <li class="pixad-exist "><i class="features-icon">+</i>Xenon</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+
+                                                    @if (Model.Reviews.FirstOrDefault() != null)
+                                                    {
+                                                        <div id="reviews" class="woocommerce-Reviews">
+                                                            <div id="comments">
+                                                                <ol class="commentlist">
+                                                                    @foreach (g_auto.Models.Review item in Model.Reviews)
+                                                                    {
+                                                                        <li class="review">
+                                                                            <div class="comment_container">
+                                                                                <div class="profimage-container">
+                                                                                    <div class="profimage" style="background:url(/Uploads/@item.User.ProfilePicture)">
+
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="comment-text">
+                                                                                    <div class="car-rating">
+                                                                                        <ul>
+                                                                                            @for (var i = 0; i < item.Rating; i++)
+                                                                                            {
+                                                                                                <li><i class="fa fa-star"></i></li>
+
+                                                                                            }
+                                                                                            @for (var i = 0; i < 5 - item.Rating; i++)
+                                                                                            {
+                                                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                                            }
+
+
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                    <p class="meta">
+                                                                                        <strong class="woocommerce-review__author">@item.User.FullName </strong>
+                                                                                        <span class="woocommerce-review__dash">–</span>
+                                                                                        <time class="woocommerce-review__published-date">@item.PostedDate.ToString("MMMM d, yyyy")</time>
+                                                                                    </p>
+                                                                                    <div class="description"><p>@item.Content</p></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                        foreach (g_auto.Models.ModelReviewReply item2 in item.Replies)
+                                                                        {
+                                                                            <li class="review pl-5">
+                                                                                <div class="comment_container">
+                                                                                    <img alt="" src="~/Uploads/@item2.Admin.ProfilePicture" srcset="~/Uploads/@item2.Admin.ProfilePicture" class="avatar avatar-60 photo ml-5" style="border-radius:50%;width:100%;height:60px" >
+                                                                                    <div class="comment-text">
+                                                                                       
+                                                                                        <p class="meta">
+                                                                                            @if (item2.Admin.AdminSettings.FirstOrDefault() != null)
+                                                                                            {
+                                                                                                <strong class="woocommerce-review__author">@item2.Admin.AdminSettings.FirstOrDefault().DisplayName </strong>
+                                                                                            }
+                                                                                            <span class="woocommerce-review__dash">–</span>
+                                                                                            <time class="woocommerce-review__published-date">@item2.PostedDate.ToString("MMMM d, yyyy")</time>
+                                                                                        </p>
+                                                                                        <p><strong>Replying To @item.User.FullName</strong></p>
+                                                                                        <div class="description"><p>@item2.Content</p></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </li>
+                                                                        }
+                                                                    }
+
+                                                                </ol>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                                 <h3 class="text-center mt-5">No Reviews Yet.</h3>
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="reservation-button">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="action-btn" style="display:flex; justify-content:center">
+                                    <a href="@Url.Action("Reservation","ModelG", new {id=Model.Id })" class="gauto-btn">Reserve Now!</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+   
+}
+else
+{
+    Html.RenderPartial("~/Views/Partial/_BreadCromb.cshtml", new g_auto.VM.BreadCromb
+    {
+        Page = "404 Page",
+        HREF = Url.Action("Index")
+    });
+
+
+    Html.RenderPartial("~/Views/Partial/_NotFound.cshtml");
+}
+
+

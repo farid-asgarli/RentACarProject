@@ -1,0 +1,922 @@
+﻿<!DOCTYPE html>
+<html lang="en" style="background-image: linear-gradient(45deg, #1C3FAA 50%, #002025 100%)!important;">
+<!-- BEGIN: Head -->
+<head>
+    <meta charset="utf-8">
+    <link href="~/Areas/Admin/Assets/images/logo.svg" rel="shortcut icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CyberDream</title>
+    <!-- BEGIN: CSS Assets-->
+
+    <link rel="stylesheet" href="~/Areas/Admin/Assets/css/app.css">
+    <link href="~/Assets/css/jquery.datepicker.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Assets/css/style.css" rel="stylesheet" />
+    <!-- END: CSS Assets-->
+</head>
+<!-- END: Head -->
+<body class="app">
+    <div class="preloader">
+        <div id="particles-background" class="vertical-centered-box"></div>
+        <div class="vertical-centered-box">
+            <div class="preloader-content">
+                <div class="loader-circle"></div>
+                <div class="loader-line-mask">
+                    <div class="loader-line"></div>
+                </div>
+                <img alt="Midone Tailwind HTML Admin Template" style="width:3.5rem" src="~/Areas/Admin/Assets/images/logo.svg">
+            </div>
+        </div>
+    </div>
+    <!-- BEGIN: Mobile Menu -->
+    <div class="mobile-menu md:hidden">
+        <div class="mobile-menu-bar">
+            <a href="" class="flex mr-auto">
+                <img alt="Midone Tailwind HTML Admin Template" class="w-6" src="~/Areas/Admin/Assets/images/logo.svg">
+            </a>
+            <a href="javascript:;" id="mobile-menu-toggler"> <i data-feather="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
+        </div>
+        <ul class="py-5 hidden">
+
+            <li>
+                <a href="@Url.Action("Index", "Home")" class="menu  @(ViewBag.DashboardPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="home"></i> </div>
+                    <div class="menu__title"> Dashboard </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Layout")" class="menu  @(ViewBag.LayoutPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="layout"></i> </div>
+                    <div class="menu__title"> Layout </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Settings")" class="menu  @(ViewBag.SettingsPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="settings"></i> </div>
+                    <div class="menu__title"> Settings </div>
+                </a>
+            </li>
+            <li class="side-nav__devider my-6"></li>
+            <li>
+                <a href="@Url.Action("Index", "Appointment")" class="menu  @(ViewBag.AppointmentPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="calendar"></i> </div>
+                    <div class="menu__title"> Appointments </div>
+                </a>
+            </li>
+
+            <li>
+                <a href="@Url.Action("Index", "Message")" class="menu  @(ViewBag.MessagePage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="message-square"></i> </div>
+                    <div class="menu__title"> Messages </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Newsletter")" class="menu  @(ViewBag.NewsletterPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="message-circle"></i> </div>
+                    <div class="menu__title"> Newsletter </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Reservation")" class="menu  @(ViewBag.ReservationPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="trello"></i> </div>
+                    <div class="menu__title"> Reservations </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Review")" class="menu  @(ViewBag.ReviewPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="star"></i> </div>
+                    <div class="menu__title"> Reviews </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Sale")" class="menu  @(ViewBag.SalePage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="shopping-bag"></i> </div>
+                    <div class="menu__title"> Sales </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Testimonial")" class="menu  @(ViewBag.TestimonialPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="bookmark"></i> </div>
+                    <div class="menu__title"> Testimonials </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "User")" class="menu  @(ViewBag.UserPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="users"></i> </div>
+                    <div class="menu__title"> Users </div>
+                </a>
+            </li>
+
+            <li class="side-nav__devider my-6"></li>
+
+            <li>
+                <a href="@Url.Action("Index", "About")" class="menu  @(ViewBag.AboutPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="align-center"></i> </div>
+                    <div class="menu__title"> About </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Blog")" class="menu @(ViewBag.BlogPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="book-open"></i> </div>
+                    <div class="menu__title"> Blogs </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "BlogCategories")" class="menu @(ViewBag.BlogCategoriesPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="copy"></i> </div>
+                    <div class="menu__title"> Blog Categories </div>
+                </a>
+            </li>
+
+            <li>
+                <a href="@Url.Action("Index", "Brand")" class="menu @(ViewBag.BrandPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="framer"></i> </div>
+                    <div class="menu__title"> Brands </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Expert")" class="menu @(ViewBag.ExpertPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="user"></i> </div>
+                    <div class="menu__title"> Experts </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "FeatureSet")" class="menu @(ViewBag.FeatureSetPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="grid"></i> </div>
+                    <div class="menu__title"> Feature Sets </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Gallery")" class="menu @(ViewBag.GalleryPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="image"></i> </div>
+                    <div class="menu__title"> Gallery </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Model")" class="menu @(ViewBag.ModelPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="codesandbox"></i> </div>
+                    <div class="menu__title"> Models </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Product")" class="menu  @(ViewBag.ProductPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="pocket"></i> </div>
+                    <div class="menu__title"> Products </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "ProductCategories")" class="menu @(ViewBag.ProductCategoriesPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="file-text"></i> </div>
+                    <div class="menu__title"> Product Categories </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Service")" class="menu @(ViewBag.ServicePage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="target"></i> </div>
+                    <div class="menu__title">Services </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "ServiceInfo")" class="menu @(ViewBag.ServiceInfoPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="alert-circle"></i> </div>
+                    <div class="menu__title"> Service Infos </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Slider")" class="menu @(ViewBag.SliderPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="film"></i> </div>
+                    <div class="menu__title"> Slider </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Tags")" class="menu @(ViewBag.TagsPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="tag"></i> </div>
+                    <div class="menu__title">Tags </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Vacancy")" class="menu  @(ViewBag.VacancyPage!=null?"menu--active":"")">
+                    <div class="menu__icon"> <i data-feather="briefcase"></i> </div>
+                    <div class="menu__title"> Vacancies </div>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+    <!-- END: Mobile Menu -->
+    <div class="flex">
+        <!-- BEGIN: Side Menu -->
+        <nav class="side-nav" style="position:relative">
+            <a href="@Url.Action("Index", "Home")" class="intro-x flex items-center pl-5 pt-4 action-pr-btn">
+                <img alt="Midone Tailwind HTML Admin Template" class="w-6" src="~/Areas/Admin/Assets/images/logo.svg">
+                <span class="hidden xl:block text-white text-lg ml-3"> Cyber<span class="font-medium">Dream</span> </span>
+
+            </a>
+            <div class="side-nav__devider my-6"></div>
+            <ul>
+                @{
+                    g_auto.DAL.DBContext db = new g_auto.DAL.DBContext();
+                    int AdminId = (int)Session["AdminId"];
+
+                }
+
+
+                @if (db.AdminSettings.FirstOrDefault(c => c.AdminId == AdminId).menuGrouping)
+                {
+                    <li>
+                        <a href="javascript:;" class="side-menu">
+                            <div class="side-menu__icon"> <i data-feather="codepen"></i> </div>
+                            <div class="side-menu__title">Layout <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
+                        </a>
+                        <ul class="">
+                            <li>
+                                <a href="@Url.Action("Index", "Home")" class="side-menu  @(ViewBag.DashboardPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="home"></i> </div>
+                                    <div class="side-menu__title"> Dashboard </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Layout")" class="side-menu  @(ViewBag.LayoutPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="layout"></i> </div>
+                                    <div class="side-menu__title"> Layout </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Settings")" class="side-menu  @(ViewBag.SettingsPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="settings"></i> </div>
+                                    <div class="side-menu__title"> Settings </div>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" class="side-menu">
+                            <div class="side-menu__icon"> <i data-feather="flag"></i> </div>
+                            <div class="side-menu__title"> Management <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
+                        </a>
+                        <ul class="">
+                            <li>
+                                <a href="@Url.Action("Index", "Appointment")" class="side-menu  @(ViewBag.AppointmentPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="calendar"></i> </div>
+                                    <div class="side-menu__title"> Appointments </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="@Url.Action("Index", "Message")" class="side-menu  @(ViewBag.MessagePage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="message-square"></i> </div>
+                                    <div class="side-menu__title"> Messages </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Newsletter")" class="side-menu  @(ViewBag.NewsletterPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="message-circle"></i> </div>
+                                    <div class="side-menu__title"> Newsletter </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Reservation")" class="side-menu  @(ViewBag.ReservationPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="trello"></i> </div>
+                                    <div class="side-menu__title"> Reservations </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Review")" class="side-menu  @(ViewBag.ReviewPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="star"></i> </div>
+                                    <div class="side-menu__title"> Reviews </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Sale")" class="side-menu  @(ViewBag.SalePage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="shopping-bag"></i> </div>
+                                    <div class="side-menu__title"> Sales </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Testimonial")" class="side-menu  @(ViewBag.TestimonialPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="bookmark"></i> </div>
+                                    <div class="side-menu__title"> Testimonials </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "User")" class="side-menu  @(ViewBag.UserPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                                    <div class="side-menu__title"> Users </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" class="side-menu">
+                            <div class="side-menu__icon"> <i data-feather="database"></i> </div>
+                            <div class="side-menu__title"> CRUD <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
+                        </a>
+                        <ul class="">
+                            <li>
+                                <a href="@Url.Action("Index", "About")" class="side-menu  @(ViewBag.AboutPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="align-center"></i> </div>
+                                    <div class="side-menu__title"> About </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Blog")" class="side-menu @(ViewBag.BlogPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="book-open"></i> </div>
+                                    <div class="side-menu__title"> Blogs </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "BlogCategories")" class="side-menu @(ViewBag.BlogCategoriesPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="copy"></i> </div>
+                                    <div class="side-menu__title"> Blog Categories </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="@Url.Action("Index", "Brand")" class="side-menu @(ViewBag.BrandPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="framer"></i> </div>
+                                    <div class="side-menu__title"> Brands </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Expert")" class="side-menu @(ViewBag.ExpertPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="user"></i> </div>
+                                    <div class="side-menu__title"> Experts </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "FeatureSet")" class="side-menu @(ViewBag.FeatureSetPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="grid"></i> </div>
+                                    <div class="side-menu__title"> Feature Sets </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Gallery")" class="side-menu @(ViewBag.GalleryPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="image"></i> </div>
+                                    <div class="side-menu__title"> Gallery </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Model")" class="side-menu @(ViewBag.ModelPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="codesandbox"></i> </div>
+                                    <div class="side-menu__title"> Models </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Product")" class="side-menu  @(ViewBag.ProductPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="pocket"></i> </div>
+                                    <div class="side-menu__title"> Products </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "ProductCategories")" class="side-menu @(ViewBag.ProductCategoriesPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="file-text"></i> </div>
+                                    <div class="side-menu__title"> Product Categories </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Service")" class="side-menu @(ViewBag.ServicePage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="target"></i> </div>
+                                    <div class="side-menu__title">Services </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "ServiceInfo")" class="side-menu @(ViewBag.ServiceInfoPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="alert-circle"></i> </div>
+                                    <div class="side-menu__title"> Service Infos </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Slider")" class="side-menu @(ViewBag.SliderPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="film"></i> </div>
+                                    <div class="side-menu__title"> Slider </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Tags")" class="side-menu @(ViewBag.TagsPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="tag"></i> </div>
+                                    <div class="side-menu__title">Tags </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Vacancy")" class="side-menu  @(ViewBag.VacancyPage!=null?"side-menu--active":"")">
+                                    <div class="side-menu__icon"> <i data-feather="briefcase"></i> </div>
+                                    <div class="side-menu__title"> Vacancies </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a href="@Url.Action("Index", "Home")" class="side-menu  @(ViewBag.DashboardPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="home"></i> </div>
+                            <div class="side-menu__title"> Dashboard </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Layout")" class="side-menu  @(ViewBag.LayoutPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="layout"></i> </div>
+                            <div class="side-menu__title"> Layout </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Settings")" class="side-menu  @(ViewBag.SettingsPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="settings"></i> </div>
+                            <div class="side-menu__title"> Settings </div>
+                        </a>
+                    </li>
+                    <li class="side-nav__devider my-6"></li>
+                    <li>
+                        <a href="@Url.Action("Index", "Appointment")" class="side-menu  @(ViewBag.AppointmentPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="calendar"></i> </div>
+                            <div class="side-menu__title"> Appointments </div>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index", "Message")" class="side-menu  @(ViewBag.MessagePage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="message-square"></i> </div>
+                            <div class="side-menu__title"> Messages </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Newsletter")" class="side-menu  @(ViewBag.NewsletterPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="message-circle"></i> </div>
+                            <div class="side-menu__title"> Newsletter </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Reservation")" class="side-menu  @(ViewBag.ReservationPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="trello"></i> </div>
+                            <div class="side-menu__title"> Reservations </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Review")" class="side-menu  @(ViewBag.ReviewPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="star"></i> </div>
+                            <div class="side-menu__title"> Reviews </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Sale")" class="side-menu  @(ViewBag.SalePage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="shopping-bag"></i> </div>
+                            <div class="side-menu__title"> Sales </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Testimonial")" class="side-menu  @(ViewBag.TestimonialPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="bookmark"></i> </div>
+                            <div class="side-menu__title"> Testimonials </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "User")" class="side-menu  @(ViewBag.UserPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                            <div class="side-menu__title"> Users </div>
+                        </a>
+                    </li>
+
+                    <li class="side-nav__devider my-6"></li>
+
+                    <li>
+                        <a href="@Url.Action("Index", "About")" class="side-menu  @(ViewBag.AboutPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="align-center"></i> </div>
+                            <div class="side-menu__title"> About </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Blog")" class="side-menu @(ViewBag.BlogPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="book-open"></i> </div>
+                            <div class="side-menu__title"> Blogs </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "BlogCategories")" class="side-menu @(ViewBag.BlogCategoriesPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="copy"></i> </div>
+                            <div class="side-menu__title"> Blog Categories </div>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index", "Brand")" class="side-menu @(ViewBag.BrandPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="framer"></i> </div>
+                            <div class="side-menu__title"> Brands </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Expert")" class="side-menu @(ViewBag.ExpertPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="user"></i> </div>
+                            <div class="side-menu__title"> Experts </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "FeatureSet")" class="side-menu @(ViewBag.FeatureSetPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="grid"></i> </div>
+                            <div class="side-menu__title"> Feature Sets </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Gallery")" class="side-menu @(ViewBag.GalleryPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="image"></i> </div>
+                            <div class="side-menu__title"> Gallery </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Model")" class="side-menu @(ViewBag.ModelPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="codesandbox"></i> </div>
+                            <div class="side-menu__title"> Models </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Product")" class="side-menu  @(ViewBag.ProductPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="pocket"></i> </div>
+                            <div class="side-menu__title"> Products </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "ProductCategories")" class="side-menu @(ViewBag.ProductCategoriesPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="file-text"></i> </div>
+                            <div class="side-menu__title"> Product Categories </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Service")" class="side-menu @(ViewBag.ServicePage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="target"></i> </div>
+                            <div class="side-menu__title">Services </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "ServiceInfo")" class="side-menu @(ViewBag.ServiceInfoPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="alert-circle"></i> </div>
+                            <div class="side-menu__title"> Service Infos </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Slider")" class="side-menu @(ViewBag.SliderPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="film"></i> </div>
+                            <div class="side-menu__title"> Slider </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Tags")" class="side-menu @(ViewBag.TagsPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="tag"></i> </div>
+                            <div class="side-menu__title">Tags </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Vacancy")" class="side-menu  @(ViewBag.VacancyPage!=null?"side-menu--active":"")">
+                            <div class="side-menu__icon"> <i data-feather="briefcase"></i> </div>
+                            <div class="side-menu__title"> Vacancies </div>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+        <!-- BEGIN: Content -->
+        <div class="content">
+            <!-- BEGIN: Top Bar -->
+            <div class="top-bar">
+                <!-- BEGIN: Breadcrumb -->
+                @if (ViewBag.AboutPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","About")" class="breadcrumb--active action-pr-btn">About</a> </div>
+                }
+                else if (ViewBag.BlogPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Blog")" class="breadcrumb--active action-pr-btn">Blog</a> </div>
+
+                }
+                else if (ViewBag.BlogCategoriesPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","BlogCategories")" class="breadcrumb--active action-pr-btn">Blog Categories</a> </div>
+
+                }
+                else if (ViewBag.BrandPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Brand")" class="breadcrumb--active action-pr-btn">Brand</a> </div>
+
+                }
+                else if (ViewBag.ExpertPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Expert")" class="breadcrumb--active action-pr-btn">Experts</a> </div>
+
+                }
+                else if (ViewBag.GalleryPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Gallery")" class="breadcrumb--active action-pr-btn">Gallery</a> </div>
+
+                }
+                else if (ViewBag.ModelPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Model")" class="breadcrumb--active action-pr-btn">Models</a> </div>
+
+                }
+                else if (ViewBag.ProductPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Product")" class="breadcrumb--active action-pr-btn">Products</a> </div>
+
+                }
+                else if (ViewBag.ProductCategoriesPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","ProductCategories")" class="breadcrumb--active action-pr-btn">Product Categories</a> </div>
+
+                }
+                else if (ViewBag.ServicePage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Service")" class="breadcrumb--active action-pr-btn">Services</a> </div>
+
+                }
+                else if (ViewBag.ServiceInfoPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","ServiceInfo")" class="breadcrumb--active action-pr-btn">Service Infos</a> </div>
+
+                }
+                else if (ViewBag.SliderPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Slider")" class="breadcrumb--active action-pr-btn">Slider</a> </div>
+
+                }
+                else if (ViewBag.TagsPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Tags")" class="breadcrumb--active action-pr-btn">Tags</a> </div>
+
+                }
+                else if (ViewBag.DashboardPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Home")" class="breadcrumb--active action-pr-btn">Dashboard</a> </div>
+
+                }
+                else if (ViewBag.LayoutPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Layout")" class="breadcrumb--active action-pr-btn">Layout</a> </div>
+
+                }
+                else if (ViewBag.SettingsPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Settings")" class="breadcrumb--active action-pr-btn">Settings</a> </div>
+
+                }
+                else if (ViewBag.SalePage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Sale")" class="breadcrumb--active action-pr-btn">Sales</a> </div>
+
+                }
+                else if (ViewBag.ReservationPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Reservation")" class="breadcrumb--active action-pr-btn">Reservations</a> </div>
+
+                }
+                else if (ViewBag.AppointmentPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Appointment")" class="breadcrumb--active action-pr-btn">Appointments</a> </div>
+
+                }
+                else if (ViewBag.NewsletterPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Newsletter")" class="breadcrumb--active action-pr-btn">Newsletter</a> </div>
+
+                }
+                else if (ViewBag.MessagePage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Message")" class="breadcrumb--active action-pr-btn">Messages</a> </div>
+
+                }
+                else if (ViewBag.FeatureSetPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","FeatureSet")" class="breadcrumb--active action-pr-btn">Feature Sets</a> </div>
+
+                }
+                else if (ViewBag.UserPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","User")" class="breadcrumb--active action-pr-btn">Feature Sets</a> </div>
+
+                }
+                else if (ViewBag.ReviewPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Review")" class="breadcrumb--active action-pr-btn">Reviews</a> </div>
+
+                }
+                else if (ViewBag.TestimonialPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Testimonial")" class="breadcrumb--active action-pr-btn">Testimonials</a> </div>
+
+                }
+                else if (ViewBag.VacancyPage != null)
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Vacancy")" class="breadcrumb--active action-pr-btn">Vacancies</a> </div>
+
+                }
+                else
+                {
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="@Url.Action("Index","Home")" class="action-pr-btn">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Index","Home")" class="breadcrumb--active action-pr-btn">Dashboard</a> </div>
+                }
+                <!-- END: Breadcrumb -->
+                <!-- BEGIN: Search -->
+                <div class="intro-x relative mr-3 sm:mr-6">
+                    <div class="search hidden sm:block">
+                        <button type="button" id="code_gnrt_btn" class="button w-24 rounded-full shadow-md mr-1 mb-2 bg-gray-200 text-gray-600">+  Invite</button>
+                    </div>
+                    <a class="notification sm:hidden" href=""> <i data-feather="search" class="notification__icon dark:text-gray-300"></i> </a>
+
+                </div>
+                <!-- END: Search -->
+                @*BEGIN: Notifications*@
+                <!--<div class="intro-x dropdown relative mr-auto sm:mr-6">
+                    <div class="dropdown-toggle notification notification--bullet cursor-pointer"> <i data-feather="bell" class="notification__icon dark:text-gray-300"></i> </div>
+                    <div class="notification-content dropdown-box mt-8 absolute top-0 left-0 sm:left-auto sm:right-0 z-20 -ml-10 sm:ml-0">
+                        <div class="notification-content__box dropdown-box__content box dark:bg-dark-6">
+                            <div class="notification-content__title">Notifications</div>
+
+                            <div class="cursor-pointer relative flex items-center ">
+                                <div class="w-12 h-12 flex-none image-fit mr-1">
+                                    <img alt="Midone Tailwind HTML Admin Template" class="rounded-full" src="~/Uploads/DefaultUserAvatar.png">
+                                    <div class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white"></div>
+                                </div>
+                                <div class="ml-2 overflow-hidden">
+                                    <div class="flex items-center">
+                                        <a href="javascript:;" class="font-medium truncate mr-5">Tom Cruise</a>
+                                        <div class="text-xs text-gray-500 ml-auto whitespace-no-wrap">06:05 AM</div>
+                                    </div>
+                                    <div class="w-full truncate text-gray-600">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>-->
+                @*END: Notifications*@
+                @{
+                    Html.RenderPartial("~/Areas/Admin/Views/Partial/_AdminDropDown.cshtml");
+                }
+            </div>
+            <!-- END: Top Bar -->
+            @RenderBody()
+        </div>
+        <!-- END: Content -->
+    </div>
+
+
+
+    <div class="modal" id="code_gnrt_modal">
+        <div class="modal__content modal__content--lg p-10 text-center">
+            <h1 class="m-5">Generate Access Code</h1>
+            <div class="form-group mb-3">
+                <div class="mt-5">
+                    <input type="text" name="Code" class="form-control input w-full border mt-2 mb-2 intro-y box input--lg" disabled id="code_generate_field" value="" />
+
+                    <div class="row mt-5">
+                        <div class="col-sm-6">
+
+                            <button type="button" id="code_generate_btn" class="button w-full mr-2 mb-2 flex items-center justify-center bg-theme-1 text-white"> <i data-feather="refresh-ccw" class="w-4 h-4 mr-2"></i> Generate </button>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <button type="button" id="copy_code_btn" class="button w-full  mr-2 mb-2 flex items-center justify-center bg-gray-200 text-gray-600"> <i data-feather="clipboard" class="w-4 h-4 mr-2"></i> Copy To Clipboard </button>
+                        </div>
+                    </div>
+                    <div class="row mt-5 p-3">
+                        <p class="mb-1 mt-1 text-left">· By clicking on "Copy to Clipboard", you will allow the user to use this access code for registration purposes. </p>
+                        <p class="mb-1 mt-1  text-left">· Access code is only valid for one registration only, and won't be valid for further registrations. </p>
+
+                        <p class="mb-1 mt-1  text-left">· The access code will only be valid for an (1) hour. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="change_password_modal">
+        <div class="modal__content modal__content--lg p-10 text-center">
+            <h1 class="m-5">Update Your Password</h1>
+            <form id="userPasswordForm" method="post" onsubmit="return false">
+                <div class="form-group mb-3">
+                    <div class="mt-10">
+                        <div class="form-group mt-3 text-left">
+                            <label class="control-label col-md-2 text-left" s for="Phone">Current Password</label>
+
+                            <div class="">
+                                <input type="password" name="Cur_Password" class="form-control input w-full border mt-2 mb-2 intro-y box input--lg" />
+
+
+                            </div>
+                        </div>
+                        <div class="form-group mt-3 text-left">
+                            <label class="control-label col-md-2 text-left" s for="Phone">New Password</label>
+
+                            <div class="">
+                                <input type="password" id="confirm_pass" name="Password" class="form-control input w-full border mt-2 mb-2 intro-y box input--lg" />
+
+
+                            </div>
+                        </div>
+                        <div class="form-group mt-3 text-left">
+                            <label class="control-label col-md-2 text-left" s for="Phone">Confirm New Password</label>
+
+                            <div class="">
+                                <input type="password" name="Con_Password" class="form-control input w-full border mt-2 mb-2 intro-y box input--lg" />
+
+
+                            </div>
+                        </div>
+
+                        <div class="row mt-5">
+                            <div class="col-sm-6">
+
+                            </div>
+                            <div class="col-sm-6">
+
+                                <button type="submit" id="update-pass-btn" class="button w-full mr-2 mb-2 flex items-center justify-center bg-theme-1 text-white"> <i data-feather="refresh-ccw" class="w-4 h-4 mr-2"></i> Update </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    @if (TempData["Create"] != null)
+    {
+
+        <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.toast("Succesfully created.")
+
+            });
+        </script>
+
+    }
+    else if (TempData["Delete"] != null)
+    {
+
+        <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.toast("Succesfully deleted.")
+
+            });
+        </script>
+
+    }
+    else if (TempData["Update"] != null)
+    {
+
+        <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.toast("Succesfully updated.")
+
+            });
+        </script>
+
+    }
+    else if (TempData["Update-Error"] != null)
+    {
+
+        <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.toast("Error(s) occured while updating.")
+
+            });
+        </script>
+
+    }
+    else if (TempData["Create-Error"] != null)
+    {
+
+        <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.toast("Error(s) occured while creating.")
+
+            });
+        </script>
+
+    }
+
+    <!-- BEGIN: JS Assets-->
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Assets/datepicker/picker.js"></script>
+    <script src="~/Assets/datepicker/picker.date.js"></script>
+    <script src="~/Assets/datepicker/picker.time.js"></script>
+    <script src="~/Assets/js/autosize.js"></script>
+    <script src="https://kit.fontawesome.com/714b24d2a0.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="~/Assets/js/jquery.mask.js"></script>
+    <script src="~/Areas/Admin/Assets/js/app.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Areas/Admin/Assets/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model List<g_auto.Models.NewsLetter>
+
+
+<div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+    <h1 class="mr-auto">
+        Newsletter
+    </h1>
+    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+        <a href="@Url.Action("ExportNewsletter","ExportExcel")" class="button box flex items-center text-gray-700 excel_export"> <i data-feather="file-text" class="hidden sm:block w-4 h-4 mr-2 "></i> Export to Excel </a>
+    </div>
+</div>
+<!-- BEGIN: Datatable -->
+<div class="intro-y datatable-wrapper box p-5 mt-5">
+    <table class="table table-report table-report--bordered display datatable w-full">
+        <thead>
+            <tr>
+                <th class="border-b-2 whitespace-no-wrap">№</th>
+                <th class="border-b-2 text-left whitespace-no-wrap">EMAIL</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">DATE POSTED</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.FirstOrDefault() != null)
+            {
+                foreach (g_auto.Models.NewsLetter item in Model)
+                {
+                    <tr>
+                        <td class=" border-b">@(item.Id)</td>
+                        <td class="border-b">
+                            <div class="font-medium whitespace-no-wrap">@item.Email</div>
+                        </td>
+
+                        <td class="text-center border-b">@item.PostDate.ToString("MMM d, yyyy")</td>
+                        
+                        <td class="border-b w-5">
+                            <div class="flex sm:justify-center items-center status_container">
+                                <a class="flex items-center text-theme-6 cancel_news" href="javascript:;" id="" data-id="@item.Id"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</div>
+<div class="modal" id="delete-confirmation-modal">
+    <div class="modal__content">
+        <div class="p-5 text-center">
+            <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+            <div class="text-3xl mt-5">Are you sure?</div>
+            <div class="text-gray-600 mt-2">Are you sure you want to remove the subscribed user?</div>
+        </div>
+        <div class="px-5 pb-8 text-center">
+            <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Dismiss</button>
+            <button type="button" id="btn-cancel-news" data-id="" class="button w-60 bg-theme-6 text-white">Delete</button>
+        </div>
+    </div>
+</div>
